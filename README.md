@@ -1,2 +1,2 @@
-# CapStone
+# CapStone Project
 School_Unity_Project
