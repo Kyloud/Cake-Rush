@@ -1,4 +1,4 @@
-## Team Randing ##
+## Game Name ##
 > **Cake Rush (자율 주제)**
 
 ## Use Tools Info ##
