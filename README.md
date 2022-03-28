@@ -1,4 +1,4 @@
-## Game Name ##
+## Game Title ##
 > **Cake Rush (자율 주제)**
 
 ## Use Tools Info ##
