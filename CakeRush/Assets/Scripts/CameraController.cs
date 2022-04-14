@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    // 카메라 타겟
     [SerializeField] public Transform _target;
+    // 카메라 이동속도
     [SerializeField] float _speed;
+    // 카메라
     Camera _cam;
 
     private void Start()
