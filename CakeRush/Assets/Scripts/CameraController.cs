@@ -10,13 +10,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] float _speed;
     // ī�޶�
     Camera _cam;
-
+    
     private void Start()
     {
         _target = null;
         _cam = gameObject.GetComponent<Camera>();
     }
-
+    
     void Update()
     {
               
@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
         {
             transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * _speed;
         }
-        trans
+        
         if (Input.mousePosition.y <= 20f)
         {
             transform.position += new Vector3(0, 0, -1) * Time.deltaTime * _speed;
