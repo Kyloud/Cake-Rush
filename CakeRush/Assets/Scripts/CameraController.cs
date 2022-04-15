@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Ä«¸Þ¶ó Å¸°Ù
+    // Ä«ï¿½Þ¶ï¿½ Å¸ï¿½ï¿½
     [SerializeField] public Transform _target;
-    // Ä«¸Þ¶ó ÀÌµ¿¼Óµµ
+    // Ä«ï¿½Þ¶ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½
     [SerializeField] float _speed;
-    // Ä«¸Þ¶ó
+    // Ä«ï¿½Þ¶ï¿½
     Camera _cam;
 
     private void Start()
@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        // ¸¶¿ì½º Á¶ÀÛ
+        // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½
         if(Input.mousePosition.x >= Screen.width - 20f)
         {
             transform.position += new Vector3(1, 0, 0) * Time.deltaTime * _speed;
@@ -39,18 +39,18 @@ public class CameraController : MonoBehaviour
         {
             transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * _speed;
         }
-
+        trans
         if (Input.mousePosition.y <= 20f)
         {
             transform.position += new Vector3(0, 0, -1) * Time.deltaTime * _speed;
         }
 
-        // À¯´Ö Æ÷Ä¿½Ì
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½
         if (Input.GetKey(KeyCode.Y))
         {
             transform.position = new Vector3(_target.position.x, transform.position.y, _target.position.z);
         }
-        // ¹æÇâÅ° Á¶ÀÛ
+        // ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½
         else
         {
             if (Input.GetKey(KeyCode.UpArrow))
