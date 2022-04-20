@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class ObjectBase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //스탯
+    protected float hp;
+    protected float attackSpeed;
+    protected float attackRange;
+    public float damage { get; set; }
+
+    //시야 및 상호작용
+    protected float returnExp;
+    protected float eyeSight;
+    protected float cose;
+    protected float dropItem;
+
+    protected virtual void Attack()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Hit(float hitDamage)
     {
-        
+        hp -= hitDamage;
     }
+
+    protected virtual void Die()
+    {
+        if(hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 }
