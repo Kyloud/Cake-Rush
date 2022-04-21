@@ -1,84 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CameraController : MonoBehaviour
 {
-    // 카메라 메인 타겟 
-    [SerializeField] public Transform _target;
-    // 카메라 이동 속도
-    [SerializeField] float _speed;
-    Camera _cam;
+    // Cameram Main Target
+    [SerializeField] public Transform target;
+    // Camera Movement Speed
+    [SerializeField] float speed = 10;
+    private float mousePosforMove = 40f;
+
+    [SerializeField] private List<Transform> units = new List<Transform>();
+    [SerializeField] private Transform unit;
+    
+    [SerializeField] private Vector3 destPos;
     
     private void Start()
     {
-        _target = null;
-        _cam = gameObject.GetComponent<Camera>();
+        target = null;
     }
     
     void Update()
     {
-              
+        
     }
 
     private void LateUpdate()
     {
-        // ���콺 ����
-        if(Input.mousePosition.x >= Screen.width - 20f)
+        CameraMovement();
+        if (Input.GetMouseButton(0))
         {
-            transform.position += new Vector3(1, 0, 0) * Time.deltaTime * _speed;
+            ShotRay();
+        }
+    }
+    
+    void CameraMovement()
+    {
+        if(Input.mousePosition.x >= Screen.width - mousePosforMove)
+        {
+            transform.position += new Vector3(1, 0, 0) * Time.deltaTime * speed;
         }
 
-        if(Input.mousePosition.y >= Screen.height - 20f)
+        if(Input.mousePosition.y >= Screen.height - mousePosforMove)
         {
-            transform.position += new Vector3(0, 0, 1) * Time.deltaTime * _speed;
+            transform.position += new Vector3(0, 0, 1) * Time.deltaTime * speed;
         }
 
-        if(Input.mousePosition.x <= 20f)
+        if(Input.mousePosition.x <= mousePosforMove)
         {
-            transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * _speed;
+            transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed;
         }
         
-        if (Input.mousePosition.y <= 20f)
+        if (Input.mousePosition.y <= mousePosforMove)
         {
-            transform.position += new Vector3(0, 0, -1) * Time.deltaTime * _speed;
+            transform.position += new Vector3(0, 0, -1) * Time.deltaTime * speed;
         }
 
-        // ���� ��Ŀ��
         if (Input.GetKey(KeyCode.Y))
         {
-            transform.position = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+            transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);
         }
-        // ����Ű ����
+        
         else
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                transform.position += new Vector3(0, 0, 1) * Time.deltaTime * _speed;
+                transform.position += new Vector3(0, 0, 1) * Time.deltaTime * speed;
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
-                transform.position += new Vector3(0, 0, -1) * Time.deltaTime * _speed;
+                transform.position += new Vector3(0, 0, -1) * Time.deltaTime * speed;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * _speed;
+                transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed;
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position += new Vector3(1, 0, 0) * Time.deltaTime * _speed;
+                transform.position += new Vector3(1, 0, 0) * Time.deltaTime * speed;
             }
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            asd();
-        }
     }
-
-
-    void asd()
+    
+    void ShotRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -86,15 +92,30 @@ public class CameraController : MonoBehaviour
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Unit"))
             {
-                Debug.Log("Hit");
-
-                _target = hit.transform;
-                //if (_cursorType != CursorType.Attack)
-                //{
-                //    Cursor.SetCursor(_attackIcon, new Vector2(_attackIcon.width / 5, 0), CursorMode.Auto);
-                //    _cursorType = CursorType.Attack;
-                //}
+                Debug.Log("Hit Unit");
+                target = hit.transform;
+                
             }
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                Debug.Log("Hit Ground");
+                //units.Add(hit.transform);
+                unit = hit.transform;
+                destPos = hit.collider.transform.position;
+            }
+        }
+        Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
+    }
+
+
+            //Change Cursor
+
+            //if (_cursorType != CursorType.Attack)
+            //{
+            //    Cursor.SetCursor(_attackIcon, new Vector2(_attackIcon.width / 5, 0), CursorMode.Auto);
+            //    _cursorType = CursorType.Attack;
+            //}
+
             //else
             //{
             //    if (_cursorType != CursorType.Hand)
@@ -103,7 +124,5 @@ public class CameraController : MonoBehaviour
             //        _cursorType = CursorType.Hand;
             //    }
             //}
-        }
-    }
 }
 

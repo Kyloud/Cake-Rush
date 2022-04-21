@@ -40,6 +40,7 @@
      <Compile Include="Assets/Scripts/ObjectBase.cs" />
      <Compile Include="Assets/Scripts/BuildBase.cs" />
      <Compile Include="Assets/Scripts/EntityBase.cs" />
+     <Compile Include="Assets/Scripts/Util/DrawRect.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.3.30f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
