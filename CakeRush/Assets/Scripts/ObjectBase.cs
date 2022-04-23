@@ -9,7 +9,7 @@ public class ObjectBase : MonoBehaviour
     protected float attackSpeed;
     protected float attackRange;
     public float damage { get; set; }
-
+    
     //시야 및 상호작용
     protected float returnExp;
     protected float eyeSight;
@@ -24,6 +24,7 @@ public class ObjectBase : MonoBehaviour
     protected virtual void Hit(float hitDamage)
     {
         hp -= hitDamage;
+        
     }
 
     protected virtual void Die()
