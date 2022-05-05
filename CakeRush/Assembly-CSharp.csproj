@@ -36,15 +36,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets/Scripts/BuildBase.cs" />
      <Compile Include="Assets/Scripts/RTS/RTSUnitController.cs" />
      <Compile Include="Assets/Scripts/CameraController.cs" />
+     <Compile Include="Assets/Scripts/EntityBase.cs" />
      <Compile Include="Assets/Scripts/RTS/UnitSpawner.cs" />
      <Compile Include="Assets/Scripts/ObjectBase.cs" />
      <Compile Include="Assets/Scripts/RTS/MouseDrag.cs" />
      <Compile Include="Assets/Scripts/RTS/MouseClick.cs" />
      <Compile Include="Assets/Scripts/RTS/UnitController.cs" />
-     <Compile Include="Assets/Scripts/BuildBase.cs" />
-     <Compile Include="Assets/Scripts/EntityBase.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.3.30f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -636,6 +636,9 @@
     <Reference Include="Unity.TextMeshPro">
         <HintPath>/Users/home/Documents/UnityProjects/CapStone/CakeRush/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>/Users/home/Documents/UnityProjects/CapStone/CakeRush/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>/Users/home/Documents/UnityProjects/CapStone/CakeRush/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
@@ -647,9 +650,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
         <HintPath>/Users/home/Documents/UnityProjects/CapStone/CakeRush/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-        <HintPath>/Users/home/Documents/UnityProjects/CapStone/CakeRush/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
