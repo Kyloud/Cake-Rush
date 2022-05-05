@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,6 +40,11 @@
      <Compile Include="Assets/Scripts/ObjectBase.cs" />
      <Compile Include="Assets/Scripts/BuildBase.cs" />
      <Compile Include="Assets/Scripts/EntityBase.cs" />
+     <Compile Include="Assets/Scripts/RTS/UnitController.cs" />
+     <Compile Include="Assets/Scripts/RTS/MouseClick.cs" />
+     <Compile Include="Assets/Scripts/RTS/MouseDrag.cs" />
+     <Compile Include="Assets/Scripts/RTS/RTSUnitController.cs" />
+     <Compile Include="Assets/Scripts/RTS/UnitSpawner.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.3.30f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
