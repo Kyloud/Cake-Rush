@@ -11,7 +11,8 @@ public class RTSUnitController : MonoBehaviour
 	private void Awake()
 	{
 		selectedUnitList = new List<UnitController>();
-		UnitList = unitSpawner.SpawnUnits();
+		//UnitList = unitSpawner.SpawnUnits();
+		
 	}
 
 	/// <summary>
@@ -21,7 +22,6 @@ public class RTSUnitController : MonoBehaviour
 	{
 		// Remove all units selected in the zone
 		DeselectAll();
-
 		SelectUnit(newUnit);
 	}
 
