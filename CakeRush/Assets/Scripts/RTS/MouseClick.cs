@@ -52,7 +52,7 @@ public class MouseClick : MonoBehaviour
 		if ( Input.GetMouseButtonDown(1))
 		{
 			RaycastHit	hit;
-			Ray			ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+			Ray	ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
 			// When the unit object (layerUnit) is clicked
 			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround) )
