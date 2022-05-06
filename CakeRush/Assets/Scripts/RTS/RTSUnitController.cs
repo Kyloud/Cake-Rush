@@ -4,9 +4,9 @@ using UnityEngine;
 public class RTSUnitController : MonoBehaviour
 {
 	[SerializeField]
-	private	UnitSpawner			 unitSpawner;
-	private	List<UnitController> selectedUnitList;				// 플레이어가 클릭 or 드래그로 선택한 유닛
-	public	List<UnitController> UnitList { private set; get; }	// 맵에 존재하는 모든 유닛
+	private	UnitSpawner	unitSpawner;
+	private	List<UnitController> selectedUnitList;				// Units selected by the player by clicking or dragging
+	public	List<UnitController> UnitList { private set; get; }	// All units on the map
 
 	private void Awake()
 	{
@@ -15,27 +15,27 @@ public class RTSUnitController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 마우스 클릭으로 유닛을 선택할 때 호출
+	/// Called when a unit is selected with a mouse click
 	/// </summary>
 	public void ClickSelectUnit(UnitController newUnit)
 	{
-		// 기존에 선택되어 있는 모든 유닛 해제
+		// Remove all units selected in the zone
 		DeselectAll();
 
 		SelectUnit(newUnit);
 	}
 
 	/// <summary>
-	/// Shift+마우스 클릭으로 유닛을 선택할 때 호출
+	/// Invoked when selecting a unit with Shift+mouse click
 	/// </summary>
 	public void ShiftClickSelectUnit(UnitController newUnit)
 	{
-		// 기존에 선택되어 있는 유닛을 선택했으면
+		// If you select a previously selected unit
 		if ( selectedUnitList.Contains(newUnit) )
 		{
 			DeselectUnit(newUnit);
 		}
-		// 새로운 유닛을 선택했으면
+		// If you choose a new unit
 		else
 		{
 			SelectUnit(newUnit);
@@ -43,19 +43,19 @@ public class RTSUnitController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 마우스 드래그로 유닛을 선택할 때 호출
+	/// Called when selecting a unit by mouse dragging
 	/// </summary>
 	public void DragSelectUnit(UnitController newUnit)
 	{
-		// 새로운 유닛을 선택했으면
-		if ( !selectedUnitList.Contains(newUnit) )
+		// If you choose a new unit
+		if (!selectedUnitList.Contains(newUnit) )
 		{
 			SelectUnit(newUnit);
 		}
 	}
 
 	/// <summary>
-	/// 선택된 모든 유닛을 이동할 때 호출
+	/// Called to move all selected units
 	/// </summary>
 	public void MoveSelectedUnits(Vector3 end)
 	{
@@ -66,7 +66,7 @@ public class RTSUnitController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 모든 유닛의 선택을 해제할 때 호출
+	/// Called when all units are deselected
 	/// </summary>
 	public void DeselectAll()
 	{
@@ -79,24 +79,24 @@ public class RTSUnitController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// 매개변수로 받아온 newUnit 선택 설정
+	/// NewUnit selection set received as a parameter
 	/// </summary>
 	private void SelectUnit(UnitController newUnit)
 	{
-		// 유닛이 선택되었을 때 호출하는 메소드
+		// Method to be called when a unit is selected
 		newUnit.SelectUnit();
-		// 선택한 유닛 정보를 리스트에 저장
+		// Save the selected unit information to the list
 		selectedUnitList.Add(newUnit);
 	}
 
 	/// <summary>
-	/// 매개변수로 받아온 newUnit 선택 해제 설정
+	/// Set deselection of newUnit received as a parameter
 	/// </summary>
 	private void DeselectUnit(UnitController newUnit)
 	{
-		// 유닛이 해제되었을 때 호출하는 메소드
+		// Method called when unit is released
 		newUnit.DeselectUnit();
-		// 선택한 유닛 정보를 리스트에서 삭제
+		// Delete the selected unit information from the list
 		selectedUnitList.Remove(newUnit);
 	}
 }

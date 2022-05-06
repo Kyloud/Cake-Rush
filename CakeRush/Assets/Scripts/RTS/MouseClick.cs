@@ -18,13 +18,13 @@ public class MouseClick : MonoBehaviour
 
 	private void Update()
 	{
-		// 마우스 왼쪽 클릭으로 유닛 선택 or 해제
+		// select or deselect by click
 		if ( Input.GetMouseButtonDown(0) )
 		{
 			RaycastHit	hit;
 			Ray	ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-			// 광선에 부딪히는 오브젝트가 있을 때 (=유닛을 클릭했을 때)
+			// When there is an object hitting the ray (= clicking on the unit)
 			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerUnit) )
 			{
 				if ( hit.transform.GetComponent<UnitController>() == null ) return;
@@ -38,7 +38,7 @@ public class MouseClick : MonoBehaviour
 					rtsUnitController.ClickSelectUnit(hit.transform.GetComponent<UnitController>());
 				}
 			}
-			// 광선에 부딪히는 오브젝트가 없을 때
+			// When no object hits the ray
 			else
 			{
 				if ( !Input.GetKey(KeyCode.LeftShift) )
@@ -48,13 +48,13 @@ public class MouseClick : MonoBehaviour
 			}
 		}
 
-		// 마우스 오른쪽 클릭으로 유닛 이동
-		if ( Input.GetMouseButtonDown(1) )
+		// move units by right-clicking
+		if ( Input.GetMouseButtonDown(1))
 		{
 			RaycastHit	hit;
 			Ray			ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-			// 유닛 오브젝트(layerUnit)를 클릭했을 때
+			// When the unit object (layerUnit) is clicked
 			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround) )
 			{
 				rtsUnitController.MoveSelectedUnits(hit.point);

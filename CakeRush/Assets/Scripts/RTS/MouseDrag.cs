@@ -3,21 +3,21 @@ using UnityEngine;
 public class MouseDrag: MonoBehaviour
 {
 	[SerializeField]
-	private	RectTransform		dragRectangle;			// 마우스로 드래그한 범위를 가시화하는 Image UI의 RectTransform
+	private	RectTransform dragRectangle;			// RectTransform of Image UI to visualize the range dragged with the mouse
 
-	private	Rect				dragRect;				// 마우스로 드래그 한 범위 (xMin~xMax, yMin~yMax)
-	private	Vector2				start = Vector2.zero;	// 드래그 시작 위치
-	private	Vector2				end = Vector2.zero;		// 드래그 종료 위치
+	private	Rect dragRect;				// Range dragged with the mouse (xMin~xMax, yMin~yMax)
+	private	Vector2	start = Vector2.zero;	// drag start position
+	private	Vector2	end = Vector2.zero;		// drag end position
 	
-	private	Camera				mainCamera;
-	private	RTSUnitController	rtsUnitController;
+	private	Camera mainCamera;
+	private	RTSUnitController rtsUnitController;
 
 	private void Awake()
 	{
-		mainCamera			= Camera.main;
-		rtsUnitController	= GetComponent<RTSUnitController>();
+		mainCamera = Camera.main;
+		rtsUnitController = GetComponent<RTSUnitController>();
 		
-		// start, end가 (0, 0)인 상태로 이미지의 크기를 (0, 0)으로 설정해 화면에 보이지 않도록 함
+		// Set the image size to (0, 0) with start and end set to (0, 0) to make it invisible on the screen
 		DrawDragRectangle();
 	}
 
@@ -33,18 +33,18 @@ public class MouseDrag: MonoBehaviour
 		{
 			end = Input.mousePosition;
 			
-			// 마우스를 클릭한 상태로 드래그 하는 동안 드래그 범위를 이미지로 표현
+			// Represents the drag range as an image while dragging with the mouse clicked
 			DrawDragRectangle();
 		}
 
 		if ( Input.GetMouseButtonUp(0) )
 		{
-			// 마우스 클릭을 종료할 때 드래그 범위 내에 있는 유닛 선택
+			// Select the unit within the drag range when the mouse click ends
 			CalculateDragRect();
 			SelectUnits();
 
-			// 마우스 클릭을 종료할 때 드래그 범위가 보이지 않도록
-			// start, end 위치를 (0, 0)으로 설정하고 드래그 범위를 그린다
+			// Make the drag range invisible when you end the mouse click
+			// Set the start and end positions to (0, 0) and draw the drag range
 			start = end = Vector2.zero;
 			DrawDragRectangle();
 		}
@@ -52,9 +52,9 @@ public class MouseDrag: MonoBehaviour
 
 	private void DrawDragRectangle()
 	{
-		// 드래그 범위를 나타내는 Image UI의 위치
+		// Position of Image UI indicating drag range
 		dragRectangle.position	= (start + end) * 0.5f;
-		// 드래그 범위를 나타내는 Image UI의 크기
+		// Size of Image UI indicating drag range
 		dragRectangle.sizeDelta	= new Vector2(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y));
 	}
 
@@ -88,7 +88,7 @@ public class MouseDrag: MonoBehaviour
 		// 모든 유닛을 검사
 		foreach (UnitController unit in rtsUnitController.UnitList)
 		{
-			// 유닛의 월드 좌표를 화면 좌표로 변환해 드래그 범위 내에 있는지 검사
+			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
 			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) )
 			{
 				rtsUnitController.DragSelectUnit(unit);
