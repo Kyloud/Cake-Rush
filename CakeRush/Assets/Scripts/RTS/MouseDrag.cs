@@ -15,7 +15,7 @@ public class MouseDrag: MonoBehaviour
 	private void Awake()
 	{
 		mainCamera = Camera.main;
-		rtsUnitController = GetComponent<RTSUnitController>();
+		rtsUnitController = GameObject.FindWithTag("GameController").GetComponent<RTSUnitController>();
 		
 		// Set the image size to (0, 0) with start and end set to (0, 0) to make it invisible on the screen
 		DrawDragRectangle();

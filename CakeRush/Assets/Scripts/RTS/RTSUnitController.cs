@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class RTSUnitController : MonoBehaviour
 {
-	[SerializeField]
-	private	UnitSpawner	unitSpawner;
+	//[SerializeField]
+	//private UnitSpawner unitSpawner;
 	private	List<UnitController> selectedUnitList;				// Units selected by the player by clicking or dragging
-	public	List<UnitController> UnitList { private set; get; }	// All units on the map
+	public List<UnitController> UnitList = new List<UnitController>();	// All units on the map
 
 	private void Awake()
 	{
@@ -99,5 +99,5 @@ public class RTSUnitController : MonoBehaviour
 		// Delete the selected unit information from the list
 		selectedUnitList.Remove(newUnit);
 	}
-}
 
+}
