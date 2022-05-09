@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class ObjectBase : MonoBehaviour
 {
-    //����
     protected float hp;
     protected float attackSpeed;
     protected float attackRange;
     public float damage { get; set; }
-    
-    //�þ� �� ��ȣ�ۿ�
     protected float returnExp;
     protected float eyeSight;
     protected float cose;
     protected float dropItem;
+    protected Data.Stat stat;
 
     public virtual void Hit(float hitDamage)
     {

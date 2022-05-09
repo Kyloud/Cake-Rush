@@ -1,29 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public struct Stat
-{
-    public float moveSpeed { get; set; }
-    public float attackRange { get; set; }
-    public float attackSpeed { get; set; }
 
-    public Stat(float moveSpeed, float attackRange, float attackSpeed)
-    {
-        this.moveSpeed = moveSpeed;
-        this.attackRange = attackRange;
-        this.attackSpeed = attackSpeed;
-    }
-}
-
-public class PlayerController : MonoBehaviour   
+public class PlayerController : UnitController   
 {   
-    private PlayerMovement playerMovement;
-    public Stat stat;
-    private void Awake()
+    [SerializeField] private GameObject lightningObject;
+    [SerializeField] private LayerMask entityLayer;
+    protected override void Awake()
     {
-        stat = new Stat(5, 5, 1);
-        playerMovement = GetComponent<PlayerMovement>();
-        playerMovement.OverridingState(stat.moveSpeed, stat.attackRange, stat.attackSpeed);
+        stat = new Data.Stat(1, 1, 1, 1, 1);
     }
 
     private void Update()
@@ -37,11 +22,11 @@ public class PlayerController : MonoBehaviour
             {
                 if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Unit"))
                 {
-                    StartCoroutine(playerMovement.OutToAttakRange(hit.transform.position, stat.attackRange));
+                    StartCoroutine(OutToAttakRange(hit.transform.position, stat.attackRange));
                 }
                 else
                 {
-                    playerMovement.MoveTo(hit.point);
+                    MoveTo(hit.point);
                     Debug.Log("Checked Click");
                 }
 
@@ -50,8 +35,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Attack()
+    public void LightningStrlike(float damage)
     {
-        Debug.Log("Attack");
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity, entityLayer))
+            {
+                hit.transform.GetComponent<EntityBase>().Hit(damage);
+            }
+        }
+    }
+
+    public void CakeRush()
+    {
+        
+    }
+
+    public override void MoveTo(Vector3 end)
+    {
+        base.MoveTo(end);
+    }
+
+    public override IEnumerator OutToAttakRange(Vector3 unitPosition, float range)
+    {
+        return base.OutToAttakRange(unitPosition, range);
     }
 }
