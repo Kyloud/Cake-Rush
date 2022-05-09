@@ -35,7 +35,8 @@ public class PlayerController : UnitController
         }
     }
 
-    public void LightningStrlike(float damage)
+    //Skill lightning
+    public void Lightning(float damage)
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
@@ -49,11 +50,13 @@ public class PlayerController : UnitController
         }
     }
 
+
+    //Skill Cakerush
     public void CakeRush()
     {
-        
-    }
 
+    }
+    
     public override void MoveTo(Vector3 end)
     {
         base.MoveTo(end);

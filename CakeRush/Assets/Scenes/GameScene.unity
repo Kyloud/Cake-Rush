@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 159673451}
   m_Layer: 0
   m_Name: RTSManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,13 +532,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153256158}
-  m_LocalRotation: {x: 0.3826837, y: -0, z: -0, w: 0.92387944}
+  m_LocalRotation: {x: 0.50000006, y: -0, z: -0, w: 0.86602545}
   m_LocalPosition: {x: 0, y: 11, z: -5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &1153256162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +786,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c133a3096f2c924d895e368c16742c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  attackSpeed: 0
+  attackRange: 0
+  <damage>k__BackingField: 0
+  returnExp: 0
+  eyeSight: 0
+  cose: 0
+  dropItem: 0
+  defensive: 0
+  spawnTime: 0
+  moveSpeed: 0
+  navMeshAgent: {fileID: 0}
+  playerAttack: {fileID: 0}
 --- !u!54 &2044185805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -913,6 +926,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9622ba803b95b864bb73a899630aecbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitMarker: {fileID: 0}
+  lightningObject: {fileID: 0}
+  entityLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &2044185812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,6 +943,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0808caadc3e744bb2263fc5dfd2383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  attackSpeed: 0
+  attackRange: 0
+  <damage>k__BackingField: 0
+  returnExp: 0
+  eyeSight: 0
+  cose: 0
+  dropItem: 0
 --- !u!114 &2044185813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,7 +963,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbba766e998e1744a85016b855d0299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  attackSpeed: 0
+  attackRange: 0
+  <damage>k__BackingField: 0
+  returnExp: 0
+  eyeSight: 0
+  cose: 0
+  dropItem: 0
+  defensive: 0
+  spawnTime: 0
+  moveSpeed: 0
+  navMeshAgent: {fileID: 0}
   lightningObject: {fileID: 0}
   entityLayer:
-    serializedVersion: 2
     m_Bits: 0
