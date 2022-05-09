@@ -15,7 +15,7 @@ public class MouseDrag: MonoBehaviour
 	private void Awake()
 	{
 		mainCamera = Camera.main;
-		rtsUnitController = GetComponent<RTSUnitController>();
+		rtsUnitController = GameObject.FindWithTag("GameController").GetComponent<RTSUnitController>();
 		
 		// Set the image size to (0, 0) with start and end set to (0, 0) to make it invisible on the screen
 		DrawDragRectangle();
@@ -25,7 +25,7 @@ public class MouseDrag: MonoBehaviour
 	{
 		if ( Input.GetMouseButtonDown(0) )
 		{
-			start	 = Input.mousePosition;
+			start = Input.mousePosition;
 			dragRect = new Rect();
 		}
 		
@@ -85,7 +85,7 @@ public class MouseDrag: MonoBehaviour
 
 	private void SelectUnits()
 	{
-		// ¸ğµç À¯´ÖÀ» °Ë»ç
+		// ëª¨ë“  ìœ ë‹›ì„ ê²€ì‚¬
 		foreach (UnitController unit in rtsUnitController.UnitList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
