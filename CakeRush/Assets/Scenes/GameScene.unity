@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -244,12 +244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cd870b8881a47bdb552d99ea39e2e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerUnit:
+  layerSelectable:
     serializedVersion: 2
     m_Bits: 64
   layerGround:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8
 --- !u!114 &159673452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bfc19184b2e0489ea37eea36cefc697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 8999359877312406517, guid: 286effe27cf374b78bf0d1d585ae83ad, type: 3}
+  unitPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   maxUnitCount: 5
 --- !u!114 &159673453
 MonoBehaviour:
@@ -276,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7286317a6f914bde80fbd209955cbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitSpawner: {fileID: 159673452}
+  UnitList: []
 --- !u!114 &159673454
 MonoBehaviour:
   m_ObjectHideFlags: 0
