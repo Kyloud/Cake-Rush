@@ -5,13 +5,11 @@ public class RTSUnitController : MonoBehaviour
 {
 	//[SerializeField]
 	//private UnitSpawner unitSpawner;
-	private	List<UnitController> selectedUnitList;				// Units selected by the player by clicking or dragging
+	private	List<UnitController> selectedUnitList = new List<UnitController>();				// Units selected by the player by clicking or dragging
 	public List<UnitController> UnitList = new List<UnitController>();	// All units on the map
 
 	private void Awake()
 	{
-		selectedUnitList = new List<UnitController>();
-		//UnitList = unitSpawner.SpawnUnits();
 		
 	}
 

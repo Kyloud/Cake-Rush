@@ -5,22 +5,21 @@ using UnityEngine;
 public class Bakery : BuildBase
 {
     UnitSpawner spawner;
-    // Start is called before the first frame update
+
     void Start()
     {
-        spawner = gameObject.GetComponentInParent<UnitSpawner>();
+        spawner = gameObject.GetComponent<UnitSpawner>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Q))
             Spawn(0);
         else if(Input.GetKeyDown(KeyCode.W))
             Spawn(1);
-        else if(Input.GetKeyDown(KeyCode.A))
+        else if(Input.GetKeyDown(KeyCode.E))
             Spawn(2);
-        else if(Input.GetKeyDown(KeyCode.S))
+        else if(Input.GetKeyDown(KeyCode.R))
             Spawn(3);
     }
 

@@ -40,10 +40,7 @@ public class UnitSpawner : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.B) && !isRunning)
-		{
-			StartCoroutine(SpawnUnits(Random.Range(0,1)));
-		}
+		
 	}
 
 	public IEnumerator SpawnUnits(int unitNumber)

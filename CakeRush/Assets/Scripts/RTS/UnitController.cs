@@ -7,6 +7,7 @@ public class UnitController : MonoBehaviour
 	private	GameObject		unitMarker;
 	private	NavMeshAgent	navMeshAgent;
 
+	[SerializeField] private bool isBuilding;
 	private void Awake()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
@@ -24,7 +25,11 @@ public class UnitController : MonoBehaviour
 
 	public void MoveTo(Vector3 end)
 	{
+		if(isBuilding)
+			return;
 		navMeshAgent.SetDestination(end);
 	}
+
+
 }
 

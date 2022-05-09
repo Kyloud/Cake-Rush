@@ -44,8 +44,10 @@
      <Compile Include="Assets/Scripts/ObjectBase.cs" />
      <Compile Include="Assets/Scripts/RTS/MouseDrag.cs" />
      <Compile Include="Assets/Scripts/RTS/MouseClick.cs" />
-     <Compile Include="Assets/Scripts/RTS/UnitController.cs" />
      <Compile Include="Assets/Scripts/RTS/Bakery.cs" />
+     <Compile Include="Assets/Scripts/RTS/UnitController.cs" />
+     <Compile Include="Assets/Scripts/RTS/BuildingController.cs" />
+     <Compile Include="Assets/Scripts/RTS/RTSBuildingController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.3.30f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

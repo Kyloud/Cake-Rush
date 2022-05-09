@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class MouseClick : MonoBehaviour
 {
-	[SerializeField]
-	private	LayerMask layerUnit;
-	[SerializeField]
-	private	LayerMask layerGround;
+	[SerializeField] private LayerMask layerSelectable;
+	[SerializeField] private LayerMask layerGround;
 
-	private	Camera	mainCamera;
-	private	RTSUnitController	rtsUnitController;
+	private	Camera mainCamera;
+	private	RTSUnitController rtsUnitController;
+	private	RTSBuildingController rtsBuildingController;
 
 	private void Awake()
 	{
 		mainCamera = Camera.main;
 		rtsUnitController = GetComponent<RTSUnitController>();
+		rtsBuildingController = GetComponent<RTSBuildingController>();
 	}
 
 	private void Update()
@@ -25,35 +25,50 @@ public class MouseClick : MonoBehaviour
 			Ray	ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
 			// When there is an object hitting the ray (= clicking on the unit)
-			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerUnit) )
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerSelectable))
 			{
-				if ( hit.transform.GetComponent<UnitController>() == null ) return;
+				if (hit.transform.GetComponent<UnitController>() == null) return;
 
-				if ( Input.GetKey(KeyCode.LeftShift) )
+				if(hit.transform.CompareTag("Unit"))
 				{
-					rtsUnitController.ShiftClickSelectUnit(hit.transform.GetComponent<UnitController>());
+					if (Input.GetKey(KeyCode.LeftShift))
+					{
+						rtsUnitController.ShiftClickSelectUnit(hit.transform.GetComponent<UnitController>());
+					}
+					else
+					{
+						rtsUnitController.ClickSelectUnit(hit.transform.GetComponent<UnitController>());
+					}
 				}
-				else
+				else if (hit.transform.CompareTag("Building"))
 				{
-					rtsUnitController.ClickSelectUnit(hit.transform.GetComponent<UnitController>());
+					if (Input.GetKey(KeyCode.LeftShift))
+					{
+						rtsBuildingController.ShiftClickSelectBuilding(hit.transform.GetComponent<BuildingController>());
+					}
+					else
+					{
+						rtsBuildingController.ClickSelectBuilding(hit.transform.GetComponent<BuildingController>());
+					}
 				}
 			}
 			// When no object hits the ray
 			else
 			{
-				if ( !Input.GetKey(KeyCode.LeftShift) )
+				if (!Input.GetKey(KeyCode.LeftShift) )
 				{
 					rtsUnitController.DeselectAll();
+					rtsBuildingController.DeselectAll();
 				}
 			}
 		}
 
 		// move units by right-clicking
-		if ( Input.GetMouseButtonDown(1))
+		if (Input.GetMouseButtonDown(1))
 		{
 			RaycastHit	hit;
 			Ray	ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
+	
 			// When the unit object (layerUnit) is clicked
 			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround) )
 			{
