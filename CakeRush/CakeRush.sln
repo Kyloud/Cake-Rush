@@ -1,23 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonsterLove.StateMachine.Samples", "MonsterLove.StateMachine.Samples.csproj", "{7c5d2065-a2c6-0006-e38e-1bf19aafaa7e}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{a015ea7f-fa3f-8e61-de61-f7969300f810}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonsterLove.StateMachine.Runtime", "MonsterLove.StateMachine.Runtime.csproj", "{848eb97b-fb1d-72d2-dabf-77ab41964d7e}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonsterLove.StateMachine.Samples", "MonsterLove.StateMachine.Samples.csproj", "{7c5d2065-a2c6-0006-e38e-1bf19aafaa7e}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7c5d2065-a2c6-0006-e38e-1bf19aafaa7e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7c5d2065-a2c6-0006-e38e-1bf19aafaa7e}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a015ea7f-fa3f-8e61-de61-f7969300f810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a015ea7f-fa3f-8e61-de61-f7969300f810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{848eb97b-fb1d-72d2-dabf-77ab41964d7e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{848eb97b-fb1d-72d2-dabf-77ab41964d7e}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7c5d2065-a2c6-0006-e38e-1bf19aafaa7e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7c5d2065-a2c6-0006-e38e-1bf19aafaa7e}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -36,16 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BuildBase.cs" />
      <Compile Include="Assets\Scripts\RTS\RTSUnitController.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\EntityBase.cs" />
      <Compile Include="Assets\Scripts\RTS\UnitSpawner.cs" />
-     <Compile Include="Assets\Scripts\ObjectBase.cs" />
      <Compile Include="Assets\Scripts\RTS\MouseDrag.cs" />
      <Compile Include="Assets\Scripts\RTS\MouseClick.cs" />
      <Compile Include="Assets\Scripts\RTS\RTSBuildingController.cs" />
-     <Compile Include="Assets\Scripts\RTS\Bakery.cs" />
      <Compile Include="Assets\Scripts\RTS\UnitController.cs" />
      <Compile Include="Assets\Scripts\RTS\BuildingController.cs" />
     <Reference Include="UnityEngine">
