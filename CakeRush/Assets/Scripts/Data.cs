@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Data : MonoBehaviour
 {
+    //Structure for initialization of entity stats
     public struct Stat
     {
         public float hp { get; set; }

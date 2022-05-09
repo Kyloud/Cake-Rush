@@ -38,11 +38,6 @@ public class UnitSpawner : MonoBehaviour
 	// 	return unitList;
 	// }
 
-	void Update()
-	{
-		
-	}
-
 	public IEnumerator SpawnUnits(int unitNumber)
 	{
 		GameObject clone = unitPrefab[unitNumber];

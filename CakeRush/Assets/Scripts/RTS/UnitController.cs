@@ -22,11 +22,13 @@ public class UnitController : EntityBase
 		unitMarker.SetActive(false);
 	}
 
+	//Go to Click Point
 	public virtual void MoveTo(Vector3 end)
 	{
 		navMeshAgent.SetDestination(end);
 	}
 
+	//Follow the target outside the range until it enters the range
 	public virtual IEnumerator OutToAttakRange(Vector3 unitPosition, float range)
     {
         float distance = Vector3.SqrMagnitude(unitPosition - transform.position);
@@ -41,6 +43,7 @@ public class UnitController : EntityBase
         }
     }
 
+	//Default Attack on Entities
 	protected virtual IEnumerator BasicAttack(Vector3 targetPosition)
 	{
 		float distance = (targetPosition - transform.position).sqrMagnitude;
