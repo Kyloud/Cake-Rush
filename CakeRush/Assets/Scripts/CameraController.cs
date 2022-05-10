@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] public Transform target;
     // Camera Movement Speed
     [SerializeField] float speed = 10;
+    [SerializeField] private Vector3 originPosition;
     private float mousePosforMove = 40f;
 
     [SerializeField] private List<Transform> units = new List<Transform>();

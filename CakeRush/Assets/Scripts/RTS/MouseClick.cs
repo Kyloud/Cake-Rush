@@ -62,7 +62,7 @@ public class MouseClick : MonoBehaviour
 				}
 			}
 		}
-
+		
 		// move units by right-clicking
 		if (Input.GetMouseButtonDown(1))
 		{

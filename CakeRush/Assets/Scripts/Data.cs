@@ -13,6 +13,7 @@ public class Data : MonoBehaviour
         public float attackRange { get; set; }
         public float attackSpeed { get; set; }
 
+        
         public Stat(float hp, float damage, float moveSpeed, float attackRange, float attackSpeed)
         {
             this.hp = hp;

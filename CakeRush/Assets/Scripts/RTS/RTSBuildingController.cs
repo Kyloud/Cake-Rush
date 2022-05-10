@@ -23,7 +23,7 @@ public class RTSBuildingController : MonoBehaviour
 		DeselectAll();
 		SelectBuilding(newBuilding);
 	}
-
+	
 	/// <summary>
 	/// Invoked when selecting a Building with Shift+mouse click
 	/// </summary>
