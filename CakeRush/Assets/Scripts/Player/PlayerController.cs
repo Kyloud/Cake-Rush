@@ -6,9 +6,12 @@ public class PlayerController : UnitController
 {   
     [SerializeField] private GameObject lightningObject;
     [SerializeField] private LayerMask entityLayer;
+    
     protected override void Awake()
     {
         stat = new Data.Stat(1, 1, 1, 1, 1);
+
+        base.Awake();
     }
 
     private void Update()
