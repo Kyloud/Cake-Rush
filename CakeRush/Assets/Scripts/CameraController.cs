@@ -11,8 +11,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] float speed = 10;
     [SerializeField] private Vector3 originPosition;
     private float mousePosforMove = 40f;
-
+    
     [SerializeField] private List<Transform> units = new List<Transform>();
+
     [SerializeField] private Transform unit;
     
     [SerializeField] private Vector3 destPos;
