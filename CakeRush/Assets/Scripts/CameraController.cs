@@ -19,12 +19,13 @@ public class CameraController : MonoBehaviour
     
     private void Start()
     {
+        originPosition = transform.position;
         target = null;
     }
     
     void Update()
     {
-        
+                
     }
 
     private void LateUpdate()
@@ -60,6 +61,10 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Y))
         {
+            if(target == null)
+            {
+                transform.position = originPosition;
+            }
             transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);
         }
         
