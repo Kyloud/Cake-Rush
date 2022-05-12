@@ -53,7 +53,7 @@ MonoBehaviour:
     Key: Data
     Ordinal: 3
     Priority: 0
-    IconType: 2140
+    IconType: 2190
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0

@@ -862,7 +862,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 963117734, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
       propertyPath: unitPrefab.Array.size
+<<<<<<< HEAD
       value: 2
+=======
+      value: 4
+>>>>>>> BiN_
       objectReference: {fileID: 0}
     - target: {fileID: 963117734, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
       propertyPath: unitPrefab.Array.data[0]
@@ -871,7 +875,19 @@ PrefabInstance:
     - target: {fileID: 963117734, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
       propertyPath: unitPrefab.Array.data[1]
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 8999359877312406517, guid: bfabd7b21344f4d3986d93b3b149a0af, type: 3}
+=======
+      objectReference: {fileID: 8999359877312406517, guid: 286effe27cf374b78bf0d1d585ae83ad, type: 3}
+    - target: {fileID: 963117734, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
+      propertyPath: unitPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 8999359877312406517, guid: 286effe27cf374b78bf0d1d585ae83ad, type: 3}
+    - target: {fileID: 963117734, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
+      propertyPath: unitPrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 8999359877312406517, guid: 286effe27cf374b78bf0d1d585ae83ad, type: 3}
+>>>>>>> BiN_
     - target: {fileID: 2737886774611812578, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
       propertyPath: m_Name
       value: Bakery
@@ -918,6 +934,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2737886774611812582, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639623742362694046, guid: 3c806595f6a8445e19e9ed6645c102c1, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

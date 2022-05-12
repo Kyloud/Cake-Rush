@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : UnitController   
+public class PlayerController : UnitController
 {   
     [SerializeField] private GameObject lightningObject;
     [SerializeField] private LayerMask entityLayer;
     
     protected override void Awake()
     {
+<<<<<<< HEAD
         stat = new Data.Stat(1, 1, 1, 1, 1);
 
         base.Awake();
+=======
+        base.Awake();        
+>>>>>>> BiN_
     }
-
     private void Update()
     {
         if(Input.GetMouseButtonDown(1))
@@ -37,7 +40,11 @@ public class PlayerController : UnitController
             }
         }
     }
-
+    protected override void DataLoad(string fileName)
+    {
+        base.DataLoad(fileName);
+    }
+    
     //Skill lightning
     public void Lightning(float damage)
     {
@@ -55,9 +62,9 @@ public class PlayerController : UnitController
 
 
     //Skill Cakerush
-    public void CakeRush()
+    public void CakeRush(UnitController unit)
     {
-
+        
     }
     
     public override void MoveTo(Vector3 end)

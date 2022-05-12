@@ -19,6 +19,13 @@ public class EntityBase : ObjectBase
     protected virtual void Start() 
     { }
 
+    protected override void DataLoad(string fileName)
+    {
+        base.DataLoad(fileName);
+
+        moveSpeed = stat.moveSpeed;
+    }
+    
     public override void Hit(float hitDamage)
     {
         base.Hit(hitDamage);

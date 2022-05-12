@@ -5,8 +5,11 @@ using UnityEngine;
 public class Data : MonoBehaviour
 {
     //Structure for initialization of entity stats
+
+    [SerializeField]    
     public struct Stat
     {
+<<<<<<< HEAD
         public float hp { get; set; }
         public float damage { get; set; }
         public float moveSpeed { get; set; }
@@ -22,5 +25,12 @@ public class Data : MonoBehaviour
             this.attackRange = attackRange;
             this.attackSpeed = attackSpeed;
         }
+=======
+        public float hp;
+        public float damage;
+        public float moveSpeed;
+        public float attackRange;
+        public float attackSpeed; 
+>>>>>>> BiN_
     }
 }

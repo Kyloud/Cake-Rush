@@ -1,0 +1,7 @@
+{
+    "hp"  : 50,
+    "damage" : 5,
+    "moveSpeed" : 5,
+    "attackRange" : 3,
+    "attackSpeed" : 2
+}
