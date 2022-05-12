@@ -9,13 +9,7 @@ public class PlayerController : UnitController
     
     protected override void Awake()
     {
-<<<<<<< HEAD
-        stat = new Data.Stat(1, 1, 1, 1, 1);
-
         base.Awake();
-=======
-        base.Awake();        
->>>>>>> BiN_
     }
     private void Update()
     {
