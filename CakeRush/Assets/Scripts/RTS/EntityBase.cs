@@ -28,7 +28,11 @@ public class EntityBase : MonoBehaviour
     #region function
     public virtual void Hit(float hitDamage)
     {
-
+        hp -= (defensive - hitDamage);
+        if(hp <= 0)
+        {
+            Die();
+        }
     }
 
     public virtual void Die()
