@@ -164,8 +164,7 @@ public class RTSController : MonoBehaviour
 	{
 		for ( int i = 0; i < selectedUnitList.Count; ++ i )
 		{
-			selectedUnitList[i].Move(end);
-			
+			selectedUnitList[i].Move(end);		
 		}
 	}
 
