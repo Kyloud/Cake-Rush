@@ -5,6 +5,8 @@ using UnityEngine;
 //사용자가 조종할 유닛의 부모클래스
 public class UnitController : CharacterBase
 {
+    bool isSelected;
+
     public void SelectUnit()
 	{
 		Marker.SetActive(true);

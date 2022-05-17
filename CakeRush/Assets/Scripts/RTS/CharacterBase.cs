@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class CharacterBase : EntityBase
 {
     protected NavMeshAgent navMashAgent;
-    float curStunTime;
 
     protected virtual void Awake()
     {

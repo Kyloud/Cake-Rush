@@ -10,13 +10,10 @@ public class EntityBase : MonoBehaviour
     protected float hp;
     protected float attackSpeed;
     protected float attackRange;
-    protected float criticalChance;
-    protected float criticalDamage;
     protected float retuenExp;
     protected float eyeSight;
     protected int[] cost = new int[3];
     protected int[] dropCost = new int[3];
-    protected int dropExp;
     protected float defensive;
     protected float spwanTime;
     protected float moveSpeed;
