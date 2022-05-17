@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public RTSContoller rtsController;
+    public RTSController rtsController;
     public int[] cost;
     public bool isSpawnable;
 }

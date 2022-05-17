@@ -5,9 +5,10 @@ using UnityEngine;
 //중립 몬스터의 부모 클래스
 public class MobController : CharacterBase
 {
-    public struct State{
+    public struct State
+    {
 
-    };
+    }
 
     public State state;
 

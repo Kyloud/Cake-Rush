@@ -32,7 +32,7 @@ public class PlayerController : UnitController
 
     }
 
-    protected override void Move()
+    public override void Move(Vector3 destination)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -41,7 +41,7 @@ public class PlayerController : UnitController
         {
             if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
-                Move();
+                Move(hit.transform.position);
             }
             else
             {

@@ -28,7 +28,8 @@ public class EntityBase : MonoBehaviour
     #region function
     public virtual void Hit(float hitDamage)
     {
-        hp -= (defensive - hitDamage);
+        Debug.Log($"Hit({hitDamage}, at {gameObject.name})");
+        hp -= hitDamage;
         if(hp <= 0)
         {
             Die();
@@ -37,12 +38,15 @@ public class EntityBase : MonoBehaviour
 
     public virtual void Die()
     {
-
+        Debug.Log($"Die(), at {gameObject.name})");
+        
     }
 
     protected void DataLoad ( string fileName )
     {
-        
+        Debug.Log($"DataLoaded!({fileName}), at {gameObject.name})");
     }
+
+    
     #endregion
 }

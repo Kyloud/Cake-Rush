@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    RTSContoller rtsController;
+    RTSController rtsController;
     
     Vector3 destPos;
 

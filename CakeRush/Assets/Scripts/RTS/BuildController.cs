@@ -5,6 +5,7 @@ using UnityEngine;
 // 플레이어 캐릭터가 생성하는 건물의 최상위 클래스
 public class BuildController : EntityBase
 {
+    public bool isNotSpawned;
     private int[] returnCost;
     
     protected IEnumerator Build()
@@ -17,13 +18,13 @@ public class BuildController : EntityBase
 
     }
 
-    private void DeselectBuild(BuildController newBuild)
-    {
+    public void SelectBuilding(BuildController newBuild)
+	{
+        
+	}
 
-    }
-
-    private void SelectBuild(BuildController newBuild)
-    {
-
-    }
+	public void DeselectBuilding(BuildController newBuild)
+	{
+        
+	}
 }
