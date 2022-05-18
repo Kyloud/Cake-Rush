@@ -26,8 +26,10 @@ public class EntityBase : MonoBehaviour
     protected virtual void Awake()
     {
         Init();
+        Debug.Log(hp);
     }
 
+    //entity stat setting
     protected virtual void Init()
     {
         hp = stat.hp;
