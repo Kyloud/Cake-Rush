@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Unit
+  - Team_1
+  - Team_2
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - UI
   - Ground
   - Selectable
-  - 
-  - 
+  - Build
+  - Character
   - 
   - 
   - 

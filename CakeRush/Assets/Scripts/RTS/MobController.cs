@@ -6,19 +6,19 @@ using UnityEngine;
 public class MobController : CharacterBase
 {
     protected Vector3 originPos;
-    protected float distance;
-
     //임시
     protected float distanceToHomebase;
+    protected WaitForSeconds second;
 
     protected override void Awake()
     {
         base.Awake();
         originPos = transform.position;
         state = State.idle;
-        distanceToHomebase = 6f;
+        distanceToHomebase = 100f;
         attackRange = 5f;
         moveSpeed = 4f;
+        second = new WaitForSeconds(1);;
         //target = null;
     }
 
@@ -44,8 +44,7 @@ public class MobController : CharacterBase
                 break;
 
             case State.attack:
-                Debug.Log("ATTACK");
-                Attack();
+                //sDebug.Log("ATTACK");
                 break;
 
             case State.move:
@@ -92,56 +91,65 @@ public class MobController : CharacterBase
 
     protected void Idle()
     {
-        
+        if(target != null)
+        {
+            state = State.attack;
+        }
     }
 
-    protected void Attack()
+    protected IEnumerator Attack()
     {
-        if(target == null)
+        while(true)
         {
-            state = State.retargeting;
-            return ;
-        }
+           if(target == null)
+           {
+               state = State.retargeting;
+               Debug.Log("retargeting");
+               StopCoroutine(Attack());
+           }
 
-        distance = Vector3.SqrMagnitude(target.position - transform.position);
-        if(Mathf.Pow(attackRange, 2f) >= distance)
-        {
-            target.GetComponent<EntityBase>().Hit(damage);
-        }
-        else
-        {
-            state = State.move;
+          if(attackRange >= (target.position - transform.position).sqrMagnitude)
+          {
+               target.GetComponent<UnitController>().Hit(damage);
+               Debug.Log("Hit");
+               yield return second;
+           }
+            else
+           {
+               state = State.move;
+               Debug.Log("move");
+               StopCoroutine(Attack());
+           }
+
         }
     }
 
     //move function for trace
     protected void Move()
     {
-        distance = Vector3.SqrMagnitude(target.position - transform.position);
 
-        if(Mathf.Pow(attackRange-1, 2f) < distance)
+        //check, is it out homebase
+        if(distanceToHomebase < (originPos - transform.position).sqrMagnitude || distanceToHomebase < (originPos - target.position).sqrMagnitude)
+        {
+            state = State.reset;
+        }
+
+        if(attackRange < (target.position - transform.position).sqrMagnitude)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             transform.LookAt(target.position);
-
-            //check, is it out homebase
-            distance = Vector3.SqrMagnitude(originPos - transform.position);
-            if(Mathf.Pow(distanceToHomebase, 2f) < distance)
-            {
-                state = State.reset;
-            }
         }
         else
         {
+            StartCoroutine(Attack());
             state = State.attack;
         }
     }
 
     protected void Reset()
     {
-        distance = Vector3.SqrMagnitude(originPos - transform.position);
-
-        if(0.1f < distance)
+        //0.1f is move mistake proofread
+        if(0.1f < (originPos - transform.position).sqrMagnitude)
         {
             transform.position = Vector3.MoveTowards(transform.position, originPos, moveSpeed * Time.deltaTime);
             transform.LookAt(originPos);

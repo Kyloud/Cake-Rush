@@ -5,6 +5,35 @@ using UnityEngine;
 //사용자가 조종할 유닛의 부모클래스
 public class UnitController : CharacterBase
 {
+    public enum CharacterState
+    {
+        Idle,
+        Move,
+        Attack,
+        Stun,
+        Die,
+    }
+    public CharacterState state;    
+    public Camera teamCamera;
+    private void Start() 
+    {
+        Camera[] cam = GameObject.FindObjectsOfType<Camera>();
+        if (cam[0].tag == "Team_1")
+        {
+            teamCamera = cam[0];
+            return;
+        }
+        else 
+            teamCamera = cam[1];
+    
+        attackRange = 3f;
+        attackSpeed = 1f;
+        damage = 3;
+        state = CharacterState.Idle;
+    }
+
+    Transform targetTransform = null;
+
     public void SelectUnit()
 	{
 		Marker.SetActive(true);
@@ -20,46 +49,85 @@ public class UnitController : CharacterBase
 
     }
 
-    public virtual void Move(Vector3 destination)
+    void Update()
     {
-        //navMashAgent.SetDestination(destination);
-        navMashAgent.SetDestination(destination);
-
+        Idle();
+        Stop();
     }
 
-    public void Research()
+    void Idle()
     {
-
+        if(Input.GetMouseButtonDown(1) && Marker.active)
+        {
+            Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {   
+                Stop();
+                // attack cancel
+                if(state == CharacterState.Attack)
+                {
+                    StopAllCoroutines();
+                }
+                // attack
+                if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Selectable") && (hit.transform != this.transform))
+                {
+                    targetTransform = hit.transform; 
+                    Debug.Log("Move To Attack");
+                    StartCoroutine(OutToAttakRange(hit.transform));
+                }
+                // move
+                else
+                {
+                    state = CharacterState.Move;
+                    Debug.Log("Move");
+                    Move(hit.point);
+                }
+                Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
+           }
+        }
+    }
+    
+    public virtual void Move(Vector3 destination)
+    {
+        navMashAgent.SetDestination(destination);
     }
 
     protected virtual void Stop()
     {
-        
-    }
-
-    public virtual IEnumerator OutToAttakRange(Vector3 unitPosition, float range)
-    {
-        float distance = Vector3.SqrMagnitude(unitPosition - transform.position);
-
-        while(Mathf.Pow(range, 2f) < distance)
+        if(Input.GetKeyDown(KeyCode.S))
         {
-            transform.position = Vector3.MoveTowards(transform.position, unitPosition, moveSpeed * Time.deltaTime);
-            transform.LookAt(unitPosition);
-            distance = Vector3.SqrMagnitude(unitPosition - transform.position);
-            
-            yield return null;
+            targetTransform = null;
+            navMashAgent.SetDestination(transform.position);
+            navMashAgent.isStopped = true;
+            navMashAgent.isStopped = false; 
+            StopAllCoroutines();
+            state = CharacterState.Idle;
         }
     }
 
-	//Default Attack on Entities
-	protected virtual IEnumerator BasicAttack(Vector3 targetPosition)
-	{
-		float distance = (targetPosition - transform.position).sqrMagnitude;
+    public virtual IEnumerator OutToAttakRange(Transform target)
+    {
+        state = CharacterState.Attack;
+        while(attackRange < (target.position - transform.position).sqrMagnitude)
+        {
+            Move(target.position);
+            yield return null;
+        }
 
-		while(distance < attackRange)
+        Move(transform.position);
+        StartCoroutine(BasicAttack(target));
+    }
+
+	//Default Attack on Entities
+	protected virtual IEnumerator BasicAttack(Transform target)
+	{
+		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
 			Debug.Log("Attack");
-			yield return null;
+			yield return new WaitForSecondsRealtime(attackSpeed);
 		}
+        
+        StartCoroutine(OutToAttakRange(target));
 	}
 }

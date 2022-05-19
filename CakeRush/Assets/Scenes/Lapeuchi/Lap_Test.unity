@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 272721226}
   m_Layer: 7
   m_Name: TestUnit_4
-  m_TagString: Unit
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,6 +502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Marker: {fileID: 1473148658}
+  state: 0
+  teamCamera: {fileID: 0}
 --- !u!54 &404620594
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -712,7 +714,7 @@ GameObject:
   - component: {fileID: 829794012}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Team_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1076,6 +1078,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Marker: {fileID: 867005357}
+  state: 0
+  teamCamera: {fileID: 0}
 --- !u!122 &977690546
 Halo:
   m_ObjectHideFlags: 0
@@ -1360,6 +1364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Marker: {fileID: 1326669003}
+  state: 0
+  teamCamera: {fileID: 0}
 --- !u!122 &1020836234
 Halo:
   m_ObjectHideFlags: 0
@@ -1669,6 +1675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Marker: {fileID: 373119529}
+  state: 0
+  teamCamera: {fileID: 0}
 --- !u!54 &1396195772
 Rigidbody:
   m_ObjectHideFlags: 0

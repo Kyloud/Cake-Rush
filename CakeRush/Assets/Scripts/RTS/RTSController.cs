@@ -12,7 +12,7 @@ public class RTSController : MonoBehaviour
     public List<BuildController> buildList = new List<BuildController>();
 	public EntityBase selectedEnemyEntity;
     
-	private Camera mainCamera;
+	private Camera teamCamera;
     
 	public LayerMask layerGround = 1 << 6;
     public LayerMask layerSelectable = 1 << 7;
@@ -24,7 +24,12 @@ public class RTSController : MonoBehaviour
     
 	void Awake()
     {
-        mainCamera = Camera.main;
+		//Find Team Camera
+        Camera[] cam = GameObject.FindObjectsOfType<Camera>();
+        if (cam[0].tag == "Team_1")
+            teamCamera = cam[0];
+        else 
+            teamCamera = cam[1];
 		DrawDragRectangle();
     }
 
@@ -39,7 +44,7 @@ public class RTSController : MonoBehaviour
         // select or deselect by click
 		if ( Input.GetMouseButtonDown(0) )
 		{
-			Ray	ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			// When there is an object hitting the ray (= clicking on the unit)
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerSelectable))
@@ -58,7 +63,7 @@ public class RTSController : MonoBehaviour
 					{
 						ClickSelectUnit(hit.transform.GetComponent<UnitController>());
 					}
-					Debug.DrawLine(mainCamera.transform.position, hit.point, Color.red, 1f);
+					Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 					return;
 				}
 			}
@@ -69,7 +74,7 @@ public class RTSController : MonoBehaviour
 				{
 					DeselectAllUnit();
 				}
-				Debug.DrawLine(mainCamera.transform.position, hit.point, Color.red, 1f);
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 			 }	
 
 		}
@@ -77,17 +82,17 @@ public class RTSController : MonoBehaviour
 		if (Input.GetMouseButtonDown(1))
 		{
 			RaycastHit	hit;
-			Ray	ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			// When the unit object (layerUnit) is clicked
 			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
 			{
-				MoveSelectedUnits(hit.point);
-				Debug.DrawLine(mainCamera.transform.position, hit.point, Color.red, 1f);
+				//MoveSelectedUnits(hit.point);
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 				return;
 			}
 			else
 			{
-				Debug.DrawLine(mainCamera.transform.position, hit.point, Color.red, 1f);
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 			}
 		}
     }
@@ -107,10 +112,10 @@ public class RTSController : MonoBehaviour
 			// Represents the drag range as an image while dragging with the mouse clicked
 			DrawDragRectangle();
 			
-			Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+			Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if ( Physics.Raycast(ray, out hit, Mathf.Infinity))
-				Debug.DrawLine(mainCamera.transform.position, hit.point, Color.green, 1f);
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.green, 1f);
 		}
 		
 		if (Input.GetMouseButtonUp(0))
@@ -236,7 +241,7 @@ public class RTSController : MonoBehaviour
  		foreach (UnitController unit in unitList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
-			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) == true)
+			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(unit.transform.position)) == true)
 			{
 				DragSelectUnit(unit);
 			}
