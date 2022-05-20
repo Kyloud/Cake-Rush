@@ -24,12 +24,8 @@ public class RTSController : MonoBehaviour
     
 	void Awake()
     {
+		teamCamera = Camera.main;
 		//Find Team Camera
-        Camera[] cam = GameObject.FindObjectsOfType<Camera>();
-        if (cam[0].tag == "Team_1")
-            teamCamera = cam[0];
-        else 
-            teamCamera = cam[1];
 		DrawDragRectangle();
     }
 
@@ -38,7 +34,7 @@ public class RTSController : MonoBehaviour
         Click();
 		Drag();
     }
-    
+
     void Click()
     {
         // select or deselect by click

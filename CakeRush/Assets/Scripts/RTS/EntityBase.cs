@@ -26,10 +26,8 @@ public class EntityBase : MonoBehaviour
     protected virtual void Awake()
     {
         Init();
-        Debug.Log(hp);
     }
 
-    //entity stat setting
     protected virtual void Init()
     {
         hp = stat.hp;
@@ -57,7 +55,7 @@ public class EntityBase : MonoBehaviour
         }
     }
 
-    public virtual void Die()
+    protected virtual void Die()
     {
         Debug.Log($"Die(), at {gameObject.name})");
     }

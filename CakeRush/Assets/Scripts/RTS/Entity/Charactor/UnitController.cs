@@ -13,19 +13,14 @@ public class UnitController : CharacterBase
         Stun,
         Die,
     }
-    public CharacterState state;    
+
+    public CharacterState state;
+
     public Camera teamCamera;
+
     private void Start() 
     {
-        Camera[] cam = GameObject.FindObjectsOfType<Camera>();
-        if (cam[0].tag == "Team_1")
-        {
-            teamCamera = cam[0];
-            return;
-        }
-        else 
-            teamCamera = cam[1];
-    
+        teamCamera = Camera.main;
         attackRange = 3f;
         attackSpeed = 1f;
         damage = 3;
@@ -33,6 +28,12 @@ public class UnitController : CharacterBase
     }
 
     Transform targetTransform = null;
+    public CakeRush cakeRush;
+
+    protected override void Awake()
+    {
+        base.Awake();   
+    }
 
     public void SelectUnit()
 	{
