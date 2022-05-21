@@ -7,7 +7,8 @@ public class EntityBase : MonoBehaviour
 {
     #region  element
     public float damage { get; set; }
-    public float hp { get; set; }
+    public float maxHp { get; set; }
+    public float curHp { get; set; }
     protected float attackSpeed;
     protected float attackRange;
     protected float criticalChance;
@@ -30,7 +31,8 @@ public class EntityBase : MonoBehaviour
 
     protected virtual void Init()
     {
-        hp = stat.hp;
+        maxHp = stat.hp;
+        curHp = stat.hp;
         damage = stat.damage;
         attackRange = stat.attackRange;
         attackSpeed = stat.attackSpeed;
@@ -47,9 +49,9 @@ public class EntityBase : MonoBehaviour
     public virtual void Hit(float hitDamage)
     {
         Debug.Log($"Hit({hitDamage}, at {gameObject.name})");
-        hp -= hitDamage;
+        curHp -= hitDamage;
 
-        if(hp <= 0)
+        if(curHp <= 0)
         {
             Die();
         }

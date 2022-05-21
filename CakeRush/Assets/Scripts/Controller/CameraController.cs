@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
         rtsController = GameObject.FindWithTag("GameController").GetComponent<RTSController>();
         isLock = false;
         speed = 5f;
+        // playerTransform = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class CameraController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            
+            // transform.position = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z - 11f);
         }
     }
 
@@ -44,8 +45,8 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3
             (
                 rtsController.selectedUnitList[0].transform.position.x,
-                originPos.y,
-                rtsController.selectedUnitList[0].transform.position.z - 6f
+                transform.position.y,
+                rtsController.selectedUnitList[0].transform.position.z - 11f
             );
         }
     }
@@ -57,8 +58,8 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3
             (
                 rtsController.selectedUnitList[0].transform.position.x,
-                originPos.y,
-                rtsController.selectedUnitList[0].transform.position.z - 6f
+                transform.position.y,
+                rtsController.selectedUnitList[0].transform.position.z - 11f
             );
         }
         if (Input.GetKeyDown(KeyCode.Y))

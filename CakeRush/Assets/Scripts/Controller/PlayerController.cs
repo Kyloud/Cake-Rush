@@ -2,30 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class SkillStat
+public struct SkillStat
 {
-    public float coolDown;    
-    public float currentCoolDown;
+    public float level { get; set; }
+    public float coolDown { get; set; }
+    public float factor { get; set; }
 }
 
 public class PlayerController : UnitController
 {
-    public int cakeRushLevel { get; set; }
-    public int cokeShotLevel { get; set; }
-    private LayerMask groundLayer;
-    private LayerMask unitLayer;
-    
-    [SerializeField] private SkillStat[] cakeRush;
-    [SerializeField] private SkillStat[] lightnig;
-    [SerializeField] private GameObject cokeShotObject;
+    public float buildRange { get; set;}
+
+    private SkillStat Skill_CakeRush;
+    private SkillStat Skill_Lightning;
     protected override void Awake()
     {
-        DataLoad("Player"); 
-        cakeRushLevel = 0;
-        cokeShotLevel = 0;
-        base.Init();
+        Skill_CakeRush = new SkillStat();
+        Skill_Lightning = new SkillStat();
         base.Awake();
+        
     }
 
+    private void CakeRush()
+    {
+        
+    }
+
+    private void Lightning()
+    {
+        
+    }
+    
+    public override void Move(Vector3 destination)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                Move(hit.transform.position);
+            }
+            else
+            {
+                Attack();
+            }
+        }
+    }
+
+    protected override void Attack()
+    {
+        
+    }
+
+    protected override void Stop()
+    {
+
+    }
+
+    
 }
