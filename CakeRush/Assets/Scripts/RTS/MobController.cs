@@ -33,6 +33,16 @@ public class MobController : CharacterBase
     [SerializeField]
     public Transform target;
 
+    public void SelectUnit()
+	{
+		Marker.SetActive(true);
+	}
+
+	public void DeselectUnit()
+	{
+        Marker.SetActive(false);
+	}
+
 
     protected void Update()
     {
