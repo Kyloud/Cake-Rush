@@ -96,7 +96,6 @@ public class UnitController : CharacterBase
     public virtual void Move(Vector3 destination)
     {
         navMashAgent.SetDestination(destination);
-
     }
 
     protected virtual void Stop()
@@ -132,6 +131,12 @@ public class UnitController : CharacterBase
 		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
 			Debug.Log("Attack");
+
+            if(target.CompareTag("Monster"))
+            {
+                target.GetComponent<MobController>().Hit(damage, transform);
+            }
+
 			yield return new WaitForSecondsRealtime(attackSpeed);
 		}
         

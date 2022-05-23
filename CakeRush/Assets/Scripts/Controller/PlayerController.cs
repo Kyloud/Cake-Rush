@@ -33,8 +33,9 @@ public class PlayerController : UnitController
         Debug.Log($"AttackRange : {attackRange}");
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if(Input.GetMouseButtonDown(1))
         {
            SelectedPoint();
@@ -97,8 +98,6 @@ public class PlayerController : UnitController
 
         while(!navMashAgent.pathPending)
         {
-            
-            
                if(navMashAgent.remainingDistance <= navMashAgent.stoppingDistance)
                {
                    if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude == 0)
@@ -130,7 +129,7 @@ public class PlayerController : UnitController
                 StartCoroutine(Move(hit.point));
             }
                 
-            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Unit"))
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Charactor"))
             {
                 StartCoroutine(OutToAttakRange(hit.transform));
                 Debug.Log($"Hit as {hit.collider.gameObject.name}");
