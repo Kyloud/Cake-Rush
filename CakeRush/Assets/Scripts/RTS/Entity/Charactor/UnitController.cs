@@ -11,30 +11,39 @@ public class UnitController : CharacterBase
         Move,
         Attack,
         Stun,
-        Die,
+        Die,    
     }
-
     public CharacterState state;
+    
+    private void Start() 
+    {
+        attackRange = 3f;
+        attackSpeed = 1f;
+        damage = 3;
+        state = CharacterState.Idle;
+    }   
 
+    private Transform targetTransform = null;
+    public CakeRush cakeRush;
     public Camera teamCamera;
 
-    private void Start() 
+    protected override void Awake()
     {
         teamCamera = Camera.main;
         attackRange = 3f;
         attackSpeed = 1f;
         damage = 3;
         state = CharacterState.Idle;
-    }
-
-    Transform targetTransform = null;
-    public CakeRush cakeRush;
-
-    protected override void Awake()
-    {
         base.Awake();   
     }
 
+    protected virtual void Update()
+    {
+        Idle();
+        Stop();
+    }
+    
+    
     public void SelectUnit()
 	{
 		Marker.SetActive(true);
@@ -50,20 +59,14 @@ public class UnitController : CharacterBase
 
     }
 
-    void Update()
-    {
-        Idle();
-        Stop();
-    }
-
     void Idle()
     {
         if(Input.GetMouseButtonDown(1) && Marker.active)
         {
-            Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {   
+            {
                 Stop();
                 // attack cancel
                 if(state == CharacterState.Attack)
@@ -80,6 +83,7 @@ public class UnitController : CharacterBase
                 // move
                 else
                 {
+                    
                     state = CharacterState.Move;
                     Debug.Log("Move");
                     Move(hit.point);
@@ -92,6 +96,7 @@ public class UnitController : CharacterBase
     public virtual void Move(Vector3 destination)
     {
         navMashAgent.SetDestination(destination);
+
     }
 
     protected virtual void Stop()
@@ -106,6 +111,7 @@ public class UnitController : CharacterBase
             state = CharacterState.Idle;
         }
     }
+
 
     public virtual IEnumerator OutToAttakRange(Transform target)
     {

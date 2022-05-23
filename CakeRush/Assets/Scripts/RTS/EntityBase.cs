@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//모든 캐릭터와 건물의 최상위 부모 클래스
+//Character and Building GameObject's Base Class
 public class EntityBase : MonoBehaviour
 {
     #region  element
@@ -26,6 +26,7 @@ public class EntityBase : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Marker = transform.Find("Marker").gameObject;
         Init();
     }
 

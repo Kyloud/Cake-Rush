@@ -12,8 +12,8 @@ public class CakeRush : MonoBehaviour
         
     }
 
-    public void UnitCakeRush()
+    public void UnitCakeRush(int skillLevel)
     {
-        
+        Debug.Log($"Cake Rush! | Level {skillLevel}");
     }
 }
