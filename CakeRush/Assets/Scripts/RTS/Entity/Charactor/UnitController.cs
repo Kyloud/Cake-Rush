@@ -17,24 +17,24 @@ public class UnitController : CharacterBase
     
     private void Start() 
     {
-        attackRange = 3f;
+        attackRange = 8f;
         attackSpeed = 1f;
         damage = 3;
         state = CharacterState.Idle;
     }   
 
-    private Transform targetTransform = null;
+    protected Transform targetTransform = null;
     public CakeRush cakeRush;
     public Camera teamCamera;
 
     protected override void Awake()
     {
+        base.Awake();
         teamCamera = Camera.main;
         attackRange = 3f;
         attackSpeed = 1f;
         damage = 3;
-        state = CharacterState.Idle;
-        base.Awake();   
+        state = CharacterState.Idle;   
     }
 
     protected virtual void Update()
@@ -54,9 +54,14 @@ public class UnitController : CharacterBase
         Marker.SetActive(false);
 	}
 
-    protected virtual void Attack()
-    {
-
+    protected virtual void Attack(Transform target)
+    {        
+        navMashAgent.isStopped = true;
+        if(target.CompareTag("Monster"))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), 90);
+            target.GetComponent<MobController>().Hit(damage, transform);
+        }
     }
 
     void Idle()
@@ -74,7 +79,7 @@ public class UnitController : CharacterBase
                     StopAllCoroutines();
                 }
                 // attack
-                if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Selectable") && (hit.transform != this.transform))
+                /*if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Selectable") && (hit.transform != this.transform))
                 {
                     targetTransform = hit.transform; 
                     Debug.Log("Move To Attack");
@@ -87,6 +92,23 @@ public class UnitController : CharacterBase
                     state = CharacterState.Move;
                     Debug.Log("Move");
                     Move(hit.point);
+                }*/
+
+                if((hit.transform != this.transform))
+                {
+                    if(hit.transform.CompareTag("Monster") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Selectable"))
+                    {
+                        targetTransform = hit.transform; 
+                        Debug.Log("Move To Attack");
+                        StartCoroutine(OutToAttakRange(hit.transform));
+                    }
+                    else
+                    {
+                        //move
+                        state = CharacterState.Move;
+                        Debug.Log("Move");
+                        Move(hit.point);
+                    }
                 }
                 Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
            }
@@ -95,6 +117,8 @@ public class UnitController : CharacterBase
     
     public virtual void Move(Vector3 destination)
     {
+        navMashAgent.isStopped = false; 
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), 90);
         navMashAgent.SetDestination(destination);
     }
 
@@ -115,27 +139,31 @@ public class UnitController : CharacterBase
     public virtual IEnumerator OutToAttakRange(Transform target)
     {
         state = CharacterState.Attack;
+        animator.SetBool("Move", true);
+        animator.SetBool("Attack", false);
+
         while(attackRange < (target.position - transform.position).sqrMagnitude)
         {
+            Debug.Log((target.position - transform.position).sqrMagnitude);
             Move(target.position);
             yield return null;
         }
 
-        Move(transform.position);
+        //Move(transform.position);
         StartCoroutine(BasicAttack(target));
     }
 
 	//Default Attack on Entities
 	protected virtual IEnumerator BasicAttack(Transform target)
 	{
+        state = CharacterState.Attack;
+        animator.SetBool("Move", false);
+        animator.SetBool("Attack", true);
 		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
 			Debug.Log("Attack");
 
-            if(target.CompareTag("Monster"))
-            {
-                target.GetComponent<MobController>().Hit(damage, transform);
-            }
+            Attack(target);
 
 			yield return new WaitForSecondsRealtime(attackSpeed);
 		}

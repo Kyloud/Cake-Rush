@@ -49,7 +49,7 @@ public class EntityBase : MonoBehaviour
     #region function
     public virtual void Hit(float hitDamage)
     {
-        Debug.Log($"Hit({hitDamage}, at {gameObject.name})");
+        //Debug.Log($"Hit({hitDamage}, at {gameObject.name})");
         curHp -= hitDamage;
 
         if(curHp <= 0)

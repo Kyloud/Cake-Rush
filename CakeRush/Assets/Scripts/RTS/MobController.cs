@@ -16,7 +16,7 @@ public class MobController : CharacterBase
         originPos = transform.position;
         state = State.idle;
         distanceToHomebase = 100f;
-        attackRange = 5f;
+        attackRange = 8f;
         moveSpeed = 4f;
         second = new WaitForSeconds(1);;
         //target = null;
@@ -78,31 +78,6 @@ public class MobController : CharacterBase
             default:
                 break;
 
-        }
-
-
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            state = State.idle;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            if(state != State.attack)
-            {
-                state = State.attack;
-                StartCoroutine(Attack());
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Alpha3)){
-            state = State.move;
-        }
-        
-        if(Input.GetKeyDown(KeyCode.Alpha4)){
-            state = State.retargeting;
-        }
-        
-        if(Input.GetKeyDown(KeyCode.Alpha5)){
-            state = State.reset;
         }
     }
 
@@ -188,6 +163,7 @@ public class MobController : CharacterBase
         if(state != State.attack)
         {
             state = State.attack;
+            target = attacker;
             StartCoroutine(Attack());
         }
     }

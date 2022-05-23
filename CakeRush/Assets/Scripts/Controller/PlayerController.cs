@@ -83,6 +83,7 @@ public class PlayerController : UnitController
         while((target.position - transform.position).sqrMagnitude < attackRange && state == CharacterState.Attack)
         {
             Debug.Log("Attack");
+            Attack(target);
             animator.SetTrigger("Attack");
             yield return attackDelay;   
         }
@@ -129,7 +130,7 @@ public class PlayerController : UnitController
                 StartCoroutine(Move(hit.point));
             }
                 
-            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Charactor"))
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Character"))
             {
                 StartCoroutine(OutToAttakRange(hit.transform));
                 Debug.Log($"Hit as {hit.collider.gameObject.name}");
