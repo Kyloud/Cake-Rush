@@ -27,6 +27,7 @@ public class MobController : CharacterBase
         idle, attack, move, reset, retargeting
     }
 
+    [SerializeField]
     protected State state;
 
     //variable for serching tag of target
@@ -54,7 +55,9 @@ public class MobController : CharacterBase
                 break;
 
             case State.attack:
-                //sDebug.Log("ATTACK");
+                Debug.Log("ATTACK");
+                
+        
                 break;
 
             case State.move:
@@ -83,7 +86,11 @@ public class MobController : CharacterBase
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2)){
-            state = State.attack;
+            if(state != State.attack)
+            {
+                state = State.attack;
+                StartCoroutine(Attack());
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha3)){
@@ -101,21 +108,19 @@ public class MobController : CharacterBase
 
     protected void Idle()
     {
-        if(target != null)
-        {
-            state = State.attack;
-        }
+        //play IDLE animation
     }
 
     protected IEnumerator Attack()
     {
         while(true)
         {
+            Debug.Log("attacking");
            if(target == null)
            {
                state = State.retargeting;
                Debug.Log("retargeting");
-               StopCoroutine(Attack());
+               break;
            }
 
           if(attackRange >= (target.position - transform.position).sqrMagnitude)
@@ -128,7 +133,7 @@ public class MobController : CharacterBase
            {
                state = State.move;
                Debug.Log("move");
-               StopCoroutine(Attack());
+               break;
            }
 
         }
@@ -144,6 +149,7 @@ public class MobController : CharacterBase
             state = State.reset;
         }
 
+        //check is target in my attack range
         if(attackRange < (target.position - transform.position).sqrMagnitude)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
@@ -151,8 +157,12 @@ public class MobController : CharacterBase
         }
         else
         {
-            StartCoroutine(Attack());
-            state = State.attack;
+            //in range
+            if(state != State.attack)
+            {
+                state = State.attack;
+                StartCoroutine("Attack");
+            }
         }
     }
 
@@ -166,14 +176,20 @@ public class MobController : CharacterBase
         }
         else
         {
+            target = null;
             state = State.idle;
         }
     }
 
     public virtual void Hit(float hitDamage, Transform attacker)
     {
-        target = attacker;
         base.Hit(hitDamage);
+        
+        if(state != State.attack)
+        {
+            state = State.attack;
+            StartCoroutine(Attack());
+        }
     }
 
     protected void Retargeting()
