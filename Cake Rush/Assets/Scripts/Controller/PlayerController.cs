@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class SkillStat
-{
-    public float coolDown;    
-    public float currentCoolDown;
-}
-
 public class PlayerController : UnitController
 {
     public int cakeRushLevel { get; set; }
@@ -17,7 +10,11 @@ public class PlayerController : UnitController
     public int lightningLevel { get; set; }
 
     [SerializeField] private GameObject attackRangeView;
+    [SerializeField] private GameObject cokeShotField;
+    [SerializeField] private LayerMask groundLayer;
+
     private Camera mainCamera;
+    private CokeShot cokeShot;
     
     protected override void Awake()
     {
@@ -56,6 +53,12 @@ public class PlayerController : UnitController
         else if(Input.GetKeyDown(KeyCode.R))    //Cake rush
         {
             CakeRush();
+        }
+        
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log("On build");
+            StartCoroutine(Build(true));
         }
         
         if(Input.GetKeyDown(KeyCode.S))
@@ -97,19 +100,24 @@ public class PlayerController : UnitController
 
         base.Move(distinct);
 
-        while(!navMashAgent.pathPending)
+        while(state == CharacterState.Move)
         {
-               if(navMashAgent.remainingDistance <= navMashAgent.stoppingDistance)
-               {
-                   if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude == 0)
+            if(!navMashAgent.pathPending)
+            {
+                Debug.Log($"remianingDistance {navMashAgent.remainingDistance}");
+                Debug.Log($"stoppingDistance {navMashAgent.stoppingDistance}");
+
+                if(navMashAgent.remainingDistance <= 0.2f && navMashAgent.stoppingDistance <= 0.5f)
+                {
+                    if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude <= 0.2f)
                     {
                         Debug.Log("Idle");
                         animator.SetTrigger("Idle");
                         state = CharacterState.Idle;
                         break;
                     }
-               }
-            
+                }
+            }
 
             yield return null;
         }
@@ -142,9 +150,43 @@ public class PlayerController : UnitController
 
     private void CakeRush()
     {
-        for(int i = 0; i < GameManager.instance.rtsController.unitList.Count; i++)
+        cakeRush.UseSkill(cakeRush.skillLevel);
+    }
+
+    private IEnumerator Build(bool onBuild)     //건물 건설
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        while(onBuild)
         {
-            GameManager.instance.rtsController.unitList[i].cakeRush.UnitCakeRush(cakeRushLevel);
+            if(Input.GetMouseButtonDown(0))
+            {
+                if(Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+                {
+                    Debug.Log($"Build as {hit.point}");
+                    break;
+                }
+            }
+
+            yield return null;
+        }
+        
+        Debug.Log("end");
+    }
+
+    private void CokeShot()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray, out hit, attackRange, groundLayer))
+            {
+                cokeShot.UseSkill(cokeShot.skillLevel);
+                cokeShotField.SetActive(true);
+            }
         }
     }
 }

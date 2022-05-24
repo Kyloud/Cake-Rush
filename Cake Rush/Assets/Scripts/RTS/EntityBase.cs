@@ -53,7 +53,6 @@ public class EntityBase : MonoBehaviour
     #region function
     public virtual void Hit(float hitDamage)
     {
-        //Debug.Log($"Hit({hitDamage}, at {gameObject.name})");
         curHp -= hitDamage;
 
         if(curHp <= 0)
@@ -69,7 +68,6 @@ public class EntityBase : MonoBehaviour
 
     protected void DataLoad (string fileName)
     {
-        Debug.Log($"DataLoaded!({fileName}), at {gameObject.name})");
         stat = new Data.Stat();
         TextAsset dataFile = Resources.Load<TextAsset>($"Data/{fileName}");
         stat = JsonUtility.FromJson<Data.Stat>(dataFile.text);
