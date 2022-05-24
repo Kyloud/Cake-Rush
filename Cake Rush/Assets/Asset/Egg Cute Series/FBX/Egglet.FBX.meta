@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: 8343b1e9a48b046d996772eab9b3f9c9
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Egglet
+  - first:
+      1: 100004
+    second: Rig
+  - first:
+      1: 100006
+    second: RigHead
+  - first:
+      1: 100008
+    second: RigLLeg1
+  - first:
+      1: 100010
+    second: RigLLeg2
+  - first:
+      1: 100012
+    second: RigLLegAnkle
+  - first:
+      1: 100014
+    second: RigLLegPlatform
+  - first:
+      1: 100016
+    second: RigNeck
+  - first:
+      1: 100018
+    second: RigPelvis
+  - first:
+      1: 100020
+    second: RigRLeg1
+  - first:
+      1: 100022
+    second: RigRLeg2
+  - first:
+      1: 100024
+    second: RigRLegAnkle
+  - first:
+      1: 100026
+    second: RigRLegPlatform
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Egglet
+  - first:
+      4: 400004
+    second: Rig
+  - first:
+      4: 400006
+    second: RigHead
+  - first:
+      4: 400008
+    second: RigLLeg1
+  - first:
+      4: 400010
+    second: RigLLeg2
+  - first:
+      4: 400012
+    second: RigLLegAnkle
+  - first:
+      4: 400014
+    second: RigLLegPlatform
+  - first:
+      4: 400016
+    second: RigNeck
+  - first:
+      4: 400018
+    second: RigPelvis
+  - first:
+      4: 400020
+    second: RigRLeg1
+  - first:
+      4: 400022
+    second: RigRLeg2
+  - first:
+      4: 400024
+    second: RigRLegAnkle
+  - first:
+      4: 400026
+    second: RigRLegPlatform
+  - first:
+      21: 2100000
+    second: 07 - Default
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: Egglet
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: Egglet
+  - first:
+      43: 4300000
+    second: Egglet
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Egglet
+  externalObjects: {}
+  materials:
+    materialImportMode: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips:
+  - 4890f8c7544924adab135d0c542c53d8
+  - 34cb5d839ae4a4d8da695b2f0244db88
+  - 0877282d6a7764a7f8062cee61e44bf3
+  - 15f19cb230ee541b291ab31c1d5568a7
+  - bb29a3268faa348a7a36573ea8f74483
+  - ad38e6c0ca24d4ddeaa8f79d1ab3de8d
+  - 70d556193a5ce4e7bbdf761a48868215
+  - aea1b6dd4bad347c3adf8fa46510d123
+  - cf8b7e7ead25f4d8ab9ab6d33ad7a9ad
+  - 0b5363c83b636455abb9d67f53b976f3
+  - 9350d84fe167849eeb5da55eb344f398
+  - 42df4da0c8e4c450e9dcd70e7cf55311
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
