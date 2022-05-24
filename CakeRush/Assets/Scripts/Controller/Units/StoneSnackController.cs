@@ -6,7 +6,10 @@ public class StoneSnackController : UnitController
 {
     protected override void Awake()
     {
-        base.Awake();
+        DataLoad("StoneSnack"); 
+        base.Awake();      
+        navMashAgent.speed = moveSpeed;
+        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
     }
 
     protected override void Update()

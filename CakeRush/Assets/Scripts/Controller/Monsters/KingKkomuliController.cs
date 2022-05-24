@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class KingKkomuliController : MobController
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        DataLoad("KingKkomuli"); 
+        base.Awake();
+        navMashAgent.speed = moveSpeed;
         
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
   

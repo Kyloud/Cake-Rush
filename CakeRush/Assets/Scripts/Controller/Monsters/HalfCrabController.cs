@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class HalfCrabController : MobController
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
-        
+        DataLoad("HalfCrab");     
+        base.Awake();
+        navMashAgent.speed = moveSpeed;
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
 }

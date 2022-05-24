@@ -5,6 +5,12 @@ using UnityEngine;
 public class TheifRatController : MobController
 {
     // Start is called before the first frame update
+    protected override void Awake()
+    {
+        DataLoad("TheifRat");
+        base.Awake();        
+        navMashAgent.speed = moveSpeed;
+    }
     void Start()
     {
         

@@ -7,41 +7,15 @@ public class EggCandyController : UnitController
 
     protected override void Awake()
     {
+        DataLoad("EggCandy");
         base.Awake();
+        navMashAgent.speed = moveSpeed;
+        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
     }
 
     protected override void Update()
     {
         base.Update();
-    }
-    
-    public override void Move(Vector3 distinct)
-    {
-        animator.SetBool("Move", true);
-        animator.SetBool("Attack", false);
-        base.Move(distinct);
-        StartCoroutine(Move());
-    }
-    
-    protected IEnumerator Move()
-    {
-        while(true)
-        {
-            if(!navMashAgent.pathPending)
-            {
-               if(navMashAgent.remainingDistance <= navMashAgent.stoppingDistance)
-               {
-                   if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude == 0)
-                    {
-                        animator.SetBool("Move", false);
-                        state = CharacterState.Idle;
-                        break;
-                    }
-               }
-            }
-
-            yield return null;
-        }
     }
 
     protected override void Attack(Transform target)

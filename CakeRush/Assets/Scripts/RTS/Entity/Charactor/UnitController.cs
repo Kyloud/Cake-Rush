@@ -57,6 +57,10 @@ public class UnitController : CharacterBase
     protected virtual void Attack(Transform target)
     {        
         navMashAgent.isStopped = true;
+        
+        animator.SetBool("Move", false);
+        animator.SetBool("Attack", true);
+        
         if(target.CompareTag("Monster"))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), 90);
@@ -99,14 +103,12 @@ public class UnitController : CharacterBase
                     if(hit.transform.CompareTag("Monster") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Selectable"))
                     {
                         targetTransform = hit.transform; 
-                        Debug.Log("Move To Attack");
                         StartCoroutine(OutToAttakRange(hit.transform));
                     }
                     else
                     {
                         //move
                         state = CharacterState.Move;
-                        Debug.Log("Move");
                         Move(hit.point);
                     }
                 }
@@ -114,12 +116,37 @@ public class UnitController : CharacterBase
            }
         }
     }
-    
+    protected IEnumerator Arrive()
+    {
+        while(true)
+        {
+            if(!navMashAgent.pathPending)
+            {
+               if(navMashAgent.remainingDistance <= navMashAgent.stoppingDistance)
+               {
+                   if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude == 0)
+                    {
+                        animator.SetBool("Move", false);
+                        state = CharacterState.Idle;
+                        break;
+                    }
+               }
+            }
+
+            yield return null;
+        }
+    }    
     public virtual void Move(Vector3 destination)
     {
+        animator.SetBool("Move", true);
+        animator.SetBool("Attack", false);
+
         navMashAgent.isStopped = false; 
+
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), 90);
         navMashAgent.SetDestination(destination);
+        
+        StartCoroutine(Arrive());
     }
 
     protected virtual void Stop()
@@ -144,7 +171,6 @@ public class UnitController : CharacterBase
 
         while(attackRange < (target.position - transform.position).sqrMagnitude)
         {
-            Debug.Log((target.position - transform.position).sqrMagnitude);
             Move(target.position);
             yield return null;
         }
@@ -161,8 +187,6 @@ public class UnitController : CharacterBase
         animator.SetBool("Attack", true);
 		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
-			Debug.Log("Attack");
-
             Attack(target);
 
 			yield return new WaitForSecondsRealtime(attackSpeed);
