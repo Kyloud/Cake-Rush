@@ -50,28 +50,23 @@ public class MobController : CharacterBase
         switch(state)
         {
             case State.idle:
-                Debug.Log("IDLE");
                 Idle();
                 break;
 
             case State.attack:
-                Debug.Log("ATTACK");
                 
         
                 break;
 
             case State.move:
-                Debug.Log("MOVE");
                 Move();
                 break;
 
             case State.retargeting:
-                Debug.Log("RETARGETING");
                 Retargeting();
                 break;
 
             case State.reset:
-                Debug.Log("RESET");
                 Reset();
                 break;
 
@@ -90,24 +85,20 @@ public class MobController : CharacterBase
     {
         while(true)
         {
-            Debug.Log("attacking");
            if(target == null)
            {
                state = State.retargeting;
-               Debug.Log("retargeting");
                break;
            }
 
           if(attackRange >= (target.position - transform.position).sqrMagnitude)
           {
                target.GetComponent<UnitController>().Hit(damage);
-               Debug.Log("Hit");
                yield return second;
            }
             else
            {
                state = State.move;
-               Debug.Log("move");
                break;
            }
 
