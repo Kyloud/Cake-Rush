@@ -45,7 +45,7 @@ public class MobController : CharacterBase
 	}
 
 
-    protected void Update()
+    protected override void Update()
     {
         switch(state)
         {

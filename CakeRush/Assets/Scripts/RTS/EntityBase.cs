@@ -8,25 +8,29 @@ public class EntityBase : MonoBehaviour
     #region  element
     public float damage { get; set; }
     public float maxHp { get; set; }
-    public float curHp { get; set; }
-    protected float attackSpeed;
-    protected float attackRange;
-    protected float criticalChance;
-    protected float criticalDamage;
-    protected float returnExp;
-    protected float eyeSight;
-    protected int[] cost = new int[3];
-    protected int[] dropCost = new int[3];
-    protected float defensive;
-    protected float spawnTime;
-    public float moveSpeed { get; set; }
-    protected Data.Stat stat;
-    public GameObject Marker;
+    [SerializeField] public float curHp;
+    [SerializeField] protected float attackSpeed;
+    [SerializeField] protected float attackRange;
+    [SerializeField] protected float criticalChance;
+    [SerializeField] protected float criticalDamage;
+    [SerializeField] protected float returnExp;
+    [SerializeField] protected float eyeSight;
+    [SerializeField] protected int[] cost = new int[3];
+    [SerializeField] protected int[] dropCost = new int[3];
+    [SerializeField] protected float defensive;
+    [SerializeField] protected float spawnTime;
+    [SerializeField] public float moveSpeed { get; set; }
+    [SerializeField] protected Data.Stat stat;
+    protected RTSController rtsController;
+    [SerializeField] public GameObject Marker;
+    public bool isSelected;
+    public bool isActive;
     #endregion
 
     protected virtual void Awake()
     {
         Marker = transform.Find("Marker").gameObject;
+        rtsController = GameObject.Find("RTSManager").GetComponent<RTSController>();
         Init();
     }
 
@@ -70,7 +74,22 @@ public class EntityBase : MonoBehaviour
         TextAsset dataFile = Resources.Load<TextAsset>($"Data/{fileName}");
         stat = JsonUtility.FromJson<Data.Stat>(dataFile.text);
     }
+    public void Select()
+	{
+        isSelected = true;
+		Marker.SetActive(true);
+	}
+    
+	public void Deselect()
+	{
+        isSelected = false;
+        Marker.SetActive(false);
+	}
+    
+    protected virtual void Update()
+    {
 
+    }
     
     #endregion
 }

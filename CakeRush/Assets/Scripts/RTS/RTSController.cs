@@ -37,7 +37,7 @@ public class RTSController : MonoBehaviour
 
     void Click()
     {
-        // select or deselect by click
+			// When there is an object hitting the ray (= clicking on the unit)
 		if ( Input.GetMouseButtonDown(0) )
 		{
 			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
@@ -45,25 +45,40 @@ public class RTSController : MonoBehaviour
 			// When there is an object hitting the ray (= clicking on the unit)
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerSelectable))
 			{
-				if (hit.transform.gameObject.GetComponent<UnitController>() == null)
+				if (hit.transform.gameObject.GetComponent<EntityBase>() == null)
 					return;
 				
 				if(hit.transform.gameObject.CompareTag("Unit"))
 				{
 					Debug.Log($"hit Unit, {hit.transform.gameObject.name}");
+					selectedBuildList.Clear();
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
-						ShiftClickSelectUnit(hit.transform.GetComponent<UnitController>());
+						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<UnitController>());
 					}
 					else
 					{
-						ClickSelectUnit(hit.transform.GetComponent<UnitController>());
+						ClickSelectUnit(hit.transform.gameObject.GetComponent<UnitController>());
 					}
-					Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
-					return;
 				}
+				else if(hit.transform.gameObject.CompareTag("Build"))
+				{
+					Debug.Log($"hit Build, {hit.transform.gameObject.name}");
+					selectedUnitList.Clear();
+					if (Input.GetKey(KeyCode.LeftShift))
+					{
+						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<BuildController>());
+					}
+					else
+					{
+						ClickSelectUnit(hit.transform.gameObject.GetComponent<BuildController>());
+					}
+				}
+				
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
+				return;
 			}
-			//When ray is hitting ground.
+				//When ray is hitting ground.
 			else if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
 			{
 				if (!Input.GetKey(KeyCode.LeftShift) )
@@ -71,7 +86,7 @@ public class RTSController : MonoBehaviour
 					DeselectAllUnit();
 				}
 				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
-			 }	
+			}
 
 		}
 		// move units by right-clicking
@@ -128,35 +143,69 @@ public class RTSController : MonoBehaviour
 	}
 	
 	/// Called when a unit is selected with a mouse click
-	public void ClickSelectUnit(UnitController newUnit)
+	public void ClickSelectUnit<T>(T newEntity) where T : EntityBase
 	{
 		// Remove all units selected in the zone
 		DeselectAllUnit();
-		SelectUnit(newUnit);
+		SelectUnit<T>(newEntity);
 	}
 
 	/// Invoked when selecting a unit with Shift+mouse click
-	public void ShiftClickSelectUnit(UnitController newUnit)
+	public void ShiftClickSelectUnit<T>(T newEntity)
 	{
+		if(typeof(T).Name == "UnitController")
+		{
+			if ( selectedUnitList.Contains(newEntity as UnitController))
+			{
+				DeselectUnit(newEntity as UnitController);
+			}
+			// If you choose a new unit
+			else
+			{
+				SelectUnit(newEntity as UnitController);
+			}
+		}
+		else if(typeof(T).Name == "BuildController")
+		{
+			if ( selectedBuildList.Contains(newEntity as BuildController) )
+			{
+				DeselectUnit(newEntity as BuildController);
+			}
+			// If you choose a new unit
+			else
+			{
+				SelectUnit(newEntity as BuildController);
+			}
+		}
 		// If you select a previously selected unit
-		if ( selectedUnitList.Contains(newUnit) )
-		{
-			DeselectUnit(newUnit);
-		}
-		// If you choose a new unit
-		else
-		{
-			SelectUnit(newUnit);
-		}
+		// if ( selectedUnitList.Contains(newEntity) )
+		// {
+		// 	DeselectUnit(newEntity);
+		// }
+		// // If you choose a new unit
+		// else
+		// {
+		// 	SelectUnit(newEntity);
+		// }
 	}
 
 	/// Called when selecting a unit by mouse dragging
-	public void DragSelectUnit(UnitController newUnit)
+	public void DragSelectUnit<T>(T newEntity) where T : EntityBase
 	{
 		// If you choose a new unit
-		if (!selectedUnitList.Contains(newUnit) )
+		if(typeof(T).Name == "UnitController")
 		{
-			SelectUnit(newUnit);
+			if (!selectedUnitList.Contains(newEntity as UnitController))
+			{
+				SelectUnit(newEntity);
+			}
+		}
+		else if(typeof(T).Name == "BuildController")
+		{
+			if (!selectedBuildList.Contains(newEntity as BuildController))
+			{
+				SelectUnit(newEntity);
+			}
 		}
 	}
 
@@ -174,28 +223,49 @@ public class RTSController : MonoBehaviour
 	{
 		for ( int i = 0; i < selectedUnitList.Count; ++ i )
 		{
-			selectedUnitList[i].DeselectUnit();
+			selectedUnitList[i].Deselect();
 		}
-
+		for ( int j = 0; j < selectedBuildList.Count; ++ j )
+		{
+			selectedBuildList[j].Deselect();
+		}
 		selectedUnitList.Clear();
+		selectedBuildList.Clear();
 	}
 
 	/// NewUnit selection set received as a parameter
-	private void SelectUnit(UnitController newUnit)
+	private void SelectUnit<T>(T newEntity) where T : EntityBase
 	{
 		// Method to be called when a unit is selected
-		newUnit.SelectUnit();
+		newEntity.Select();
 		// Save the selected unit information to the list
-		selectedUnitList.Add(newUnit);
+		if(typeof(T).Name == "UnitController")
+		{
+			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitController>());
+			Debug.Log("Unit");
+		}
+		else if(typeof(T).Name == "BuildController")
+		{
+			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildController>());
+			Debug.Log("build");
+		}
 	}
 
-	/// Set deselection of newUnit received as a parameter
-	private void DeselectUnit(UnitController newUnit)
+	/// Set deselection of newEntity received as a parameter
+	private void DeselectUnit<T>(T newEntity) where T : EntityBase
 	{
 		// Method called when unit is released
-		newUnit.DeselectUnit();
+		newEntity.Deselect();
 		// Delete the selected unit information from the list
-		selectedUnitList.Remove(newUnit);
+		
+		if(typeof(T).Name == "UnitController")
+		{
+			selectedUnitList.Remove(newEntity as UnitController);
+		}
+		else if(typeof(T).Name == "BuildController")
+		{
+			selectedBuildList.Remove(newEntity as BuildController);
+		}
 	}
 	
 	private void DrawDragRectangle()
@@ -233,7 +303,7 @@ public class RTSController : MonoBehaviour
 
 	private void SelectUnits()
 	{
-		// chack all units
+		// check all units
  		foreach (UnitController unit in unitList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
@@ -242,25 +312,13 @@ public class RTSController : MonoBehaviour
 				DragSelectUnit(unit);
 			}
 		}
+		foreach (BuildController build in buildList)
+		{
+			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
+			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(build.transform.position)) == true)
+			{
+				DragSelectUnit(build);
+			}
+		}
 	}
-
-    public void DragSelect()
-    {
-
-    }
-    
-    public void DeSelect()
-    {
-
-    }
-    
-    public void DefineTeam()
-    {
-
-    }
-
-    public void AutoAttack()
-    {
-
-    }
 }

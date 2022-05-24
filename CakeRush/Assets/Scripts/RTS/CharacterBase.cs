@@ -16,6 +16,11 @@ public class CharacterBase : EntityBase
         animator = GetComponent<Animator>();
         base.Awake();
     }
+    
+    /*protected override void Update()
+    {
+        base.Update();
+    }*/
 
     public void Stun()
     {
