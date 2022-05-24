@@ -50,7 +50,6 @@ public class RTSController : MonoBehaviour
 				
 				if(hit.transform.gameObject.CompareTag("Unit"))
 				{
-					Debug.Log($"hit Unit, {hit.transform.gameObject.name}");
 					selectedBuildList.Clear();
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
@@ -63,7 +62,6 @@ public class RTSController : MonoBehaviour
 				}
 				else if(hit.transform.gameObject.CompareTag("Build"))
 				{
-					Debug.Log($"hit Build, {hit.transform.gameObject.name}");
 					selectedUnitList.Clear();
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
@@ -242,12 +240,10 @@ public class RTSController : MonoBehaviour
 		if(typeof(T).Name == "UnitController")
 		{
 			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitController>());
-			Debug.Log("Unit");
 		}
 		else if(typeof(T).Name == "BuildController")
 		{
 			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildController>());
-			Debug.Log("build");
 		}
 	}
 

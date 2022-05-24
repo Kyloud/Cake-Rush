@@ -17,9 +17,6 @@ public class UnitController : CharacterBase
     
     private void Start() 
     {
-        attackRange = 8f;
-        attackSpeed = 1f;
-        damage = 3;
         state = CharacterState.Idle;
     }   
 
@@ -31,13 +28,10 @@ public class UnitController : CharacterBase
     {
         base.Awake();
         teamCamera = Camera.main;
-        attackRange = 3f;
-        attackSpeed = 1f;
-        damage = 3;
         state = CharacterState.Idle;   
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
         Idle();
         Stop();
@@ -189,7 +183,7 @@ public class UnitController : CharacterBase
 		{
             Attack(target);
 
-			yield return new WaitForSecondsRealtime(attackSpeed);
+			yield return new WaitForSeconds(attackSpeed);
 		}
         
         StartCoroutine(OutToAttakRange(target));
