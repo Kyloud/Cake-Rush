@@ -11,10 +11,13 @@ public class BuildController : EntityBase
 
     protected override void Awake()
     {
-        buildEffect = transform.Find("BuildAnim").gameObject;
         base.Awake();
-        curHp = 0f;
-        StartCoroutine(Build());
+        if(isSpawned)
+        {
+            curHp = 0f;
+            buildEffect = transform.Find("BuildAnim").gameObject;
+            StartCoroutine(Build());
+        }
     }
     protected override void Update()
     {

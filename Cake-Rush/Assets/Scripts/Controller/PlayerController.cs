@@ -4,74 +4,57 @@ using UnityEngine;
 
 public class PlayerController : UnitController
 {
-    public int cakeRushLevel { get; set; }
-    public int cokeShotLevel { get; set; }
-    public int shootingStarLevel { get; set; }
-    public int lightningLevel { get; set; }
-
     [SerializeField] private GameObject attackRangeView;
     [SerializeField] private GameObject cokeShotField;
     [SerializeField] private LayerMask groundLayer;
-
     private Camera mainCamera;
     private CokeShot cokeShot;
-    
     protected override void Awake()
     {
         mainCamera = Camera.main;
-        
         DataLoad("Player"); 
-        
-        cakeRushLevel = 0;
-        cokeShotLevel = 0;
         
         base.Awake();
 
         Debug.Log($"AttackRange : {attackRange}");
     }
 
-    protected override void Update()
+    protected override void Attack(Transform target)
     {
-        base.Update();
-        if(Input.GetMouseButtonDown(1))
-        {
-           SelectedPoint();
-        }
+        state = CharacterState.Attack;
 
-        if(Input.GetKeyDown(KeyCode.Q))         //Coke shot
-        {
+        navMashAgent.isStopped = true;
 
-        }
-        else if(Input.GetKeyDown(KeyCode.W))    //Lightning
-        {
+        animator.SetBool("Move", false);
+        animator.SetBool("Attack", true);
 
-        }
-        else if(Input.GetKeyDown(KeyCode.E))    //Shooting star
-        {
+        target.GetComponent<EntityBase>().Hit(damage);
+    }
 
-        }
-        else if(Input.GetKeyDown(KeyCode.R))    //Cake rush
-        {
-            CakeRush();
-        }
+    public override void Move(Vector3 destination)
+    {
+        state = CharacterState.Move;
+
+        Debug.Log("Move");
+
+        animator.SetBool("Move", true);
+        animator.SetBool("Attack", false);
         
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log("On build");
-            StartCoroutine(Build(true));
-        }
-        
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            base.Stop();
-        }
+        navMashAgent.isStopped = false; 
+
+        navMashAgent.SetDestination(destination);
+
+        StartCoroutine(Arrive());
     }
 
     public override IEnumerator OutToAttakRange(Transform target)
     {
+        animator.SetBool("Move", true);
+        animator.SetBool("Attack", false);
+
         while(attackRange < (target.position - transform.position).sqrMagnitude)
         {
-            StartCoroutine(Move(target.position));
+            navMashAgent.SetDestination(target.position);
             yield return null;
         }
 
@@ -80,47 +63,24 @@ public class PlayerController : UnitController
 
     protected override IEnumerator BasicAttack(Transform target)
     {
-        WaitForSeconds attackDelay = new WaitForSeconds(attackSpeed);
         state = CharacterState.Attack;
 
-        while((target.position - transform.position).sqrMagnitude < attackRange && state == CharacterState.Attack)
-        {
-            Debug.Log("Attack");
+        animator.SetBool("Move", false);
+        animator.SetBool("Attack", true);
+
+        WaitForSeconds speed = new WaitForSeconds(attackSpeed);
+
+		while((target.position - transform.position).sqrMagnitude < attackRange)
+		{
             Attack(target);
-            animator.SetTrigger("Attack");
-            yield return attackDelay;   
-        }
+
+			yield return speed;
+		}
     }
 
-    protected new IEnumerator Move(Vector3 distinct)
+    protected override void Update()
     {
-        state = CharacterState.Move;
-
-        animator.SetTrigger("Run");
-
-        base.Move(distinct);
-
-        while(state == CharacterState.Move)
-        {
-            if(!navMashAgent.pathPending)
-            {
-                Debug.Log($"remianingDistance {navMashAgent.remainingDistance}");
-                Debug.Log($"stoppingDistance {navMashAgent.stoppingDistance}");
-
-                if(navMashAgent.remainingDistance <= 0.2f && navMashAgent.stoppingDistance <= 0.5f)
-                {
-                    if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude <= 0.2f)
-                    {
-                        Debug.Log("Idle");
-                        animator.SetTrigger("Idle");
-                        state = CharacterState.Idle;
-                        break;
-                    }
-                }
-            }
-
-            yield return null;
-        }
+        base.Update();
     }
 
     private void SelectedPoint()
@@ -134,14 +94,12 @@ public class PlayerController : UnitController
 
             if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
-                Debug.Log($"Hit as {hit.collider.gameObject.name} {hit.point}");
-                StartCoroutine(Move(hit.point));
+                Move(hit.point);
             }
                 
-            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Character"))
+            if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Selectable"))
             {
                 StartCoroutine(OutToAttakRange(hit.transform));
-                Debug.Log($"Hit as {hit.collider.gameObject.name}");
             }
 
             Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
@@ -151,6 +109,21 @@ public class PlayerController : UnitController
     private void CakeRush()
     {
         cakeRush.UseSkill(cakeRush.skillLevel);
+    }
+
+    private void CokeShot()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if(Physics.Raycast(ray, out hit, attackRange, groundLayer))
+            {
+                cokeShot.UseSkill(cokeShot.skillLevel);
+                cokeShotField.SetActive(true);
+            }
+        }
     }
 
     private IEnumerator Build(bool onBuild)     //건물 건설
@@ -173,20 +146,5 @@ public class PlayerController : UnitController
         }
         
         Debug.Log("end");
-    }
-
-    private void CokeShot()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit, attackRange, groundLayer))
-            {
-                cokeShot.UseSkill(cokeShot.skillLevel);
-                cokeShotField.SetActive(true);
-            }
-        }
     }
 }

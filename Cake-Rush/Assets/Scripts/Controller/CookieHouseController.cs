@@ -8,6 +8,7 @@ public class CookieHouseController : BuildController
     
     protected override void Awake()
     {
+        isSpawned = true;
         DataLoad("CookieHouse"); 
         base.Awake();
     }
