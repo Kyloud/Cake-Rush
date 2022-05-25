@@ -15,7 +15,7 @@ public class PlayerController : UnitController
         DataLoad("Player"); 
         
         base.Awake();
-
+        navMashAgent.speed = moveSpeed; 
         Debug.Log($"AttackRange : {attackRange}");
     }
 

@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
         originPos = new Vector3(0.0f, 17.0f, -15.0f);
         rtsController = GameObject.FindWithTag("GameController").GetComponent<RTSController>();
         isLock = false;
-        speed = 5f;
+        speed = 20f;
         // playerTransform = GameObject.Find("Player").transform;
     }
 
