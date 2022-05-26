@@ -47,37 +47,6 @@ public class PlayerController : UnitController
         StartCoroutine(Arrive());
     }
 
-    public override IEnumerator OutToAttakRange(Transform target)
-    {
-        animator.SetBool("Move", true);
-        animator.SetBool("Attack", false);
-
-        while(attackRange < (target.position - transform.position).sqrMagnitude)
-        {
-            navMashAgent.SetDestination(target.position);
-            yield return null;
-        }
-
-        StartCoroutine(BasicAttack(target));
-    }
-
-    protected override IEnumerator BasicAttack(Transform target)
-    {
-        state = CharacterState.Attack;
-
-        animator.SetBool("Move", false);
-        animator.SetBool("Attack", true);
-
-        WaitForSeconds speed = new WaitForSeconds(attackSpeed);
-
-		while((target.position - transform.position).sqrMagnitude < attackRange)
-		{
-            Attack(target);
-
-			yield return speed;
-		}
-    }
-
     protected override void Update()
     {
         base.Update();
