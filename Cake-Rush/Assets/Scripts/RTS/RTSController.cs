@@ -259,11 +259,11 @@ public class RTSController : MonoBehaviour
 		newEntity.Deselect();
 		// Delete the selected unit information from the list
 		
-		if(typeof(T).Name == "UnitController")
+		if(newEntity.GetType() == typeof(UnitBase))
 		{
 			selectedUnitList.Remove(newEntity as UnitBase);
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(newEntity.GetType() == typeof(BuildBase))
 		{
 			selectedBuildList.Remove(newEntity as BuildBase);
 		}
