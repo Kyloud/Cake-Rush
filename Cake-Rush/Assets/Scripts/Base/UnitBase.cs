@@ -123,7 +123,7 @@ public class UnitBase : CharacterBase
                         animator.SetBool("Move", false);
                         state = CharacterState.Idle;
                         break;
-                    }
+                   }
                }
             }
 
@@ -132,6 +132,8 @@ public class UnitBase : CharacterBase
     }    
     public virtual void Move(Vector3 destination)
     {
+        state = CharacterState.Move;
+
         animator.SetBool("Move", true);
         animator.SetBool("Attack", false);
 
@@ -160,6 +162,7 @@ public class UnitBase : CharacterBase
     public virtual IEnumerator OutToAttakRange(Transform target)
     {
         state = CharacterState.Attack;
+
         animator.SetBool("Move", true);
         animator.SetBool("Attack", false);
 
@@ -177,6 +180,7 @@ public class UnitBase : CharacterBase
 	protected virtual IEnumerator BasicAttack(Transform target)
 	{
         state = CharacterState.Attack;
+
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
 		while((target.position - transform.position).sqrMagnitude < attackRange)
