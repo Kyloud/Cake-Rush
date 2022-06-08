@@ -21,6 +21,7 @@ public class SkillStat
         }
 
         isCoolDown = false;
+        currentCoolDown = 0;
     }
 }
 
@@ -33,7 +34,7 @@ public class SkillBase : MonoBehaviour
 
     public virtual void UseSkill(int skillLevel)
     {
-        if(skillStat[skillLevel].isCoolDown)
+        if(!skillStat[skillLevel].isCoolDown)
         {
             StartCoroutine(skillStat[skillLevel].CurrentCoolDown());
         }
