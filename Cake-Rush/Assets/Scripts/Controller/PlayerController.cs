@@ -35,11 +35,17 @@ public class PlayerController : UnitBase
     protected override void Update()
     {
         base.Update();
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            CakeRush();
+        }
     }
 
     private void CakeRush()
     {
         cakeRush.UseSkill(cakeRush.skillLevel);
+        Debug.Log("Cake Rush");
     }
 
     private void CokeShot()
