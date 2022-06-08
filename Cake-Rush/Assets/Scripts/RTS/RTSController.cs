@@ -37,11 +37,12 @@ public class RTSController : MonoBehaviour
 
     void Click()
     {
-			// When there is an object hitting the ray (= clicking on the unit)
+		// When there is an object hitting the ray (= clicking on the unit)
 		if ( Input.GetMouseButtonDown(0) )
 		{
 			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
+
 			// When there is an object hitting the ray (= clicking on the unit)
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerSelectable))
 			{
@@ -63,6 +64,7 @@ public class RTSController : MonoBehaviour
 				else if(hit.transform.gameObject.CompareTag("Build"))
 				{
 					selectedUnitList.Clear();
+
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
 						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<BuildBase>());
@@ -81,8 +83,11 @@ public class RTSController : MonoBehaviour
 			{
 				if (!Input.GetKey(KeyCode.LeftShift) )
 				{
-					DeselectAllUnit();
+
 				}
+
+				DeselectAllUnit();
+
 				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 			}
 
@@ -237,11 +242,11 @@ public class RTSController : MonoBehaviour
 		// Method to be called when a unit is selected
 		newEntity.Select();
 		// Save the selected unit information to the list
-		if(typeof(T).Name == "UnitController")
+		if(typeof(T).Name == "UnitBase")
 		{
 			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitBase>());
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(typeof(T).Name == "BuildBase")
 		{
 			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildBase>());
 		}

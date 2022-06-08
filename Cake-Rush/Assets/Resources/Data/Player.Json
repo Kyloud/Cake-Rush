@@ -2,7 +2,7 @@
  "hp": 500,
  "damage": 20,
  "attackSpeed": 1,
- "attackRange": 70,
+ "attackRange": 5,
  "returnExp": 0,
  "eyeSight": 5,
  "cost":
@@ -19,5 +19,5 @@
  ],
  "defensive": 30,
  "spawnTime": 10,
- "moveSpeed": 25
+ "moveSpeed": 5
 }
