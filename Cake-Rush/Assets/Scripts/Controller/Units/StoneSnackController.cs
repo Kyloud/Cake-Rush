@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneSnackController : UnitController
+public class StoneSnackController : UnitBase
 {
 
     protected override void Awake()

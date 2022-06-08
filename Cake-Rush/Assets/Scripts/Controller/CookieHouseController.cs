@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CookieHouseController : BuildController
+public class CookieHouseController : BuildBase
 {
     [SerializeField] private GameObject[] units = new GameObject[4];
     
@@ -55,6 +55,6 @@ public class CookieHouseController : BuildController
     {
         yield return new WaitForSecondsRealtime(2f);
         GameObject newUnit = Instantiate(units[i], transform.position + new Vector3(Random.Range(-3.0f, 3.0f), 0, Random.Range(-3.0f, 3.0f)), Quaternion.identity);
-        rtsController.unitList.Add(newUnit.GetComponent<UnitController>());    
+        rtsController.unitList.Add(newUnit.GetComponent<UnitBase>());    
     }
 }

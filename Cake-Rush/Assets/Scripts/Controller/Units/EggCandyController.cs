@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggCandyController : UnitController
+public class EggCandyController : UnitBase
 {
 
     protected override void Awake()

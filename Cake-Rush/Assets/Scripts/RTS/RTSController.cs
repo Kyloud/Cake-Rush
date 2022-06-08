@@ -6,10 +6,10 @@ using UnityEngine;
 public class RTSController : MonoBehaviour
 {
     
-    public List<UnitController> selectedUnitList = new List<UnitController>();
-    public List<UnitController> unitList = new List<UnitController>();
-    public List<BuildController> selectedBuildList = new List<BuildController>();
-    public List<BuildController> buildList = new List<BuildController>();
+    public List<UnitBase> selectedUnitList = new List<UnitBase>();
+    public List<UnitBase> unitList = new List<UnitBase>();
+    public List<BuildBase> selectedBuildList = new List<BuildBase>();
+    public List<BuildBase> buildList = new List<BuildBase>();
 	public EntityBase selectedEnemyEntity;
     
 	private Camera teamCamera;
@@ -53,11 +53,11 @@ public class RTSController : MonoBehaviour
 					selectedBuildList.Clear();
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
-						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<UnitController>());
+						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<UnitBase>());
 					}
 					else
 					{
-						ClickSelectUnit(hit.transform.gameObject.GetComponent<UnitController>());
+						ClickSelectUnit(hit.transform.gameObject.GetComponent<UnitBase>());
 					}
 				}
 				else if(hit.transform.gameObject.CompareTag("Build"))
@@ -65,11 +65,11 @@ public class RTSController : MonoBehaviour
 					selectedUnitList.Clear();
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
-						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<BuildController>());
+						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<BuildBase>());
 					}
 					else
 					{
-						ClickSelectUnit(hit.transform.gameObject.GetComponent<BuildController>());
+						ClickSelectUnit(hit.transform.gameObject.GetComponent<BuildBase>());
 					}
 				}
 				
@@ -153,26 +153,26 @@ public class RTSController : MonoBehaviour
 	{
 		if(typeof(T).Name == "UnitController")
 		{
-			if ( selectedUnitList.Contains(newEntity as UnitController))
+			if ( selectedUnitList.Contains(newEntity as UnitBase))
 			{
-				DeselectUnit(newEntity as UnitController);
+				DeselectUnit(newEntity as UnitBase);
 			}
 			// If you choose a new unit
 			else
 			{
-				SelectUnit(newEntity as UnitController);
+				SelectUnit(newEntity as UnitBase);
 			}
 		}
 		else if(typeof(T).Name == "BuildController")
 		{
-			if ( selectedBuildList.Contains(newEntity as BuildController) )
+			if ( selectedBuildList.Contains(newEntity as BuildBase) )
 			{
-				DeselectUnit(newEntity as BuildController);
+				DeselectUnit(newEntity as BuildBase);
 			}
 			// If you choose a new unit
 			else
 			{
-				SelectUnit(newEntity as BuildController);
+				SelectUnit(newEntity as BuildBase);
 			}
 		}
 		// If you select a previously selected unit
@@ -193,14 +193,14 @@ public class RTSController : MonoBehaviour
 		// If you choose a new unit
 		if(typeof(T).Name == "UnitController")
 		{
-			if (!selectedUnitList.Contains(newEntity as UnitController))
+			if (!selectedUnitList.Contains(newEntity as UnitBase))
 			{
 				SelectUnit(newEntity);
 			}
 		}
 		else if(typeof(T).Name == "BuildController")
 		{
-			if (!selectedBuildList.Contains(newEntity as BuildController))
+			if (!selectedBuildList.Contains(newEntity as BuildBase))
 			{
 				SelectUnit(newEntity);
 			}
@@ -239,11 +239,11 @@ public class RTSController : MonoBehaviour
 		// Save the selected unit information to the list
 		if(typeof(T).Name == "UnitController")
 		{
-			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitController>());
+			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitBase>());
 		}
 		else if(typeof(T).Name == "BuildController")
 		{
-			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildController>());
+			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildBase>());
 		}
 	}
 
@@ -256,11 +256,11 @@ public class RTSController : MonoBehaviour
 		
 		if(typeof(T).Name == "UnitController")
 		{
-			selectedUnitList.Remove(newEntity as UnitController);
+			selectedUnitList.Remove(newEntity as UnitBase);
 		}
 		else if(typeof(T).Name == "BuildController")
 		{
-			selectedBuildList.Remove(newEntity as BuildController);
+			selectedBuildList.Remove(newEntity as BuildBase);
 		}
 	}
 	
@@ -300,7 +300,7 @@ public class RTSController : MonoBehaviour
 	private void SelectUnits()
 	{
 		// check all units
- 		foreach (UnitController unit in unitList)
+ 		foreach (UnitBase unit in unitList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
 			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(unit.transform.position)) == true)
@@ -308,7 +308,7 @@ public class RTSController : MonoBehaviour
 				DragSelectUnit(unit);
 			}
 		}
-		foreach (BuildController build in buildList)
+		foreach (BuildBase build in buildList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
 			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(build.transform.position)) == true)

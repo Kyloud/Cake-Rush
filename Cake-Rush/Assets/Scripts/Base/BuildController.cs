@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // this is a Build Component class that is spwanable. 
-public class BuildController : EntityBase
+public class BuildBase : EntityBase
 {
     public GameObject buildEffect;
     public bool isSpawned;
@@ -56,12 +56,12 @@ public class BuildController : EntityBase
         Destroy(gameObject);
     }
 
-    public void SelectBuilding(BuildController newBuild)
+    public void SelectBuilding(BuildBase newBuild)
 	{
         
 	}
 
-	public void DeselectBuilding(BuildController newBuild)
+	public void DeselectBuilding(BuildBase newBuild)
 	{
         
 	}

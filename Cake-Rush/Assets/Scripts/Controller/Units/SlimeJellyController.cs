@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeJellyController : UnitController
+public class SlimeJellyController : UnitBase
 {
 
     protected override void Awake()
