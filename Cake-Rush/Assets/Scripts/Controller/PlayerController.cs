@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : UnitController
+public class PlayerController : UnitBase
 {
     [SerializeField] private GameObject attackRangeView;
     [SerializeField] private GameObject cokeShotField;

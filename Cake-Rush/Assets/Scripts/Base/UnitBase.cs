@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //사용자가 조종할 유닛의 부모클래스
-public class UnitController : CharacterBase
+public class UnitBase : CharacterBase
 {
     public enum CharacterState
     {
@@ -171,7 +171,7 @@ public class UnitController : CharacterBase
         
         //Move(transform.position);
         StartCoroutine(BasicAttack(target));
-    }
+    }   
 
 	//Default Attack on Entities
 	protected virtual IEnumerator BasicAttack(Transform target)
@@ -181,8 +181,12 @@ public class UnitController : CharacterBase
         animator.SetBool("Attack", true);
 		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
+            // Vector3 dir = target.position - transform.position;
+			// Quaternion quat = Quaternion.LookRotation(dir);
+			// transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
+            transform.LookAt(target);
             Attack(target);
-
+            
 			yield return new WaitForSeconds(attackSpeed);
 		}
         

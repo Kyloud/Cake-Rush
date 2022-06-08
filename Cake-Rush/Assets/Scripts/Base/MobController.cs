@@ -93,7 +93,7 @@ public class MobController : CharacterBase
 
           if(attackRange >= (target.position - transform.position).sqrMagnitude)
           {
-               target.GetComponent<UnitController>().Hit(damage);
+               target.GetComponent<UnitBase>().Hit(damage);
                yield return second;
            }
             else
