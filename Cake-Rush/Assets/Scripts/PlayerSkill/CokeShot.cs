@@ -22,7 +22,7 @@ public class CokeShot : SkillBase
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Charactor") || other.gameObject.layer == LayerMask.NameToLayer("Selectable"))
         {
-            StartCoroutine(Factor <CharacterBase> (other.gameObject.GetComponent<CharacterBase>()));        
+            StartCoroutine(Factor(other.gameObject.GetComponent<UnitBase>()));        
         }    
     }
 }

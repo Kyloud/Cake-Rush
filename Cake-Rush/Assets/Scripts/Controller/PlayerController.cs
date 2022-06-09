@@ -8,8 +8,11 @@ public class PlayerController : UnitBase
     [SerializeField] private GameObject cokeShotField;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private CokeShot cokeShot;
+    [SerializeField] private Lightning lightning;
+    [SerializeField] private ShootingStar shootingStart;
+
     private Camera mainCamera;
-    private CokeShot cokeShot;
     
     protected override void Awake()
     {
@@ -46,7 +49,7 @@ public class PlayerController : UnitBase
         }
         else if(Input.GetKeyDown(KeyCode.E))        //슈팅 스타
         {
-            
+            ShootingStar();
         }
         else if(Input.GetKeyDown(KeyCode.R))        //케이크 러쉬
         {
@@ -82,7 +85,6 @@ public class PlayerController : UnitBase
     private void CakeRush()
     {
         cakeRush.UseSkill(cakeRush.skillLevel);
-        Debug.Log("Cake Rush");
     }
 
     private IEnumerator Build(bool onBuild)     //건물 건설

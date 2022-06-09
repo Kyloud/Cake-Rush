@@ -2609,15 +2609,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillStat:
-  - coolDown: 5
-    currentCoolDown: 0
-    isCoolDown: 0
-  - coolDown: 5
-    currentCoolDown: 0
-    isCoolDown: 0
-  - coolDown: 5
-    currentCoolDown: 0
-    isCoolDown: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
   damage:
   - 0
   - 0
