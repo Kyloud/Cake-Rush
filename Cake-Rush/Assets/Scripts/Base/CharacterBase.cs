@@ -22,8 +22,14 @@ public class CharacterBase : EntityBase
         base.Update();
     }*/
 
-    public void Stun()
+    public IEnumerator Stun(float stunTime)
     {
-        curStunTime -= Time.deltaTime;
+        curStunTime = stunTime;
+
+        while(curStunTime >= 0)
+        {
+            curStunTime -= Time.deltaTime;
+            yield return null;
+        }
     }
 }

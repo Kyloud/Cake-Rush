@@ -19,7 +19,7 @@ public class PlayerController : UnitBase
         base.Awake();
         navMashAgent.speed = moveSpeed;
     }
-    //ghkjlhuo
+
     protected override void Attack(Transform target)
     {
         state = CharacterState.Attack;
@@ -36,16 +36,27 @@ public class PlayerController : UnitBase
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.Q))             //낙뢰
+        {
+            Lightning();
+        }
+        else if(Input.GetKeyDown(KeyCode.W))        //콜라 뿌리기
+        {
+            CokeShot();
+        }
+        else if(Input.GetKeyDown(KeyCode.E))        //슈팅 스타
+        {
+            
+        }
+        else if(Input.GetKeyDown(KeyCode.R))        //케이크 러쉬
         {
             CakeRush();
         }
     }
 
-    private void CakeRush()
+    private void Lightning()
     {
-        cakeRush.UseSkill(cakeRush.skillLevel);
-        Debug.Log("Cake Rush");
+
     }
 
     private void CokeShot()
@@ -61,6 +72,17 @@ public class PlayerController : UnitBase
                 cokeShotField.SetActive(true);
             }
         }
+    }
+
+    private void ShootingStar()
+    {
+        
+    }
+
+    private void CakeRush()
+    {
+        cakeRush.UseSkill(cakeRush.skillLevel);
+        Debug.Log("Cake Rush");
     }
 
     private IEnumerator Build(bool onBuild)     //건물 건설

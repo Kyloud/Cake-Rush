@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class CokeShot : SkillBase
 {
-    public override void UseSkill(int skillLevel)
-    {
-        if(skillStat[skillLevel].isCoolDown)
-        {
-            StartCoroutine(skillStat[skillLevel].CurrentCoolDown());
-        }
-        else
-        {
-            return;
-        }
-    }
-
     public void SetActivation()
     {
         gameObject.SetActive(false);
