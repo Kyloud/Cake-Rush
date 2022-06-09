@@ -13,6 +13,8 @@ public class SkillStat
     {
         isCoolDown = true;
 
+        currentCoolDown = coolDown;
+
         while(currentCoolDown >= 0)
         {
             currentCoolDown -= Time.deltaTime;
