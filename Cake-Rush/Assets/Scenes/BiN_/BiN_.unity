@@ -123,54 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: ea1dde305b76c734b92ab79662e5afcb, type: 2}
---- !u!1 &78200113
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 78200114}
-  - component: {fileID: 78200115}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &78200114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 78200113}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1413232517}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &78200115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 78200113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41c1bfbd00860f64daf9a806a67d7cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLevel: 0
-  rtsController: {fileID: 889880315}
-  cost: 
-  isSpawnable: 0
 --- !u!1 &236423962
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +689,54 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.24186051, y: -0.023771375, z: 0}
     m_Extent: {x: 0.5646871, y: 0.38267186, z: 0.3215582}
   m_DirtyAABB: 0
+--- !u!1 &652280595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652280597}
+  - component: {fileID: 652280596}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &652280596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652280595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c1bfbd00860f64daf9a806a67d7cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLevel: 0
+  rtsController: {fileID: 889880315}
+  cost: 
+  isSpawnable: 0
+--- !u!4 &652280597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652280595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657693293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,7 +2241,6 @@ Transform:
   - {fileID: 668605867}
   - {fileID: 2135286120}
   - {fileID: 1147298688}
-  - {fileID: 78200114}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2610,19 +2609,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillStat:
-  - coolDown: 5
-    currentCoolDown: 0
-    isCoolDown: 0
-  - coolDown: 5
-    currentCoolDown: 0
-    isCoolDown: 0
-  - coolDown: 5
-    currentCoolDown: 0
-    isCoolDown: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
   damage:
   - 0
   - 0
   - 0
+--- !u!114 &2102197658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102197646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d4a75dc4eba89148a044da0289ea21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat:
+  - coolTime: 6
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 6
+    currentCoolTime: 0
+    isCoolTime: 0
+  damage:
+  - 0
+  - 0
+  stunTime: 1
 --- !u!1 &2135286115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3540,6 +3562,10 @@ PrefabInstance:
       propertyPath: cakeRush
       value: 
       objectReference: {fileID: 2102197652}
+    - target: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: shootingStart
+      value: 
+      objectReference: {fileID: 2102197658}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
 --- !u!4 &5197773576405932120

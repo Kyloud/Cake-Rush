@@ -8,8 +8,11 @@ public class PlayerController : UnitBase
     [SerializeField] private GameObject cokeShotField;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private CokeShot cokeShot;
+    [SerializeField] private Lightning lightning;
+    [SerializeField] private ShootingStar shootingStart;
+
     private Camera mainCamera;
-    private CokeShot cokeShot;
     
     protected override void Awake()
     {
@@ -36,31 +39,59 @@ public class PlayerController : UnitBase
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKey(KeyCode.Q))             //낙뢰
+        {
+            Lightning();
+        }
+        else if(Input.GetKey(KeyCode.W))        //콜라 뿌리기
+        {
+            CokeShot();
+        }
+        else if(Input.GetKey(KeyCode.E))        //슈팅 스타
+        {
+            ShootingStar();
+        }
+        else if(Input.GetKeyDown(KeyCode.R))        //케이크 러쉬
         {
             CakeRush();
         }
     }
 
-    private void CakeRush()
+    private void Lightning()
     {
-        cakeRush.UseSkill(cakeRush.skillLevel);
-        Debug.Log("Cake Rush");
+
     }
 
     private void CokeShot()
     {
-        if(Input.GetMouseButtonDown(0))
+        
+    }
+
+    private void ShootingStar()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, attackRange, groundLayer))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
             {
-                cokeShot.UseSkill(cokeShot.skillLevel);
-                cokeShotField.SetActive(true);
+                if (hit.collider.gameObject != null)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(hit.point, 10f);
+                    shootingStart.UseSkill(shootingStart.skillLevel, colliders);
+                }
+
+                Debug.DrawRay(transform.position, hit.point, Color.yellow, 1f);
             }
+
         }
+        
+    }
+
+    private void CakeRush()
+    {
+        cakeRush.UseSkill(cakeRush.skillLevel);
     }
 
     private IEnumerator Build(bool onBuild)     //건물 건설
