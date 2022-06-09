@@ -19,7 +19,7 @@ public class PlayerController : UnitBase
         base.Awake();
         navMashAgent.speed = moveSpeed;
     }
-
+    
     protected override void Attack(Transform target)
     {
         state = CharacterState.Attack;
@@ -40,6 +40,12 @@ public class PlayerController : UnitBase
         {
             CakeRush();
         }
+
+        var direction = Quaternion.AngleAxis(1, transform.right) * transform.forward;
+
+        Ray ray = new Ray(transform.position, direction);
+
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * 5, Color.red);
     }
 
     private void CakeRush()
