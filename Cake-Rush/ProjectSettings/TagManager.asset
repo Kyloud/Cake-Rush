@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Team_1
   - Team_2
+  - Ground_Stone
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Selectable
   - Build
   - Character
-  - 
+  - Fog
   - 
   - 
   - 
