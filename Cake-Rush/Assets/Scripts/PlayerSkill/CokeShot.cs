@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class CokeShot : SkillBase
 {
-    public override void UseSkill(int skillLevel)
-    {
-        if(skillStat[skillLevel].isCoolDown)
-        {
-            StartCoroutine(skillStat[skillLevel].CurrentCoolDown());
-        }
-        else
-        {
-            return;
-        }
-    }
-
     public void SetActivation()
     {
         gameObject.SetActive(false);
@@ -34,7 +22,7 @@ public class CokeShot : SkillBase
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Charactor") || other.gameObject.layer == LayerMask.NameToLayer("Selectable"))
         {
-            StartCoroutine(Factor <CharacterBase> (other.gameObject.GetComponent<CharacterBase>()));        
-        }    
+            StartCoroutine(Factor(other.gameObject.GetComponent<UnitBase>()));        
+        }
     }
 }

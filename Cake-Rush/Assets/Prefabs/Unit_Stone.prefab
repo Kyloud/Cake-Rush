@@ -802,6 +802,7 @@ GameObject:
   - component: {fileID: 2554932333613993857}
   - component: {fileID: 2554932333613993859}
   - component: {fileID: 2554932333613993867}
+  - component: {fileID: 2554932333613993866}
   - component: {fileID: 2554932333613993865}
   m_Layer: 7
   m_Name: Unit_Stone
@@ -862,7 +863,7 @@ NavMeshAgent:
   m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!122 &2554932333613993857
@@ -922,6 +923,32 @@ MonoBehaviour:
   state: 0
   cakeRush: {fileID: 0}
   teamCamera: {fileID: 0}
+--- !u!114 &2554932333613993866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554932333613993885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0116805851d3948d29d0ca9f04aaedee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 6.3
+  viewAngle: 360
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  visibleTargets: []
+  meshResolution: 1.08
+  edgeResolveIterations: 40
+  edgeDstThreshold: 0.69
+  maskCutawayDst: 0
+  viewMeshFilter: {fileID: 2554932334396507690}
 --- !u!95 &2554932333613993865
 Animator:
   serializedVersion: 4

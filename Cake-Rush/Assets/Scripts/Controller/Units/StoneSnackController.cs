@@ -10,6 +10,7 @@ public class StoneSnackController : UnitBase
         DataLoad("StoneSnack");
         base.Awake();
         navMashAgent.speed = moveSpeed; 
+        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
     }
 
     protected override void Update()

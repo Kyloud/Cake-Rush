@@ -11,7 +11,7 @@ public class RTSController : MonoBehaviour
     public List<BuildBase> selectedBuildList = new List<BuildBase>();
     public List<BuildBase> buildList = new List<BuildBase>();
 	public EntityBase selectedEnemyEntity;
-
+    
 	private Camera teamCamera;
     
 	public LayerMask layerGround = 1 << 6;
@@ -32,7 +32,7 @@ public class RTSController : MonoBehaviour
     void Update() 
 	{
         Click();
-		//Drag();
+		Drag();
     }
 
     void Click()
@@ -156,7 +156,7 @@ public class RTSController : MonoBehaviour
 	/// Invoked when selecting a unit with Shift+mouse click
 	public void ShiftClickSelectUnit<T>(T newEntity)
 	{
-		if(typeof(T).Name == "UnitController")
+		if(typeof(T).GetType() == typeof(UnitBase))
 		{
 			if ( selectedUnitList.Contains(newEntity as UnitBase))
 			{
@@ -168,7 +168,7 @@ public class RTSController : MonoBehaviour
 				SelectUnit(newEntity as UnitBase);
 			}
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(typeof(T).GetType() == typeof(BuildBase))
 		{
 			if ( selectedBuildList.Contains(newEntity as BuildBase) )
 			{
@@ -308,7 +308,7 @@ public class RTSController : MonoBehaviour
  		foreach (UnitBase unit in unitList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
-			if (dragRect.Contains(teamCamera.WorldToScreenPoint(unit.transform.position)) == true)
+			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(unit.transform.position)) == true)
 			{
 				DragSelectUnit(unit);
 			}

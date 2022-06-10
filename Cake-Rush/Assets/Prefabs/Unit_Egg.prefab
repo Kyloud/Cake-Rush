@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 68751289501283798}
   - component: {fileID: 68751289501283792}
   - component: {fileID: 68751289501283793}
+  - component: {fileID: 68751289501283794}
   - component: {fileID: 68751289501283795}
   m_Layer: 7
   m_Name: Unit_Egg
@@ -738,6 +739,32 @@ MonoBehaviour:
   state: 0
   cakeRush: {fileID: 0}
   teamCamera: {fileID: 0}
+--- !u!114 &68751289501283794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68751289501283800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0116805851d3948d29d0ca9f04aaedee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 3.18
+  viewAngle: 360
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  visibleTargets: []
+  meshResolution: 0.6
+  edgeResolveIterations: 16
+  edgeDstThreshold: 0.87
+  maskCutawayDst: 0
+  viewMeshFilter: {fileID: 68751289101667726}
 --- !u!95 &68751289501283795
 Animator:
   serializedVersion: 4
