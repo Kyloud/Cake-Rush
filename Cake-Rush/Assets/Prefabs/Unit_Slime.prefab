@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 1637940688551827410}
   - component: {fileID: 1637940688551827408}
   - component: {fileID: 1637940688551827409}
-  - component: {fileID: 1637940688551827414}
   - component: {fileID: 1637940688551827415}
   m_Layer: 7
   m_Name: Unit_Slime
@@ -262,32 +261,6 @@ MonoBehaviour:
   state: 0
   cakeRush: {fileID: 0}
   teamCamera: {fileID: 0}
---- !u!114 &1637940688551827414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637940688551827400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0116805851d3948d29d0ca9f04aaedee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 2.75
-  viewAngle: 360
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 512
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  visibleTargets: []
-  meshResolution: 0.51
-  edgeResolveIterations: 21
-  edgeDstThreshold: 0.6
-  maskCutawayDst: 0
-  viewMeshFilter: {fileID: 1637940688278628724}
 --- !u!95 &1637940688551827415
 Animator:
   serializedVersion: 4
