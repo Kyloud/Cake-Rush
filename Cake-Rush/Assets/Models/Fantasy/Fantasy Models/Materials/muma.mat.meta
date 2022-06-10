@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ea2392bfec5dfa649b638cbb3704a175
+=======
+guid: 96ad8e24e38d34bbc8fb9a00713fac51
+>>>>>>> origin/Lapeuchi
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
