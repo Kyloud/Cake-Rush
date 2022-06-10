@@ -12,15 +12,21 @@ public class ShootingStar : SkillBase
     private void Awake()
     {
         range = 5f;
-        angleRange = 45f;
+        angleRange = 60f;
     }
 
     public void UseSkill(int skillLevel, Collider[] colliders)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            SectorColision(colliders);
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
+
+            if (colliders.Length < 2)
+            {
+                return;
+            }
+
+            SectorColision(colliders);
         }
         else
         {

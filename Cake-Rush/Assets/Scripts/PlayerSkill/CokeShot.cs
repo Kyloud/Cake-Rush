@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CokeShot : SkillBase
 {
+    [SerializeField] private float[] damage;
+
     public void SetActivation()
     {
         gameObject.SetActive(false);
