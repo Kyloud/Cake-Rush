@@ -156,7 +156,7 @@ public class RTSController : MonoBehaviour
 	/// Invoked when selecting a unit with Shift+mouse click
 	public void ShiftClickSelectUnit<T>(T newEntity)
 	{
-		if(typeof(T).Name == "UnitController")
+		if(typeof(T).GetType() == typeof(UnitBase))
 		{
 			if ( selectedUnitList.Contains(newEntity as UnitBase))
 			{
@@ -168,7 +168,7 @@ public class RTSController : MonoBehaviour
 				SelectUnit(newEntity as UnitBase);
 			}
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(typeof(T).GetType() == typeof(BuildBase))
 		{
 			if ( selectedBuildList.Contains(newEntity as BuildBase) )
 			{

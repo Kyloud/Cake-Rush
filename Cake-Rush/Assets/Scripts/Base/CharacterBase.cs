@@ -25,7 +25,7 @@ public class CharacterBase : EntityBase
     public IEnumerator Stun(float stunTime)
     {
         curStunTime = stunTime;
-
+        Debug.Log($"Stun {gameObject.name}");
         while(curStunTime >= 0)
         {
             curStunTime -= Time.deltaTime;

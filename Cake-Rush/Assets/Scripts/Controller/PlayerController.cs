@@ -11,7 +11,8 @@ public class PlayerController : UnitBase
     [SerializeField] private CokeShot cokeShot;
     [SerializeField] private Lightning lightning;
     [SerializeField] private ShootingStar shootingStart;
-
+    [SerializeField]
+    Collider[] colliders;
     private Camera mainCamera;
     
     protected override void Awake()
@@ -74,19 +75,31 @@ public class PlayerController : UnitBase
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+            if(colliders.Length > 0)
             {
-                if (hit.collider.gameObject != null)
+                for(int i = 0; i < colliders.Length; i++)
                 {
-                    Collider[] colliders = Physics.OverlapSphere(hit.point, 10f);
-                    shootingStart.UseSkill(shootingStart.skillLevel, colliders);
+                    colliders[i] = null;
                 }
+            }
 
-                Debug.DrawRay(transform.position, hit.point, Color.yellow, 1f);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
+
+                colliders = Physics.OverlapSphere(transform.position, 5.0f, 1 << LayerMask.NameToLayer("Selectable"));
+                
+                shootingStart.UseSkill(shootingStart.skillLevel, colliders);
+                Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
 
         }
-        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 3.0f);
     }
 
     private void CakeRush()

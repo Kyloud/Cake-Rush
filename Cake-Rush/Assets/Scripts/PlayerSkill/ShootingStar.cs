@@ -31,9 +31,10 @@ public class ShootingStar : SkillBase
     //매개변수 배열 전달 말고 하나씩 전달
     public void SectorColision(Collider[] colliders)
     {
-        Transform target;
         Vector3 dirction;
         float dotValue = 0;
+
+        Debug.Log("Check");
 
         dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
 
@@ -41,9 +42,13 @@ public class ShootingStar : SkillBase
         {
             dirction = colliders[i].transform.position - transform.position;
 
-            if(Vector3.Dot(dirction.normalized, transform.forward) > dotValue)
+            if(Vector3.Dot(dirction.normalized, transform.forward) > dotValue && colliders[i].GetType() != typeof(PlayerController))
             {
-                StunEntity(colliders[i].GetComponent<CharacterBase>());
+                StunEntity(colliders[i].gameObject.GetComponent<CharacterBase>());
+            }
+            else
+            {
+                continue;
             }
         }
     }
@@ -52,7 +57,13 @@ public class ShootingStar : SkillBase
     {
         unit = unit as T;
 
-        unit.Stun(stunTime);
-        Debug.Log("Stun");
+        StartCoroutine(unit.Stun(stunTime));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
+
     }
 }
