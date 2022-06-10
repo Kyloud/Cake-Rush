@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Cake-Rush/Assets/Scripts/MultiTest/MultiTest.cs.meta
 guid: 0468552e2e78db24eb1eb47c135487ec
+========
+guid: c270fc62d489f7045b1dfee30e410827
+>>>>>>>> origin/Lapeuchi:Cake-Rush/Assets/Asset/FogOfWar/Scripts/Editor/FogOfWarManagerEditor.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
