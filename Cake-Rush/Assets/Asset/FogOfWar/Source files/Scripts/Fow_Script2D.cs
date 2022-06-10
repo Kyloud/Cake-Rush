@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fow_Script : MonoBehaviour {
+public class Fow_Script2D : MonoBehaviour {
 
     ////////////////////////////////////////////////////////////////
     // If you have any trouble with the asset, please email me at //
@@ -40,7 +40,8 @@ public class Fow_Script : MonoBehaviour {
         fowCamera.depth = mainCamera.depth+1; // make sure the FoW camera renders on top of the main camera
         fowCamera.farClipPlane = mainCamera.farClipPlane;
         fowCamera.nearClipPlane = mainCamera.nearClipPlane;
-
+        fowCamera.orthographic = mainCamera.orthographic;
+        fowCamera.orthographicSize = mainCamera.orthographicSize;
         fogPlane = GameObject.Instantiate(prefab_fowPlane); // create the fog plane
         if (fogPlane.layer==0) {
             Debug.LogError("Error: Fog plane is missing the FOW layer!");
@@ -56,9 +57,9 @@ public class Fow_Script : MonoBehaviour {
 
     void Update() {
 
-        fogPlane.transform.position = new Vector3(mainCamera.transform.position.x, 0, mainCamera.transform.position.z) + planeOffset; // make the fog plane follow the camera with an offset
+        fogPlane.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y,0) + planeOffset; // make the fog plane follow the camera with an offset
         fogPlane.transform.localScale = fowPlaneScale;
-        fogPlane.transform.localRotation = Quaternion.Euler(270, 0, planeRotation);
+        fogPlane.transform.localRotation = Quaternion.Euler(180, 0, planeRotation);
         fowCamera.fieldOfView = mainCamera.fieldOfView;
 
         updateTimer -= 1 * Time.deltaTime;
@@ -72,7 +73,7 @@ public class Fow_Script : MonoBehaviour {
             foreach (FowUnit unit in fowUnits) {
                 for (int i = 0; i < fogPlaneVertices.Length; i++) {
                     Vector3 v = fogPlane.transform.TransformPoint(fogPlaneVertices[i]);
-                    float dist = Vector3.SqrMagnitude(v - new Vector3(unit.transform.position.x, fogPlane.transform.position.y, unit.transform.position.z));
+                    float dist = Vector3.SqrMagnitude(v - new Vector3(unit.transform.position.x, unit.transform.position.y, fogPlane.transform.position.z));
                     float alpha = Mathf.Min(fogPlaneColors[i].a, (dist - unit.edgeSharpness * 50) / (unit.radius * unit.radius));
                     fogPlaneColors[i].a = alpha; // set transparency based on distance
                 }
