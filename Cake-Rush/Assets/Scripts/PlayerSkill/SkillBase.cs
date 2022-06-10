@@ -40,8 +40,7 @@ public class SkillStat
 public class SkillBase : MonoBehaviour
 {
     [SerializeField] protected SkillStat[] skillStat;
-    [SerializeField] protected float[] damage;
-
+   
     public float range { get; set; }
     public int skillLevel { get; set; }
 
