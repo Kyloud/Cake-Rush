@@ -10,7 +10,6 @@ public class EggCandyController : UnitController
         DataLoad("EggCandy");
         base.Awake();
         navMashAgent.speed = moveSpeed;
-        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
     }
 
     protected override void Update()

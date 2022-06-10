@@ -10,7 +10,6 @@ public class SlimeJellyController : UnitController
         DataLoad("SlimeJelly");
         base.Awake();
         navMashAgent.speed = moveSpeed; 
-        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
     }
 
     protected override void Update()
