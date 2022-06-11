@@ -43,6 +43,7 @@ public class SkillBase : MonoBehaviour
    
     public float range { get; set; }
     public int skillLevel { get; set; }
+    private int damage { get; set; }
 
     public virtual void UseSkill(int skillLevel)
     {
@@ -54,5 +55,13 @@ public class SkillBase : MonoBehaviour
         {
             return;
         }
+    }
+
+    private void LightningFactor<T>(T unit) where T : CharacterBase
+    {
+        unit = unit as T;
+
+
+
     }
 }
