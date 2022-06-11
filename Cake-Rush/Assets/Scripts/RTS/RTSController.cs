@@ -196,14 +196,14 @@ public class RTSController : MonoBehaviour
 	public void DragSelectUnit<T>(T newEntity) where T : EntityBase
 	{
 		// If you choose a new unit
-		if(typeof(T).Name == "UnitController")
+		if (newEntity.GetType() == typeof(UnitBase))
 		{
 			if (!selectedUnitList.Contains(newEntity as UnitBase))
 			{
 				SelectUnit(newEntity);
 			}
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(newEntity.GetType() == typeof(BuildBase))
 		{
 			if (!selectedBuildList.Contains(newEntity as BuildBase))
 			{

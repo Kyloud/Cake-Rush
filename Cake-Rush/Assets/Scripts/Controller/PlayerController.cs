@@ -12,11 +12,8 @@ public class PlayerController : UnitBase
     [SerializeField] private Lightning lightning;
     [SerializeField] private ShootingStar shootingStar;
     
-    private Camera mainCamera;
-    
     protected override void Awake()
     {
-        mainCamera = Camera.main;
         DataLoad("Player");
 
         cakeRush.skillLevel = 0;
@@ -64,7 +61,21 @@ public class PlayerController : UnitBase
 
     private void Lightning()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Selectable")))
+            {
+                while((hit.transform.position - transform.position).sqrMagnitude > attackRange)
+                {
+                    Move(hit.transform.position);
+                }
+
+                lightning.UseSkill(lightning.skillLevel);
+            }
+        }
     }
 
     private void CokeShot()
@@ -76,7 +87,7 @@ public class PlayerController : UnitBase
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -88,7 +99,6 @@ public class PlayerController : UnitBase
                 shootingStar.UseSkill(shootingStar.skillLevel, colliders);         
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
-
         }
     }
 
@@ -99,7 +109,7 @@ public class PlayerController : UnitBase
 
     private IEnumerator Build(bool onBuild)     //건물 건설
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         while(onBuild)
