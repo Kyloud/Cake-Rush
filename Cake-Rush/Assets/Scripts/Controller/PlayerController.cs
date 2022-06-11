@@ -8,18 +8,26 @@ public class PlayerController : UnitBase
     [SerializeField] private GameObject cokeShotField;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private CokeShot cokeShot;
+    [SerializeField] private Lightning lightning;
+    [SerializeField] private ShootingStar shootingStar;
+    
     private Camera mainCamera;
-    private CokeShot cokeShot;
     
     protected override void Awake()
     {
         mainCamera = Camera.main;
-        DataLoad("Player"); 
+        DataLoad("Player");
+
+        cakeRush.skillLevel = 0;
+        //cokeShot.skillLevel = 0;
+        //lightning.skillLevel = 0;
+        shootingStar.skillLevel = 0;
         
         base.Awake();
         navMashAgent.speed = moveSpeed;
     }
-    
+
     protected override void Attack(Transform target)
     {
         state = CharacterState.Attack;
@@ -36,37 +44,57 @@ public class PlayerController : UnitBase
     {
         base.Update();
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKey(KeyCode.Q))             //낙뢰
+        {
+            Lightning();
+        }
+        else if(Input.GetKey(KeyCode.W))        //콜라 뿌리기
+        {
+            CokeShot();
+        }
+        else if(Input.GetKey(KeyCode.E))        //슈팅 스타
+        {
+            ShootingStar();
+        }
+        else if(Input.GetKeyDown(KeyCode.R))        //케이크 러쉬
         {
             CakeRush();
         }
+    }
 
-        var direction = Quaternion.AngleAxis(1, transform.right) * transform.forward;
+    private void Lightning()
+    {
 
-        Ray ray = new Ray(transform.position, direction);
+    }
 
-        Debug.DrawLine(ray.origin, ray.origin + ray.direction * 5, Color.red);
+    private void CokeShot()
+    {
+        
+    }
+
+    private void ShootingStar()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
+
+                Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, 1 << LayerMask.NameToLayer("Selectable"));
+                
+                shootingStar.UseSkill(shootingStar.skillLevel, colliders);         
+                Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
+            }
+
+        }
     }
 
     private void CakeRush()
     {
         cakeRush.UseSkill(cakeRush.skillLevel);
-        Debug.Log("Cake Rush");
-    }
-
-    private void CokeShot()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit, attackRange, groundLayer))
-            {
-                cokeShot.UseSkill(cokeShot.skillLevel);
-                cokeShotField.SetActive(true);
-            }
-        }
     }
 
     private IEnumerator Build(bool onBuild)     //건물 건설

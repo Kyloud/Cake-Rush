@@ -9,7 +9,7 @@ public class SlimeJellyController : UnitBase
     {
         DataLoad("SlimeJelly");
         base.Awake();
-        navMashAgent.speed = moveSpeed; 
+        navMashAgent.speed = moveSpeed;
     }
 
     protected override void Update()

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fow_Script : MonoBehaviour {
+public class Fow_Script : MonoBehaviour 
+{
 
     ////////////////////////////////////////////////////////////////
     // If you have any trouble with the asset, please email me at //
@@ -21,21 +22,20 @@ public class Fow_Script : MonoBehaviour {
 
     private GameObject fogPlane; // instantiated fog plane
 
-    private Camera fowCamera;
-    private Camera mainCamera;
-
+    [SerializeField] private Camera fowCamera;
+    [SerializeField] private Camera mainCamera;
 
     private Mesh fogPlaneMesh;
     private Vector3[] fogPlaneVertices;
     private Color[] fogPlaneColors;
-
-
+    
     public float updateFrequency; // how often the fog updates, in milliseconds, 1000 ms = 1 second. Set to 0 to update every frame
     private float updateTimer;
 
-    void Start() {
-        mainCamera = transform.parent.GetComponent<Camera>();
-        fowCamera = GetComponent<Camera>();
+    void Start() 
+    {
+        //mainCamera = transform.parent.GetComponent<Camera>();
+        //fowCamera = GetComponent<Camera>();
         fowCamera.depth = mainCamera.depth+1; // make sure the FoW camera renders on top of the main camera
         fowCamera.farClipPlane = mainCamera.farClipPlane;
         fowCamera.nearClipPlane = mainCamera.nearClipPlane;

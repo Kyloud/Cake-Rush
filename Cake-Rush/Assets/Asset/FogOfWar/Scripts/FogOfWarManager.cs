@@ -165,7 +165,6 @@ public class FogOfWarManager : MonoBehaviour
         }
     }
 
-
     private void OnDestroy()
     {
         CleanupComputeHandlers();
