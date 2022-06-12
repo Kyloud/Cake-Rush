@@ -6,10 +6,10 @@ using UnityEngine;
 public class RTSController : MonoBehaviour
 {
     
-    public List<UnitController> selectedUnitList = new List<UnitController>();
-    public List<UnitController> unitList = new List<UnitController>();
-    public List<BuildController> selectedBuildList = new List<BuildController>();
-    public List<BuildController> buildList = new List<BuildController>();
+    public List<UnitBase> selectedUnitList = new List<UnitBase>();
+    public List<UnitBase> unitList = new List<UnitBase>();
+    public List<BuildBase> selectedBuildList = new List<BuildBase>();
+    public List<BuildBase> buildList = new List<BuildBase>();
 	public EntityBase selectedEnemyEntity;
     
 	private Camera teamCamera;
@@ -37,11 +37,12 @@ public class RTSController : MonoBehaviour
 
     void Click()
     {
-			// When there is an object hitting the ray (= clicking on the unit)
+		// When there is an object hitting the ray (= clicking on the unit)
 		if ( Input.GetMouseButtonDown(0) )
 		{
 			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
+
 			// When there is an object hitting the ray (= clicking on the unit)
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerSelectable))
 			{
@@ -53,23 +54,24 @@ public class RTSController : MonoBehaviour
 					selectedBuildList.Clear();
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
-						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<UnitController>());
+						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<UnitBase>());
 					}
 					else
 					{
-						ClickSelectUnit(hit.transform.gameObject.GetComponent<UnitController>());
+						ClickSelectUnit(hit.transform.gameObject.GetComponent<UnitBase>());
 					}
 				}
 				else if(hit.transform.gameObject.CompareTag("Build"))
 				{
 					selectedUnitList.Clear();
+
 					if (Input.GetKey(KeyCode.LeftShift))
 					{
-						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<BuildController>());
+						ShiftClickSelectUnit(hit.transform.gameObject.GetComponent<BuildBase>());
 					}
 					else
 					{
-						ClickSelectUnit(hit.transform.gameObject.GetComponent<BuildController>());
+						ClickSelectUnit(hit.transform.gameObject.GetComponent<BuildBase>());
 					}
 				}
 				
@@ -81,8 +83,11 @@ public class RTSController : MonoBehaviour
 			{
 				if (!Input.GetKey(KeyCode.LeftShift) )
 				{
-					DeselectAllUnit();
+
 				}
+
+				DeselectAllUnit();
+
 				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 			}
 
@@ -151,28 +156,28 @@ public class RTSController : MonoBehaviour
 	/// Invoked when selecting a unit with Shift+mouse click
 	public void ShiftClickSelectUnit<T>(T newEntity)
 	{
-		if(typeof(T).Name == "UnitController")
+		if(typeof(T).GetType() == typeof(UnitBase))
 		{
-			if ( selectedUnitList.Contains(newEntity as UnitController))
+			if ( selectedUnitList.Contains(newEntity as UnitBase))
 			{
-				DeselectUnit(newEntity as UnitController);
+				DeselectUnit(newEntity as UnitBase);
 			}
 			// If you choose a new unit
 			else
 			{
-				SelectUnit(newEntity as UnitController);
+				SelectUnit(newEntity as UnitBase);
 			}
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(typeof(T).GetType() == typeof(BuildBase))
 		{
-			if ( selectedBuildList.Contains(newEntity as BuildController) )
+			if ( selectedBuildList.Contains(newEntity as BuildBase) )
 			{
-				DeselectUnit(newEntity as BuildController);
+				DeselectUnit(newEntity as BuildBase);
 			}
 			// If you choose a new unit
 			else
 			{
-				SelectUnit(newEntity as BuildController);
+				SelectUnit(newEntity as BuildBase);
 			}
 		}
 		// If you select a previously selected unit
@@ -193,14 +198,14 @@ public class RTSController : MonoBehaviour
 		// If you choose a new unit
 		if(typeof(T).Name == "UnitController")
 		{
-			if (!selectedUnitList.Contains(newEntity as UnitController))
+			if (!selectedUnitList.Contains(newEntity as UnitBase))
 			{
 				SelectUnit(newEntity);
 			}
 		}
 		else if(typeof(T).Name == "BuildController")
 		{
-			if (!selectedBuildList.Contains(newEntity as BuildController))
+			if (!selectedBuildList.Contains(newEntity as BuildBase))
 			{
 				SelectUnit(newEntity);
 			}
@@ -237,13 +242,13 @@ public class RTSController : MonoBehaviour
 		// Method to be called when a unit is selected
 		newEntity.Select();
 		// Save the selected unit information to the list
-		if(typeof(T).Name == "UnitController")
+		if(typeof(T).Name == "UnitBase")
 		{
-			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitController>());
+			selectedUnitList.Add(newEntity.gameObject.GetComponent<UnitBase>());
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(typeof(T).Name == "BuildBase")
 		{
-			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildController>());
+			selectedBuildList.Add(newEntity.gameObject.GetComponent<BuildBase>());
 		}
 	}
 
@@ -254,13 +259,13 @@ public class RTSController : MonoBehaviour
 		newEntity.Deselect();
 		// Delete the selected unit information from the list
 		
-		if(typeof(T).Name == "UnitController")
+		if(newEntity.GetType() == typeof(UnitBase))
 		{
-			selectedUnitList.Remove(newEntity as UnitController);
+			selectedUnitList.Remove(newEntity as UnitBase);
 		}
-		else if(typeof(T).Name == "BuildController")
+		else if(newEntity.GetType() == typeof(BuildBase))
 		{
-			selectedBuildList.Remove(newEntity as BuildController);
+			selectedBuildList.Remove(newEntity as BuildBase);
 		}
 	}
 	
@@ -300,7 +305,7 @@ public class RTSController : MonoBehaviour
 	private void SelectUnits()
 	{
 		// check all units
- 		foreach (UnitController unit in unitList)
+ 		foreach (UnitBase unit in unitList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
 			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(unit.transform.position)) == true)
@@ -308,7 +313,7 @@ public class RTSController : MonoBehaviour
 				DragSelectUnit(unit);
 			}
 		}
-		foreach (BuildController build in buildList)
+		foreach (BuildBase build in buildList)
 		{
 			// Converts the unit's world coordinates to screen coordinates to check if they are within the drag range
 			if ( dragRect.Contains(teamCamera.WorldToScreenPoint(build.transform.position)) == true)

@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeJellyController : UnitController
+public class SlimeJellyController : UnitBase
 {
 
     protected override void Awake()
     {
         DataLoad("SlimeJelly");
         base.Awake();
-        navMashAgent.speed = moveSpeed; 
-        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
+        navMashAgent.speed = moveSpeed;
     }
 
     protected override void Update()

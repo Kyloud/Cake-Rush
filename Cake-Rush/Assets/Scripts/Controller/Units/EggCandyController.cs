@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggCandyController : UnitController
+public class EggCandyController : UnitBase
 {
 
     protected override void Awake()
@@ -10,7 +10,6 @@ public class EggCandyController : UnitController
         DataLoad("EggCandy");
         base.Awake();
         navMashAgent.speed = moveSpeed;
-        gameObject.GetComponent<FieldOfView>().viewRadius = eyeSight;
     }
 
     protected override void Update()
