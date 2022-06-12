@@ -39,8 +39,6 @@ public class ShootingStar : SkillBase
         Vector3 dirction;
         float dotValue;
 
-        Debug.Log("Check");
-
         dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
 
         for(int i = 0; i < colliders.Length; i++)
@@ -50,10 +48,6 @@ public class ShootingStar : SkillBase
             if(Vector3.Dot(dirction.normalized, transform.forward) > dotValue && colliders[i].GetType() != typeof(PlayerController))
             {
                 StunEntity(colliders[i].gameObject.GetComponent<CharacterBase>());
-            }
-            else
-            {
-                continue;
             }
         }
     }
