@@ -11,7 +11,8 @@ public class PlayerController : UnitBase
     [SerializeField] private CokeShot cokeShot;
     [SerializeField] private Lightning lightning;
     [SerializeField] private ShootingStar shootingStar;
-    
+    [SerializeField] private GameObject CookieHouse;
+
     protected override void Awake()
     {
         DataLoad("Player");
@@ -56,6 +57,10 @@ public class PlayerController : UnitBase
         else if(Input.GetKeyDown(KeyCode.R))        //케이크 러쉬
         {
             CakeRush();
+        }
+        else if(Input.GetKeyDown(KeyCode.B)) // Build
+        {
+            StartCoroutine(Build());        
         }
     }
 
@@ -107,25 +112,62 @@ public class PlayerController : UnitBase
         cakeRush.UseSkill(cakeRush.skillLevel);
     }
 
-    private IEnumerator Build(bool onBuild)     //건물 건설
+    private IEnumerator Build()
     {
-        Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("BuildMode");
+        GameObject go = null;
         RaycastHit hit;
-
-        while(onBuild)
+        while(true)
         {
-            if(Input.GetMouseButtonDown(0))
+            if(go != null)
             {
-                if(Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, 5000f, groundLayer))
                 {
-                    Debug.Log($"Build as {hit.point}");
+                    go.transform.position = hit.point;
+                }
+                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 10f)
+                {
+                    Debug.Log("Build!");
                     break;
                 }
             }
+           
+            //Input
 
+            if(Input.GetKeyDown(KeyCode.U))
+            {
+                go = Instantiate(CookieHouse);
+            }
+
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                StopCoroutine("Build");
+            }
             yield return null;
         }
-        
-        Debug.Log("end");
     }
+
+    // private IEnumerator Build(bool onBuild)     //건물 건설
+    // {
+    //     Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+    //     RaycastHit hit;
+
+    //     while(onBuild)
+    //     {
+    //         if(Input.GetMouseButtonDown(0))
+    //         {
+    //             if(Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+    //             {
+    //                 Debug.Log($"Build as {hit.point}");
+    //                 break;
+    //             }
+    //         }
+
+    //         yield return null;
+    //     }
+        
+    //     Debug.Log("end");
+    // }
 }

@@ -9,21 +9,24 @@ public class CharacterBase : EntityBase
     protected NavMeshAgent navMashAgent;
     protected Animator animator;
     float curStunTime;
-
+    protected bool isStun;
     protected override void Awake()
     {
+        isStun = false;
         navMashAgent = gameObject.GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         base.Awake();
     }
     
-    /*protected override void Update()
+    protected override void Update()
     {
+        is(isStun) return;
         base.Update();
-    }*/
+    }
 
     public IEnumerator Stun(float stunTime)
     {
+        isStun = true;
         curStunTime = stunTime;
         Debug.Log($"Stun {gameObject.name}");
 
@@ -34,5 +37,6 @@ public class CharacterBase : EntityBase
         }
 
         curStunTime = 0;
+        isStun = false;
     }
 }
