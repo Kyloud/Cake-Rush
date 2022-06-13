@@ -7,16 +7,24 @@ public class BuildBase : EntityBase
 {
     public GameObject buildEffect;
     public bool isSpawned;
+        
     private int[] returnCost;
-
+    
+    [SerializeField] Material blueprintMat;
+    [SerializeField] Material originMat;
+    Renderer render;
     protected override void Awake()
     {
+        render = gameObject.GetComponentInChildren<Renderer>();
+        originMat = render.material;
+
         base.Awake();
         if(isSpawned)
         {
+            render.material = blueprintMat;
             curHp = 0f;
             buildEffect = transform.Find("BuildAnim").gameObject;
-            StartCoroutine(Build());
+           //StartCoroutine(Build());
         }
     }
     protected override void Update()
@@ -28,9 +36,11 @@ public class BuildBase : EntityBase
         base.Update();
     }
     
-    protected IEnumerator Build()
+    public IEnumerator Build()
     {   
         buildEffect.SetActive(true);
+        gameObject.layer = LayerMask.NameToLayer("Selectable");
+        //gameObject.tag = "Build";
         Debug.Log("Start Coroutine Build()");
         while (curHp < maxHp )
         {
@@ -41,6 +51,7 @@ public class BuildBase : EntityBase
         Debug.Log("Build() Completed");
         isActive = true;
         buildEffect.SetActive(false);
+        render.material = originMat;
     }
 
     protected void BuildCancel()
