@@ -6,10 +6,17 @@ public class CokeShot : SkillBase
 {
     [SerializeField] private float[] damage;
 
-    public void SetActivation()
+    public override void UseSkill(int skillLevel)
     {
-        gameObject.SetActive(false);
-    } 
+        if (!skillStat[skillLevel].isCoolTime)
+        {
+            StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
+        }
+        else
+        {
+            return;
+        }
+    }
 
     private IEnumerator Factor <T> (T component) where T : CharacterBase
     {
@@ -18,13 +25,5 @@ public class CokeShot : SkillBase
         data.Hit(damage[skillLevel]);
 
         yield return new WaitForEndOfFrame();
-    }
-    
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Charactor") || other.gameObject.layer == LayerMask.NameToLayer("Selectable"))
-        {
-            StartCoroutine(Factor(other.gameObject.GetComponent<UnitBase>()));        
-        }
     }
 }

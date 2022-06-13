@@ -23,12 +23,15 @@ public class UnitBase : CharacterBase
     protected Transform targetTransform = null;
     public CakeRush cakeRush;
     public Camera teamCamera;
+    public GameObject rangeView;
 
     protected override void Awake()
     {
         base.Awake();
         teamCamera = Camera.main;
-        state = CharacterState.Idle;   
+        state = CharacterState.Idle;
+
+        navMashAgent.speed = moveSpeed;
     }
 
     protected override void Update()
@@ -36,7 +39,6 @@ public class UnitBase : CharacterBase
         Idle();
         Stop();
     }
-    
     
     public void SelectUnit()
 	{
@@ -120,6 +122,7 @@ public class UnitBase : CharacterBase
                {
                    if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude == 0)
                     {
+                        Debug.Log("Arrive");
                         animator.SetBool("Move", false);
                         state = CharacterState.Idle;
                         break;

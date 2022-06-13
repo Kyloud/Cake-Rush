@@ -27,6 +27,7 @@ public class BuildBase : EntityBase
            //StartCoroutine(Build());
         }
     }
+    
     protected override void Update()
     {
         if(Input.GetKeyDown(KeyCode.P) && isSelected)
