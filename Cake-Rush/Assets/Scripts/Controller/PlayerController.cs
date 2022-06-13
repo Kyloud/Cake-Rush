@@ -13,6 +13,7 @@ public class PlayerController : UnitBase
     [SerializeField] private ShootingStar shootingStar;
     [SerializeField] private GameObject CookieHouse;
 
+
     protected override void Awake()
     {
         DataLoad("Player");
@@ -41,7 +42,7 @@ public class PlayerController : UnitBase
     protected override void Update()
     {
         base.Update();
-
+        if(isSelected == false) return;
         if(Input.GetKey(KeyCode.Q))             //낙뢰
         {
             Lightning();
@@ -117,6 +118,9 @@ public class PlayerController : UnitBase
         Debug.Log("BuildMode");
         GameObject go = null;
         RaycastHit hit;
+        BuildBase build = null;
+        string curBuildName = null;
+        yield return null;
         while(true)
         {
             if(go != null)
@@ -127,22 +131,37 @@ public class PlayerController : UnitBase
                 {
                     go.transform.position = hit.point;
                 }
-                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 10f)
+                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
                 {
+                    StartCoroutine(build.Build());
+                    go = null;
                     Debug.Log("Build!");
+                    curBuildName = null;
                     break;
                 }
+                
             }
-           
+            
             //Input
-
-            if(Input.GetKeyDown(KeyCode.U))
+            if(go == null)
             {
-                go = Instantiate(CookieHouse);
+                if(Input.GetKeyDown(KeyCode.U) && curBuildName != cakeRush.name)
+                {
+                    Debug.Log($"Select {CookieHouse.name} {cakeRush.name}");
+                    go = Instantiate(CookieHouse);
+                    name = go.name;
+                    build = go.GetComponent<BuildBase>();
+                }
             }
-
+            
             if(Input.GetKeyDown(KeyCode.B))
             {
+                Debug.Log("Stop BuildMode");
+                if(go != null)
+                {
+                    Destroy(go);
+                    Debug.Log("Build Canceled");
+                }
                 StopCoroutine("Build");
             }
             yield return null;

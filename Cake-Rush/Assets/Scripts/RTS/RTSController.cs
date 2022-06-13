@@ -32,7 +32,7 @@ public class RTSController : MonoBehaviour
     void Update() 
 	{
         Click();
-		Drag();
+		//Drag();
     }
 
     void Click()
@@ -86,7 +86,7 @@ public class RTSController : MonoBehaviour
 
 				}
 
-				DeselectAllUnit();
+				//DeselectAllUnit();
 
 				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 			}
