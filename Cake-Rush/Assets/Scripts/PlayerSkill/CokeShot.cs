@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class CokeShot : SkillBase
 {
+    public float currentHoldTime { get; set; }
+
+    private float skillHoldTime = 2.5f;
+    private const float DELAY = 0.25f;
+    private WaitForSeconds delayTime;
+
     [SerializeField] private float[] damage;
 
-    public override void UseSkill(int skillLevel)
+    private void Awake()
+    {
+        delayTime = new WaitForSeconds(DELAY);
+    }
+
+    public void UseSkill(int skillLevel, Collider[] colliders)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
+            currentHoldTime = skillHoldTime;
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
@@ -17,13 +29,5 @@ public class CokeShot : SkillBase
             return;
         }
     }
-
-    private IEnumerator Factor <T> (T component) where T : CharacterBase
-    {
-        T data = component as T;
-
-        data.Hit(damage[skillLevel]);
-
-        yield return new WaitForEndOfFrame();
-    }
 }
+
