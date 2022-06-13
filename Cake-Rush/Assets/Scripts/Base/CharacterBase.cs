@@ -20,7 +20,7 @@ public class CharacterBase : EntityBase
     
     protected override void Update()
     {
-        is(isStun) return;
+        if(isStun) return;
         base.Update();
     }
 
