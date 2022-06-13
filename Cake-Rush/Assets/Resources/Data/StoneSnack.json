@@ -1,0 +1,23 @@
+{
+    "hp": 250,
+    "damage": 15,
+    "attackSpeed": 1,
+    "attackRange": 80,
+    "returnExp": 10,
+    "eyeSight": 3,
+    "cost":
+    [
+      0,
+      0,
+      0
+    ],
+    "dropCost": 
+    [
+      50,
+      50,
+      50
+    ],
+    "defensive": 0,
+    "spawnTime": 0,
+    "moveSpeed": 30
+}
