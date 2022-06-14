@@ -7,7 +7,8 @@ public class PlayerController : UnitBase
     private CokeShot cokeShot;
     private Lightning lightning;
     private ShootingStar shootingStar;
-
+    [SerializeField] GameObject cookieHouse;
+    
     protected override void Awake()
     {
         DataLoad("Player");
@@ -40,6 +41,10 @@ public class PlayerController : UnitBase
         else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
         {
             CakeRush();
+        }
+        else if(Input.GetKeyDown(KeyCode.B))
+        {
+            StartCoroutine(Build());
         }
     }
 
@@ -135,25 +140,57 @@ public class PlayerController : UnitBase
         cakeRush.UseSkill(cakeRush.level);
     }
 
-    private IEnumerator Build(bool onBuild)     //건물 건설
+    private IEnumerator Build()
     {
-        Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("BuildMode");
+        GameObject go = null;
         RaycastHit hit;
-
-        while (onBuild)
+        BuildBase build = null;
+        string curBuildName = null;
+        yield return null;
+        while(true)
         {
-            if (Input.GetMouseButtonDown(0))
+            if(go != null)
             {
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, GameProgress.instance.groundLayer))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, 5000f, LayerMask.NameToLayer("selectable")))
                 {
-                    Debug.Log($"Build as {hit.point}");
+                    go.transform.position = hit.point;
+                }
+                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
+                {
+                    StartCoroutine(build.Build());
+                    go = null;
+                    Debug.Log("Build!");
+                    curBuildName = null;
                     break;
                 }
             }
-
+            
+            //Input
+            if(go == null)
+            {
+                if(Input.GetKeyDown(KeyCode.U) && curBuildName != cakeRush.name)
+                {
+                    Debug.Log($"Select {cookieHouse.name} {cakeRush.name}");
+                    go = Instantiate(cookieHouse);
+                    name = go.name;
+                    build = go.GetComponent<BuildBase>();
+                }
+            }
+            
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                Debug.Log("Stop BuildMode");
+                if(go != null)
+                {
+                    Destroy(go);
+                    Debug.Log("Build Canceled");
+                }
+                StopCoroutine("Build");
+            }
             yield return null;
         }
-
-        Debug.Log("end");
     }
 }
