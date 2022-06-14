@@ -81,12 +81,7 @@ public class RTSController : MonoBehaviour
 				//When ray is hitting ground.
 			else if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
 			{
-				if (!Input.GetKey(KeyCode.LeftShift) )
-				{
-
-				}
-
-				//DeselectAllUnit();
+				DeselectAllUnit();
 
 				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 			}

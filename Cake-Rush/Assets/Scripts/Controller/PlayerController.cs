@@ -7,6 +7,7 @@ public class PlayerController : UnitBase
     private CokeShot cokeShot;
     private Lightning lightning;
     private ShootingStar shootingStar;
+
     [SerializeField] GameObject cookieHouse;
     
     protected override void Awake()
@@ -48,7 +49,7 @@ public class PlayerController : UnitBase
         }
     }
 
-    protected override void Attack(Transform target)
+    protected override void Attack (Transform target)
     {
         state = CharacterState.Attack;
 

@@ -2,7 +2,7 @@
     "hp": 40,
     "damage": 10,
     "attackSpeed": 1,
-    "attackRange": 65,
+    "attackRange": 10,
     "returnExp": 10,
     "eyeSight": 4.5,
     "cost":
@@ -19,5 +19,5 @@
     ],
     "defensive": 0,
     "spawnTime": 0,
-    "moveSpeed": 35
+    "moveSpeed": 5
 }

@@ -70,6 +70,7 @@ public class UnitBase : CharacterBase
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
             if(Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 Stop();
@@ -141,7 +142,6 @@ public class UnitBase : CharacterBase
         animator.SetBool("Attack", false);
 
         navMashAgent.isStopped = false; 
-
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), 90);
         navMashAgent.SetDestination(destination);
         
@@ -174,9 +174,10 @@ public class UnitBase : CharacterBase
             Move(target.position);
             yield return null;
         }
-        
+
         //Move(transform.position);
         StartCoroutine(BasicAttack(target));
+    
     }   
 
 	//Default Attack on Entities
@@ -186,6 +187,7 @@ public class UnitBase : CharacterBase
 
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
+
 		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
             // Vector3 dir = target.position - transform.position;
