@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
   m_PrefabInstance: {fileID: 4857680237184361232}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102197646}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7564c00a2efbe2446abf5b1000374faa, type: 3}
@@ -1406,53 +1406,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7d03bc6c503745129fc8dc6f3f6eb28, type: 3}
---- !u!1 &2102197646 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5150835717301315730, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+--- !u!114 &2102197652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2102197652, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
   m_PrefabInstance: {fileID: 4857680237184361232}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2102197652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102197646}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d5a8507f608f2448773b7f4072a4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillStat:
-  - coolTime: 5
-    currentCoolTime: 0
-    isCoolTime: 0
-  - coolTime: 5
-    currentCoolTime: 0
-    isCoolTime: 0
-  - coolTime: 5
-    currentCoolTime: 0
-    isCoolTime: 0
---- !u!114 &2102197658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102197646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d4a75dc4eba89148a044da0289ea21a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillStat:
-  - coolTime: 6
-    currentCoolTime: 0
-    isCoolTime: 0
-  - coolTime: 6
-    currentCoolTime: 0
-    isCoolTime: 0
-  stunTime: 1
 --- !u!1 &2135286115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1538,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1760859322, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1622,17 +1590,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
-      propertyPath: cakeRush
-      value: 
-      objectReference: {fileID: 2102197652}
-    - target: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
-      propertyPath: shootingStar
-      value: 
-      objectReference: {fileID: 2102197658}
-    - target: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
-      propertyPath: shootingStart
-      value: 
-      objectReference: {fileID: 2102197658}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
