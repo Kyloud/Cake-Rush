@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CokeShot : SkillBase
 {
-    public float currentHoldTime { get; set; }
     public float radius { get; set; }
+
     private const float skillHoldTime = 10f;
     private const float DELAY = 1f;
+    private float currentHoldTime;
     private WaitForSeconds delayTime;
 
     [SerializeField] private float[] damage;
@@ -22,6 +23,7 @@ public class CokeShot : SkillBase
         if (!skillStat[skillLevel].isCoolTime)
         {
             currentHoldTime = skillHoldTime;
+            StartCoroutine(SkillActive(point));
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
@@ -30,12 +32,13 @@ public class CokeShot : SkillBase
         }
     }
 
-    private IEnumerator SkillActive(Transform point)
+    private IEnumerator SkillActive(Vector3 point)
     {
         while(currentHoldTime >= 0)
         {
-            Collider[] overlapShpere = Physics.OverlapSphere(point.position, radius, GameProgress.instance.selectableLayer);
-
+            Collider[] overlapShpere = Physics.OverlapSphere(point, radius, GameProgress.instance.selectableLayer);
+            
+            Factor(overlapShpere);
             currentHoldTime -= DELAY;
             yield return delayTime;
         }
@@ -45,6 +48,7 @@ public class CokeShot : SkillBase
     {
         for(int i = 0; i < colliders.Length; i++)
         {
+            Debug.Log($"{colliders[i].name} Coke Shot");
             colliders[i].GetComponent<CharacterBase>().Hit(damage[level]);
         }
     }
