@@ -8,20 +8,19 @@ public class MultiTest : MonoBehaviourPunCallbacks
 {
     void Start()
     {
-        PhotonNetwork.NickName = "1";
+        PhotonNetwork.LocalPlayer.NickName = "1";
         PhotonNetwork.ConnectUsingSettings();
-        Debug.Log("OnLine");
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("OnLobby");
+        Debug.Log("OnLine");
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("CreateRoom");
+        Debug.Log("OnLobby");
 
 
         Debug.Log("CreateRoom");

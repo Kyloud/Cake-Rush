@@ -4,29 +4,52 @@ using UnityEngine;
 
 public class PlayerController : UnitBase
 {
-    [SerializeField] private GameObject attackRangeView;
-    [SerializeField] private GameObject cokeShotField;
-    [SerializeField] private LayerMask groundLayer;
+    private CokeShot cokeShot;
+    private Lightning lightning;
+    private ShootingStar shootingStar;
 
-    [SerializeField] private CokeShot cokeShot;
-    [SerializeField] private Lightning lightning;
-    [SerializeField] private ShootingStar shootingStar;
-    [SerializeField] private GameObject CookieHouse;
-
+    [SerializeField] GameObject cookieHouse;
+    
     protected override void Awake()
     {
         DataLoad("Player");
 
-        cakeRush.skillLevel = 0;
-        //cokeShot.skillLevel = 0;
-        //lightning.skillLevel = 0;
-        shootingStar.skillLevel = 0;
-        
+        cakeRush = GetComponent<CakeRush>();
+        shootingStar = GetComponent<ShootingStar>();
+        lightning = GetComponent<Lightning>();
+        cokeShot = GetComponent<CokeShot>();
+
         base.Awake();
-        navMashAgent.speed = moveSpeed;
+        SkillInit();
     }
 
-    protected override void Attack(Transform target)
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKey(KeyCode.Q))             //Lightning
+        {
+            StartCoroutine(Lightning());
+        }
+        else if (Input.GetKey(KeyCode.W))        //Coke shot
+        {
+            StartCoroutine(CokeShot());
+        }
+        else if (Input.GetKey(KeyCode.E))        //Shooting star
+        {
+            ShootingStar();
+        }
+        else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
+        {
+            CakeRush();
+        }
+        else if(Input.GetKeyDown(KeyCode.B))
+        {
+            StartCoroutine(Build());
+        }
+    }
+
+    protected override void Attack (Transform target)
     {
         state = CharacterState.Attack;
 
@@ -38,54 +61,60 @@ public class PlayerController : UnitBase
         target.GetComponent<EntityBase>().Hit(damage);
     }
 
-    protected override void Update()
+    private void SkillInit()
     {
-        base.Update();
+        cakeRush.level = 0;
+        cokeShot.level = 0;
+        lightning.level = 0;
+        shootingStar.level = 0;
 
-        if(Input.GetKey(KeyCode.Q))             //낙뢰
-        {
-            Lightning();
-        }
-        else if(Input.GetKey(KeyCode.W))        //콜라 뿌리기
-        {
-            CokeShot();
-        }
-        else if(Input.GetKey(KeyCode.E))        //슈팅 스타
-        {
-            ShootingStar();
-        }
-        else if(Input.GetKeyDown(KeyCode.R))        //케이크 러쉬
-        {
-            CakeRush();
-        }
-        else if(Input.GetKeyDown(KeyCode.B)) // Build
-        {
-            StartCoroutine(Build());        
-        }
+        lightning.range = 10f;
+        cokeShot.range = 5f;
     }
 
-    private void Lightning()
+    private IEnumerator Lightning()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Selectable")))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, GameProgress.instance.selectableLayer))
             {
-                while((hit.transform.position - transform.position).sqrMagnitude > attackRange)
+                while (lightning.range < (hit.transform.position - transform.position).sqrMagnitude)
                 {
-                    Move(hit.transform.position);
+                    base.Move(hit.transform.position);
+                    yield return null;
                 }
 
-                lightning.UseSkill(lightning.skillLevel);
+                navMashAgent.Stop();
+                animator.SetBool("Move", false);
+                lightning.UseSkill(lightning.level);
             }
         }
     }
 
-    private void CokeShot()
+    private IEnumerator CokeShot()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, GameProgress.instance.groundLayer))
+            {
+                while (cokeShot.range < (hit.transform.position - transform.position).sqrMagnitude)
+                {
+                    base.Move(hit.transform.position);
+                    yield return null;
+                }
+                Collider[] colliders = Physics.OverlapSphere(hit.point, 5f);
+
+                navMashAgent.Stop();
+                animator.SetBool("Move", false);
+                cokeShot.UseSkill(cokeShot.level, colliders);
+            }
+        }
     }
 
     private void ShootingStar()
@@ -99,9 +128,9 @@ public class PlayerController : UnitBase
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
-                Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, 1 << LayerMask.NameToLayer("Selectable"));
-                
-                shootingStar.UseSkill(shootingStar.skillLevel, colliders);         
+                Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
+
+                shootingStar.UseSkill(shootingStar.level, colliders);
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
         }
@@ -109,7 +138,7 @@ public class PlayerController : UnitBase
 
     private void CakeRush()
     {
-        cakeRush.UseSkill(cakeRush.skillLevel);
+        cakeRush.UseSkill(cakeRush.level);
     }
 
     private IEnumerator Build()
@@ -117,57 +146,54 @@ public class PlayerController : UnitBase
         Debug.Log("BuildMode");
         GameObject go = null;
         RaycastHit hit;
+        BuildBase build = null;
+        string curBuildName = null;
+
+        yield return null;
+        
         while(true)
         {
             if(go != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, 5000f, groundLayer))
+                if (Physics.Raycast(ray, out hit, 5000f, LayerMask.NameToLayer("selectable")))
                 {
                     go.transform.position = hit.point;
                 }
-                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 10f)
+                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
                 {
+                    StartCoroutine(build.Build());
+                    go = null;
                     Debug.Log("Build!");
+                    curBuildName = null;
                     break;
                 }
             }
-           
+            
             //Input
-
-            if(Input.GetKeyDown(KeyCode.U))
+            if(go == null)
             {
-                go = Instantiate(CookieHouse);
+                if(Input.GetKeyDown(KeyCode.U) && curBuildName != cakeRush.name)
+                {
+                    Debug.Log($"Select {cookieHouse.name} {cakeRush.name}");
+                    go = Instantiate(cookieHouse);
+                    name = go.name;
+                    build = go.GetComponent<BuildBase>();
+                }
             }
-
+            
             if(Input.GetKeyDown(KeyCode.B))
             {
+                Debug.Log("Stop BuildMode");
+                if(go != null)
+                {
+                    Destroy(go);
+                    Debug.Log("Build Canceled");
+                }
                 StopCoroutine("Build");
             }
             yield return null;
         }
     }
-
-    // private IEnumerator Build(bool onBuild)     //건물 건설
-    // {
-    //     Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
-    //     RaycastHit hit;
-
-    //     while(onBuild)
-    //     {
-    //         if(Input.GetMouseButtonDown(0))
-    //         {
-    //             if(Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
-    //             {
-    //                 Debug.Log($"Build as {hit.point}");
-    //                 break;
-    //             }
-    //         }
-
-    //         yield return null;
-    //     }
-        
-    //     Debug.Log("end");
-    // }
 }

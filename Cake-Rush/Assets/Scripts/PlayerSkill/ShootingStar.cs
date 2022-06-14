@@ -11,7 +11,6 @@ public class ShootingStar : SkillBase
 
     private void Awake()
     {
-        range = 5f;
         angleRange = 60f;
     }
 

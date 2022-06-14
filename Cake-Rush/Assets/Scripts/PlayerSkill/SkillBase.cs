@@ -17,7 +17,7 @@ public class SkillStat
 
         Debug.Log(isCoolTime);
 
-        while(currentCoolTime >= 0)
+        while (currentCoolTime >= 0)
         {
             currentCoolTime -= Time.deltaTime;
 
@@ -31,23 +31,18 @@ public class SkillStat
         isCoolTime = false;
         currentCoolTime = 0;
     }
-
-    //예상 버그 : 스킬 사용후 레벨업시 스킬 쿨이 초기화됌.
-    //해결법 -> 레벨업시 이전 쿨타임 데이터를 레벨업 후 쿨타임 데이터로 옮김.
-    //ex ) skillStat[skillLevel].currentCoolTime = skillStat[skillLevel - 1].currentCoolTime
 }
 
 public class SkillBase : MonoBehaviour
 {
     [SerializeField] protected SkillStat[] skillStat;
-   
+
     public float range { get; set; }
-    public int skillLevel { get; set; }
-    private int damage { get; set; }
+    public int level { get; set; }
 
     public virtual void UseSkill(int skillLevel)
     {
-        if(!skillStat[skillLevel].isCoolTime)
+        if (!skillStat[skillLevel].isCoolTime)
         {
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
@@ -55,13 +50,5 @@ public class SkillBase : MonoBehaviour
         {
             return;
         }
-    }
-
-    private void LightningFactor<T>(T unit) where T : CharacterBase
-    {
-        unit = unit as T;
-
-
-
     }
 }

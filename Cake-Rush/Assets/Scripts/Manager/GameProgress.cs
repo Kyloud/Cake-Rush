@@ -7,6 +7,15 @@ public class GameProgress : MonoSingleton<GameProgress>
 {
     public bool isGameOver;
 
+    public LayerMask groundLayer;
+    public LayerMask selectableLayer;
+
+    private void Awake()
+    {
+        groundLayer = 1 << LayerMask.NameToLayer("Ground");
+        selectableLayer = 1 << LayerMask.NameToLayer("Selectable");
+    }
+
     public void CountDown()
     {
 

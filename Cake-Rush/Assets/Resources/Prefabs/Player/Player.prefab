@@ -126,7 +126,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4278255407
-  m_Size: 1
+  m_Size: 3
 --- !u!1 &5149937489730830526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5127,6 +5127,11 @@ GameObject:
   - component: {fileID: 5151919943443715713}
   - component: {fileID: 5151919943443715773}
   - component: {fileID: 1651520174}
+  - component: {fileID: 1789932157}
+  - component: {fileID: 2102197652}
+  - component: {fileID: 2102197658}
+  - component: {fileID: 2102197665}
+  - component: {fileID: 2102197666}
   m_Layer: 7
   m_Name: Player
   m_TagString: Unit
@@ -5143,7 +5148,7 @@ Transform:
   m_GameObject: {fileID: 5150835717301315730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5147535238735540236}
@@ -5217,13 +5222,10 @@ MonoBehaviour:
   isSelected: 0
   isActive: 0
   state: 0
-  cakeRush: {fileID: 0}
+  cakeRush: {fileID: 2102197652}
   teamCamera: {fileID: 0}
-  attackRangeView: {fileID: 0}
-  cokeShotField: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  rangeView: {fileID: 0}
+  cookieHouse: {fileID: 0}
 --- !u!195 &5151919943443715773
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5236,7 +5238,7 @@ NavMeshAgent:
   m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 100
-  avoidancePriority: 50
+  avoidancePriority: 99
   m_AngularSpeed: 180
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -5259,6 +5261,89 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 1.2, z: 0.35}
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1789932157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150835717301315730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33be6d8915785834eab16a8ff7a71c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 10
+  edgeSharpness: 0
+--- !u!114 &2102197652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150835717301315730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d5a8507f608f2448773b7f4072a4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat:
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 5
+    currentCoolTime: 0
+    isCoolTime: 0
+--- !u!114 &2102197658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150835717301315730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d4a75dc4eba89148a044da0289ea21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat:
+  - coolTime: 6
+    currentCoolTime: 0
+    isCoolTime: 0
+  - coolTime: 6
+    currentCoolTime: 0
+    isCoolTime: 0
+  stunTime: 1
+--- !u!114 &2102197665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150835717301315730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72f64dbab3e3da4ba997a692ca00531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: []
+  damage: []
+--- !u!114 &2102197666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150835717301315730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebe15709f1ec094d84e862520886c3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillStat: []
 --- !u!1 &5150862141404204656
 GameObject:
   m_ObjectHideFlags: 0

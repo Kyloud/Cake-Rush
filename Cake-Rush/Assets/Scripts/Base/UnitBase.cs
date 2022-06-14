@@ -23,12 +23,15 @@ public class UnitBase : CharacterBase
     protected Transform targetTransform = null;
     public CakeRush cakeRush;
     public Camera teamCamera;
+    public GameObject rangeView;
 
     protected override void Awake()
     {
         base.Awake();
         teamCamera = Camera.main;
-        state = CharacterState.Idle;   
+        state = CharacterState.Idle;
+
+        navMashAgent.speed = moveSpeed;
     }
 
     protected override void Update()
@@ -36,7 +39,6 @@ public class UnitBase : CharacterBase
         Idle();
         Stop();
     }
-    
     
     public void SelectUnit()
 	{
@@ -68,6 +70,7 @@ public class UnitBase : CharacterBase
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
             if(Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 Stop();
@@ -120,6 +123,7 @@ public class UnitBase : CharacterBase
                {
                    if(!navMashAgent.hasPath || navMashAgent.velocity.sqrMagnitude == 0)
                     {
+                        Debug.Log("Arrive");
                         animator.SetBool("Move", false);
                         state = CharacterState.Idle;
                         break;
@@ -138,7 +142,6 @@ public class UnitBase : CharacterBase
         animator.SetBool("Attack", false);
 
         navMashAgent.isStopped = false; 
-
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), 90);
         navMashAgent.SetDestination(destination);
         
@@ -171,9 +174,10 @@ public class UnitBase : CharacterBase
             Move(target.position);
             yield return null;
         }
-        
+
         //Move(transform.position);
         StartCoroutine(BasicAttack(target));
+    
     }   
 
 	//Default Attack on Entities
@@ -183,6 +187,7 @@ public class UnitBase : CharacterBase
 
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
+
 		while((target.position - transform.position).sqrMagnitude < attackRange)
 		{
             // Vector3 dir = target.position - transform.position;
