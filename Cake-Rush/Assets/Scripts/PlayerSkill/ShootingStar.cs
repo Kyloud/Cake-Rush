@@ -1,26 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class ShootingStar : SkillBase
 {
-    public float stunTime;
+    public float stunTime { get; set; }
     private bool isColision;
     private float angleRange;
 
     private void Awake()
     {
-        range = 5f;
-        angleRange = 45f;
+        angleRange = 60f;
     }
 
     public void UseSkill(int skillLevel, Collider[] colliders)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            SectorColision(colliders);
+            StopAllCoroutines();
+
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
+
+            if (colliders.Length < 2)
+            {
+                return;
+            }
+
+            SectorColision(colliders);
         }
         else
         {
@@ -28,13 +34,10 @@ public class ShootingStar : SkillBase
         }
     }
 
-    //매개변수 배열 전달 말고 하나씩 전달
     public void SectorColision(Collider[] colliders)
     {
         Vector3 dirction;
-        float dotValue = 0;
-
-        Debug.Log("Check");
+        float dotValue;
 
         dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
 
@@ -46,10 +49,6 @@ public class ShootingStar : SkillBase
             {
                 StunEntity(colliders[i].gameObject.GetComponent<CharacterBase>());
             }
-            else
-            {
-                continue;
-            }
         }
     }
 
@@ -58,12 +57,5 @@ public class ShootingStar : SkillBase
         unit = unit as T;
 
         StartCoroutine(unit.Stun(stunTime));
-    }
-
-    private void OnDrawGizmos()
-    {
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
-
     }
 }

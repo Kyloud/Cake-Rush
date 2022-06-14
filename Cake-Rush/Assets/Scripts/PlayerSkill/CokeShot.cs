@@ -4,25 +4,53 @@ using UnityEngine;
 
 public class CokeShot : SkillBase
 {
-    public void SetActivation()
+    public float radius { get; set; }
+
+    private const float skillHoldTime = 10f;
+    private const float DELAY = 1f;
+    private float currentHoldTime;
+    private WaitForSeconds delayTime;
+
+    [SerializeField] private float[] damage;
+
+    private void Awake()
     {
-        gameObject.SetActive(false);
-    } 
-
-    private IEnumerator Factor <T> (T component) where T : CharacterBase
-    {
-        T data = component as T;
-
-        data.Hit(damage[skillLevel]);
-
-        yield return new WaitForEndOfFrame();
+        delayTime = new WaitForSeconds(DELAY);
     }
-    
-    private void OnTriggerStay(Collider other)
+
+    public void UseSkill(int skillLevel, Vector3 point)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Charactor") || other.gameObject.layer == LayerMask.NameToLayer("Selectable"))
+        if (!skillStat[skillLevel].isCoolTime)
         {
-            StartCoroutine(Factor(other.gameObject.GetComponent<UnitBase>()));        
+            currentHoldTime = skillHoldTime;
+            StartCoroutine(SkillActive(point));
+            StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private IEnumerator SkillActive(Vector3 point)
+    {
+        while(currentHoldTime >= 0)
+        {
+            Collider[] overlapShpere = Physics.OverlapSphere(point, radius, GameProgress.instance.selectableLayer);
+            
+            Factor(overlapShpere);
+            currentHoldTime -= DELAY;
+            yield return delayTime;
+        }
+    }
+
+    private void Factor(Collider[] colliders)
+    {
+        for(int i = 0; i < colliders.Length; i++)
+        {
+            Debug.Log($"{colliders[i].name} Coke Shot");
+            colliders[i].GetComponent<CharacterBase>().Hit(damage[level]);
         }
     }
 }
+
