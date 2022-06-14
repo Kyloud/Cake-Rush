@@ -18,6 +18,7 @@ public class RTSController : MonoBehaviour
     public LayerMask layerSelectable = 1 << 7;
 
 	[SerializeField] RectTransform dragRectangle;
+
 	private Rect dragRect;
 	private Vector2 start = Vector2.zero;
 	private Vector2 end = Vector2.zero;

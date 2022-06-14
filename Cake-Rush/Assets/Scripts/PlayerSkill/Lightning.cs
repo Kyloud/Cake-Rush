@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Lightning : SkillBase
 {
+    public float[] damage;
+
     public override void UseSkill(int skillLevel)
     {
         Debug.Log("³«·Ú");
