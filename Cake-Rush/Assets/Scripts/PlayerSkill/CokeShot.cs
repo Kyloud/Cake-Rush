@@ -7,7 +7,7 @@ public class CokeShot : SkillBase
     public float radius { get; set; }
 
     private const float skillHoldTime = 10f;
-    private const float DELAY = 1f;
+    private const float DELAY = 4f;
     private float currentHoldTime;
     private WaitForSeconds delayTime;
 
@@ -40,12 +40,18 @@ public class CokeShot : SkillBase
             
             Factor(overlapShpere);
             currentHoldTime -= DELAY;
+
             yield return delayTime;
         }
     }
 
-    private void Factor(Collider[] colliders)
+    private void Factor (Collider[] colliders)
     {
+        if(colliders.Length < 1)
+        {
+            return;
+        }
+
         for(int i = 0; i < colliders.Length; i++)
         {
             Debug.Log($"{colliders[i].name} Coke Shot");

@@ -68,9 +68,10 @@ public class PlayerController : UnitBase
         lightning.level = 0;
         shootingStar.level = 0;
 
+        shootingStar.range = 6f;
         lightning.range = 10f;
         cokeShot.range = 30f;
-        shootingStar.range = 6f;
+        cokeShot.radius = 5f;
     }
 
     private IEnumerator Lightning()
@@ -112,7 +113,7 @@ public class PlayerController : UnitBase
 
                 navMashAgent.Stop();
                 animator.SetBool("Move", false);
-                cokeShot.UseSkill(cokeShot.level);
+                cokeShot.UseSkill(cokeShot.level, hit.point);
             }
         }
     }
