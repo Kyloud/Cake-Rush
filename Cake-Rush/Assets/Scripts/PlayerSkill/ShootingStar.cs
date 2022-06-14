@@ -60,7 +60,7 @@ public class ShootingStar : SkillBase
 
     private void OnDrawGizmos()
     {
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
+        //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
+        //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
     }
 }
