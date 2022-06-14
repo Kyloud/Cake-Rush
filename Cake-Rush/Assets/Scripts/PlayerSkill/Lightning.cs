@@ -6,7 +6,6 @@ public class Lightning : SkillBase
 {
     public override void UseSkill(int skillLevel)
     {
-
         Debug.Log("³«·Ú");
 
         if (!skillStat[skillLevel].isCoolTime)
@@ -17,5 +16,10 @@ public class Lightning : SkillBase
         {
             return;
         }
+    }
+
+    private void Factor<T>(T unit) where T : CharacterBase
+    {
+
     }
 }

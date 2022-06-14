@@ -147,7 +147,9 @@ public class PlayerController : UnitBase
         RaycastHit hit;
         BuildBase build = null;
         string curBuildName = null;
+
         yield return null;
+        
         while(true)
         {
             if(go != null)
