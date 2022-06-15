@@ -11593,7 +11593,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 569466254}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -13802,8 +13802,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 682567572}
-  - component: {fileID: 682567571}
   - component: {fileID: 682567570}
+  - component: {fileID: 682567573}
   m_Layer: 0
   m_Name: 2st Ground
   m_TagString: Untagged
@@ -13820,9 +13820,24 @@ TerrainCollider:
   m_GameObject: {fileID: 682567569}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: c63e7b19664904f4c8e8c35d408e8ce8, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: c72a4057cc9af714481ebf0940764dae, type: 2}
   m_EnableTreeColliders: 1
---- !u!218 &682567571
+--- !u!4 &682567572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682567569}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1351253405}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!218 &682567573
 Terrain:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13831,7 +13846,7 @@ Terrain:
   m_GameObject: {fileID: 682567569}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: c63e7b19664904f4c8e8c35d408e8ce8, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: c72a4057cc9af714481ebf0940764dae, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -13851,26 +13866,11 @@ Terrain:
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 0.08533333
+  m_ScaleInLightmap: 1
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
---- !u!4 &682567572
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682567569}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 1351253405}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AllowAutoConnect: 0
 --- !u!1 &684315804
 GameObject:
   m_ObjectHideFlags: 0
@@ -18762,8 +18762,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC885\uB8CC\uD558\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
+  m_sharedMaterial: {fileID: 8099216222945845519, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19649,8 +19649,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAC8C\uC784\uC2DC\uC791"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
+  m_sharedMaterial: {fileID: 8099216222945845519, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20289,8 +20289,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u24D2 Gyeongbuk Software High School S.H Stiudio"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
+  m_sharedMaterial: {fileID: 8099216222945845519, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20444,7 +20444,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 977325320}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -22288,8 +22288,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB9CC\uB4E0\uC774"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
+  m_sharedMaterial: {fileID: 8099216222945845519, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -28152,7 +28152,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1299829967}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -32173,8 +32173,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1510127299}
-  - component: {fileID: 1510127298}
-  - component: {fileID: 1510127297}
+  - component: {fileID: 1510127301}
+  - component: {fileID: 1510127300}
   m_Layer: 0
   m_Name: 4st Ground
   m_TagString: Untagged
@@ -32182,18 +32182,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!154 &1510127297
-TerrainCollider:
+--- !u!4 &1510127299
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510127296}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: b4b8381b6f5019247af42b0c0e8db8a7, type: 2}
-  m_EnableTreeColliders: 1
---- !u!218 &1510127298
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -300, y: 0, z: 300}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1351253405}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!218 &1510127300
 Terrain:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32226,22 +32230,18 @@ Terrain:
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
---- !u!4 &1510127299
-Transform:
+  m_AllowAutoConnect: 0
+--- !u!154 &1510127301
+TerrainCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510127296}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -300, y: 0, z: 300}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 1351253405}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: b4b8381b6f5019247af42b0c0e8db8a7, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!1 &1511446633
 GameObject:
   m_ObjectHideFlags: 0
@@ -38879,8 +38879,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC635\uC158\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
+  m_sharedMaterial: {fileID: 8099216222945845519, guid: 4694093562ce9f24ba541e9be170b693, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -42288,7 +42288,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2009358559}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
