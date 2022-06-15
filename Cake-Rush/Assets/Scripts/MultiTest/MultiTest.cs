@@ -60,4 +60,9 @@ public class MultiTest : MonoBehaviourPunCallbacks
         Debug.Log(newPlayer.NickName);
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
     }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        
+    }
 }
