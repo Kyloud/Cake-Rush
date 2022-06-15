@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 //Character and Building GameObject's Base Class
-public class EntityBase : MonoBehaviour
+public class EntityBase : MonoBehaviourPunCallbacks
 {
     #region  element
     public float damage { get; set; }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerController : UnitBase
 {
@@ -8,6 +10,7 @@ public class PlayerController : UnitBase
     private Lightning lightning;
     private ShootingStar shootingStar;
     //private Build build;
+    PhotonView PV;
 
     [SerializeField] GameObject cookieHouse;
     
@@ -19,6 +22,7 @@ public class PlayerController : UnitBase
         shootingStar = GetComponent<ShootingStar>();
         lightning = GetComponent<Lightning>();
         cokeShot = GetComponent<CokeShot>();
+        PV = GetComponent<PhotonView>();
         //build = GetComponent<Build>();
         base.Awake();
         SkillInit();
@@ -26,27 +30,30 @@ public class PlayerController : UnitBase
 
     protected override void Update()
     {
-        base.Update();
+        if(PV.IsMine)
+        {
+            base.Update();
 
-        if (Input.GetKey(KeyCode.Q))             //Lightning
-        {
-            StartCoroutine(Lightning());
-        }
-        else if (Input.GetKey(KeyCode.W))        //Coke shot
-        {
-            StartCoroutine(CokeShot());
-        }
-        else if (Input.GetKey(KeyCode.E))        //Shooting star
-        {
-            ShootingStar();
-        }
-        else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
-        {
-            CakeRush();
-        }
-        else if(Input.GetKeyDown(KeyCode.B))
-        {
-            StartCoroutine(Build());
+            if (Input.GetKey(KeyCode.Q))             //Lightning
+            {
+                StartCoroutine(Lightning());
+            }
+            else if (Input.GetKey(KeyCode.W))        //Coke shot
+            {
+                StartCoroutine(CokeShot());
+            }
+            else if (Input.GetKey(KeyCode.E))        //Shooting star
+            {
+                ShootingStar();
+            }
+            else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
+            {
+                CakeRush();
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                StartCoroutine(Build());
+            }
         }
     }
 

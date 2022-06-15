@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 
-public class ChatTest : MonoBehaviour
+public class ChatTest : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private GameObject inputBox;
@@ -18,6 +20,7 @@ public class ChatTest : MonoBehaviour
     private TMP_Text[] texts = new TMP_Text[5];
     private int maxLenght = 5;
     private bool isChat;
+    PhotonView PV;
 
     private void Start()
     {
@@ -29,36 +32,50 @@ public class ChatTest : MonoBehaviour
         input = inputBox.GetComponent<TMP_InputField>();
         inputBox.SetActive(false);
         scrollView.SetActive(false);
+        PV = GetComponent<PhotonView>();
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            isChat = !isChat;
-
-            if(isChat)
+            if(!isChat)
             {
+                isChat = true;
                 inputBox.SetActive(true);
                 scrollView.SetActive(true);
-                input.Select();
-                return;
+                //input.Select();
+                input.ActivateInputField();
             }
-            else if(input.text == "")
+            else
             {
-                inputBox.SetActive(false);
-                scrollView.SetActive(false);
-                return;
+                if(input.text == "")
+                {
+                    input.Select();
+                    isChat = false;
+                    inputBox.SetActive(false);
+                    scrollView.SetActive(false);
+                    return;
+                }
+                else
+                {
+                    PV.RPC("Chat", RpcTarget.All, $"{PhotonNetwork.LocalPlayer.NickName} : {input.text}");
+                    input.text = "";
+                    Debug.Log("Chat");
+                    input.ActivateInputField();
+                }
             }
-
-            for (int i = maxLenght - 1; i > 0; i--)
-            {
-                texts[i].text = texts[i - 1].text;
-            }
-            texts[0].text = input.text;
-            input.text = "";
-            input.Select();
         }
+    }
 
+
+    [PunRPC]
+    void Chat(string str)
+    {
+        for (int i = maxLenght - 1; i > 0; i--)
+        {
+            texts[i].text = texts[i - 1].text;
+        }
+        texts[0].text = str;
     }
 }

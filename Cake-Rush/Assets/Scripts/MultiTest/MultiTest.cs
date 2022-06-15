@@ -22,14 +22,13 @@ public class MultiTest : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnLobby");
 
-
         Debug.Log("CreateRoom");
-        /*PhotonNetwork.JoinRandomOrCreateRoom(
-            null, 1, Photon.Realtime.MatchmakingMode.FillRoom,
+        PhotonNetwork.JoinRandomOrCreateRoom(
+            null, 2, Photon.Realtime.MatchmakingMode.FillRoom,
             null, null, "firstRoom",
-            new Photon.Realtime.RoomOptions { MaxPlayers = 1 });*/
+            new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
 
-        PhotonNetwork.CreateRoom("testRoom", new Photon.Realtime.RoomOptions { MaxPlayers = 2 }, null, null);
+        //PhotonNetwork.CreateRoom("testRoom", new Photon.Realtime.RoomOptions { MaxPlayers = 2 }, null, null);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
