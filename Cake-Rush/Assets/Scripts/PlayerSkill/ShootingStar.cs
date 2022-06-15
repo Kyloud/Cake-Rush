@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class ShootingStar : SkillBase
 {
-    public float stunTime;
+    public float stunTime { get; set; }
     private bool isColision;
     private float angleRange;
 
@@ -18,6 +17,8 @@ public class ShootingStar : SkillBase
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
+            StopAllCoroutines();
+
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
 
             if (colliders.Length < 2)
@@ -57,10 +58,13 @@ public class ShootingStar : SkillBase
 
         StartCoroutine(unit.Stun(stunTime));
     }
+<<<<<<< HEAD
 
     private void OnDrawGizmos()
     {
         //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
         //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
     }
+=======
+>>>>>>> BiN_
 }

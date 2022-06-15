@@ -730,7 +730,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829794011}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a9011789e7644bb897d96fec30d2bd8, type: 3}
   m_Name: 
@@ -1310,7 +1310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2554932333613993860, guid: 31f4d4a490fa14042b815af1308a3680, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.54
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 2554932333613993860, guid: 31f4d4a490fa14042b815af1308a3680, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1318,7 +1318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2554932333613993860, guid: 31f4d4a490fa14042b815af1308a3680, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.09
       objectReference: {fileID: 0}
     - target: {fileID: 2554932333613993860, guid: 31f4d4a490fa14042b815af1308a3680, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1750,11 +1750,27 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
-      propertyPath: skillStat.Array.size
+      propertyPath: damage.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[0].coolTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[1].coolTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[2].coolTime
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}

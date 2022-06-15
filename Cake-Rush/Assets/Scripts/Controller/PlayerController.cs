@@ -68,8 +68,10 @@ public class PlayerController : UnitBase
         lightning.level = 0;
         shootingStar.level = 0;
 
+        shootingStar.range = 6f;
         lightning.range = 10f;
-        cokeShot.range = 5f;
+        cokeShot.range = 30f;
+        cokeShot.radius = 5f;
     }
 
     private IEnumerator Lightning()
@@ -103,16 +105,15 @@ public class PlayerController : UnitBase
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, GameProgress.instance.groundLayer))
             {
-                while (cokeShot.range < (hit.transform.position - transform.position).sqrMagnitude)
+                while (cokeShot.range < (hit.point - transform.position).sqrMagnitude)
                 {
-                    base.Move(hit.transform.position);
+                    base.Move(hit.point);
                     yield return null;
                 }
-                Collider[] colliders = Physics.OverlapSphere(hit.point, 5f);
 
                 navMashAgent.Stop();
                 animator.SetBool("Move", false);
-                cokeShot.UseSkill(cokeShot.level, colliders);
+                cokeShot.UseSkill(cokeShot.level, hit.point);
             }
         }
     }
@@ -129,7 +130,6 @@ public class PlayerController : UnitBase
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
                 Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
-
                 shootingStar.UseSkill(shootingStar.level, colliders);
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
