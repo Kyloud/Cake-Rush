@@ -7,6 +7,7 @@ public class PlayerController : UnitBase
     private CokeShot cokeShot;
     private Lightning lightning;
     private ShootingStar shootingStar;
+    //private Build build;
 
     [SerializeField] GameObject cookieHouse;
     
@@ -18,7 +19,7 @@ public class PlayerController : UnitBase
         shootingStar = GetComponent<ShootingStar>();
         lightning = GetComponent<Lightning>();
         cokeShot = GetComponent<CokeShot>();
-
+        //build = GetComponent<Build>();
         base.Awake();
         SkillInit();
     }
