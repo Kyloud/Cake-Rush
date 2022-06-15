@@ -58,13 +58,10 @@ public class ShootingStar : SkillBase
 
         StartCoroutine(unit.Stun(stunTime));
     }
-<<<<<<< HEAD
 
     private void OnDrawGizmos()
     {
         //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
         //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
     }
-=======
->>>>>>> BiN_
 }
