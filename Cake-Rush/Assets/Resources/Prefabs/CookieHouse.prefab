@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6424830567606060228}
   - component: {fileID: 4598853871110824519}
   m_Layer: 0
-  m_Name: TestBuild
+  m_Name: CookieHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
