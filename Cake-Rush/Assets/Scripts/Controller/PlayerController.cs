@@ -130,8 +130,7 @@ public class PlayerController : UnitBase
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
-                Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
-                shootingStar.UseSkill(shootingStar.level, colliders);
+                shootingStar.UseSkill(shootingStar.level, Vector3.zero);
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
         }

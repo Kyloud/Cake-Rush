@@ -12,12 +12,13 @@ public class ShootingStar : SkillBase
         angleRange = 60f;
     }
 
-    public override void UseSkill(int skillLevel, Collider[] colliders)
+    public override void UseSkill(int skillLevel, Vector3 point)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
             StopAllCoroutines();
 
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
 
             if (colliders.Length < 2)

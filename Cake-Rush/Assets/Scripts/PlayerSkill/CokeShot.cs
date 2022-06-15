@@ -18,7 +18,7 @@ public class CokeShot : SkillBase
         delayTime = new WaitForSeconds(DELAY);
     }
 
-    public void UseSkill(int skillLevel, Vector3 point)
+    public override void UseSkill(int skillLevel, Vector3 point)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
