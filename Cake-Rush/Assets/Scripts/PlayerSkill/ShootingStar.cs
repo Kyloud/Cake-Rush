@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShootingStar : SkillBase
 {
     public float stunTime { get; set; }
-    private bool isColision;
     private float angleRange;
 
     private void Awake()
@@ -13,7 +12,7 @@ public class ShootingStar : SkillBase
         angleRange = 60f;
     }
 
-    public void UseSkill(int skillLevel, Collider[] colliders)
+    public override void UseSkill(int skillLevel, Collider[] colliders)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
@@ -57,11 +56,5 @@ public class ShootingStar : SkillBase
         unit = unit as T;
 
         StartCoroutine(unit.Stun(stunTime));
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
-        //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
     }
 }

@@ -38,7 +38,7 @@ public class SkillBase : MonoBehaviour
     public float range { get; set; }
     public int level { get; set; }
 
-    public virtual void UseSkill(int skillLevel)
+    public virtual void UseSkill(int skillLevel, Collider[] colliders)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {

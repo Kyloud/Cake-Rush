@@ -30,7 +30,6 @@ public class UnitBase : CharacterBase
         base.Awake();
         teamCamera = Camera.main;
         state = CharacterState.Idle;
-
         navMashAgent.speed = moveSpeed;
     }
 

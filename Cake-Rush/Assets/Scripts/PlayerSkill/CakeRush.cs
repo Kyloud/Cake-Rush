@@ -9,7 +9,7 @@ public class CakeRush : SkillBase
         Debug.Log($"Cake Rush! | Level {skillLevel}");
     }
 
-    public override void UseSkill(int skillLevel)
+    public void UseSkill(int skillLevel)
     {
         if(!skillStat[skillLevel].isCoolTime)
         {

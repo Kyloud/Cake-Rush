@@ -92,7 +92,7 @@ public class PlayerController : UnitBase
 
                 navMashAgent.Stop();
                 animator.SetBool("Move", false);
-                lightning.UseSkill(lightning.level);
+                lightning.UseSkill(lightning.level, hit.collider.GetComponent<CharacterBase>());
             }
         }
     }

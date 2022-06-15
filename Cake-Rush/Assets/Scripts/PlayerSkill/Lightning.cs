@@ -6,12 +6,12 @@ public class Lightning : SkillBase
 {
     public float[] damage;
 
-    public override void UseSkill(int skillLevel)
+    public void UseSkill(int skillLevel, CharacterBase unit)
     {
-        Debug.Log("³«·Ú");
-
         if (!skillStat[skillLevel].isCoolTime)
         {
+            Debug.Log("³«·Ú");
+            Factor(unit);
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
@@ -22,6 +22,10 @@ public class Lightning : SkillBase
 
     private void Factor<T>(T unit) where T : CharacterBase
     {
-
+        if(unit.GetType() != typeof(PlayerController))
+        {
+            unit = unit as T;
+            unit.GetComponent<CharacterBase>().Hit(damage[level]);
+        }
     }
 }
