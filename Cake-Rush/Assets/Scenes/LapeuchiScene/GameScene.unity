@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 88c467166db994146961f1ecc5fc214e, type: 3}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43718317, g: 0.75444984, b: 1.0290304, a: 1}
+  m_IndirectSpecularColor: {r: 0.43718457, g: 0.75444883, b: 1.0290297, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15931,7 +15931,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
   m_PrefabInstance: {fileID: 1529453028}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2115224813}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7564c00a2efbe2446abf5b1000374faa, type: 3}
@@ -17849,6 +17849,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101783542}
   m_Mesh: {fileID: 4300000, guid: de3258c27e8be4cb19e096cb6b23f46f, type: 3}
+--- !u!1 &2115224813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5150835717301315730, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+  m_PrefabInstance: {fileID: 1529453028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2115224827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115224813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6121d21a26a4441d880a2f6498708e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookieHouseObj: {fileID: 0}
+  costBuildObj: {fileID: 0}
+  cookieHouseName: 
+  costBuildName: 
+  isBuildMode: 0
 --- !u!1 &2120958591
 GameObject:
   m_ObjectHideFlags: 0

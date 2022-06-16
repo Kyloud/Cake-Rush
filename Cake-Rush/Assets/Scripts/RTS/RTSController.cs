@@ -5,36 +5,89 @@ using UnityEngine;
 // 게임 내 Entity를 관리하는 시스템 클래스
 public class RTSController : MonoBehaviour
 {
-    
-    public List<UnitBase> selectedUnitList = new List<UnitBase>();
     public List<UnitBase> unitList = new List<UnitBase>();
-    public List<BuildBase> selectedBuildList = new List<BuildBase>();
     public List<BuildBase> buildList = new List<BuildBase>();
-	public EntityBase selectedEnemyEntity;
-    
+	public EntityBase selectedEntity = null;
 	private Camera teamCamera;
     
 	public LayerMask layerGround = 1 << 6;
     public LayerMask layerSelectable = 1 << 7;
 
-	[SerializeField] RectTransform dragRectangle;
 
-	private Rect dragRect;
 	private Vector2 start = Vector2.zero;
 	private Vector2 end = Vector2.zero;
+
+	//sugar chocolate, wheat
+	public int[] cost = new int[3];
     
 	void Awake()
     {
-		teamCamera = Camera.main;
 		//Find Team Camera
-		DrawDragRectangle();
+		teamCamera = Camera.main;
     }
 
     void Update() 
 	{
         Click();
-		//Drag();
     }
+
+	void Click()
+	{
+		// When there is an object hitting the ray (= clicking on the unit)
+		if ( Input.GetMouseButtonDown(0) )
+		{
+			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+
+			// When there is an object hitting the ray (= clicking on the unit)
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerSelectable))
+			{
+				if (hit.transform.gameObject.GetComponent<EntityBase>() == null)
+					return;
+				if(selectedEntity != null)
+					selectedEntity.Deselect();
+				selectedEntity = hit.transform.gameObject.GetComponent<EntityBase>();
+				selectedEntity.Select();
+			}
+			//When ray is hitting ground.
+			else if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
+			{
+				if(selectedEntity != null)
+				{
+					selectedEntity.Deselect();	
+					selectedEntity = null;
+				}
+				
+			
+			}
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
+				return;
+		}
+		// move units by right-clicking
+		else if (Input.GetMouseButtonDown(1) && selectedEntity != null)
+		{
+			RaycastHit	hit;
+			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+			// When the unit object (layerUnit) is clicked
+			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
+			{
+				if(selectedEntity.GetType() == typeof(UnitBase))
+					selectedEntity.gameObject.GetComponent<UnitBase>().Move(hit.point);
+				
+			}
+				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
+		}
+    }
+
+
+
+/*
+
+ 	public EntityBase selectedEnemyEntity;
+    public List<UnitBase> selectedUnitList = new List<UnitBase>();
+	public List<BuildBase> selectedBuildList = new List<BuildBase>();
+	[SerializeField] RectTransform dragRectangle;
+	private Rect dragRect;
 
     void Click()
     {
@@ -318,4 +371,5 @@ public class RTSController : MonoBehaviour
 			}
 		}
 	}
+	*/
 }

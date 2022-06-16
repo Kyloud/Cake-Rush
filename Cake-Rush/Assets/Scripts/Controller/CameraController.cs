@@ -24,42 +24,32 @@ public class CameraController : MonoBehaviour
     {
         Move();
         SetPosToSelectedEntity();
-        SetPosToPlayer();
-
         PosLockToUnitPos();
         
-    }
-    
-    void SetPosToPlayer()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            // transform.position = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z - 11f);
-        }
     }
 
     void SetPosToSelectedEntity()
     {
-        if(Input.GetKey(KeyCode.T) && rtsController.selectedUnitList.Count > 0)
+        if(Input.GetKey(KeyCode.T) && rtsController.selectedEntity != null)
         {
             transform.position = new Vector3
             (
-                rtsController.selectedUnitList[0].transform.position.x,
+                rtsController.selectedEntity.transform.position.x,
                 transform.position.y,
-                rtsController.selectedUnitList[0].transform.position.z - 11f
+                rtsController.selectedEntity.transform.position.z - 11f
             );
         }
     }
 
     void PosLockToUnitPos()
     {
-        if(isLock && rtsController.selectedUnitList.Count > 0)
+        if(isLock && rtsController.selectedEntity != null)
         {
             transform.position = new Vector3
             (
-                rtsController.selectedUnitList[0].transform.position.x,
+                rtsController.selectedEntity.transform.position.x,
                 transform.position.y,
-                rtsController.selectedUnitList[0].transform.position.z - 11f
+                rtsController.selectedEntity.transform.position.z - 11f
             );
         }
         if (Input.GetKeyDown(KeyCode.Y))

@@ -15,14 +15,19 @@ public class EntityBase : MonoBehaviour
     [SerializeField] protected float criticalDamage;
     [SerializeField] protected float returnExp;
     [SerializeField] protected float eyeSight;
-    [SerializeField] protected int[] cost = new int[3];
+    [SerializeField] public int[] cost = new int[3];
     [SerializeField] protected int[] dropCost = new int[3];
     [SerializeField] protected float defensive;
-    [SerializeField] protected float spawnTime;
+    [SerializeField] public float spawnTime { get; set; }
     [SerializeField] public float moveSpeed { get; set; }
     [SerializeField] protected Data.Stat stat;
     protected RTSController rtsController;
     [SerializeField] public GameObject Marker;
+
+    public int Sugar {get {return cost[1];} protected set{cost[1] = value;} }
+    public int Chocolate {get {return cost[1];} protected set{cost[1] = value;} }
+    public int Wheat {get {return cost[1];} protected set{cost[1] = value;} }
+
     public bool isSelected;
     public bool isActive;
     #endregion

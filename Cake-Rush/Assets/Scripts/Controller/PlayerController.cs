@@ -7,9 +7,7 @@ public class PlayerController : UnitBase
     private CokeShot cokeShot;
     private Lightning lightning;
     private ShootingStar shootingStar;
-    //private Build build;
-
-    [SerializeField] GameObject cookieHouse;
+    private Build build;
     
     protected override void Awake()
     {
@@ -19,7 +17,7 @@ public class PlayerController : UnitBase
         shootingStar = GetComponent<ShootingStar>();
         lightning = GetComponent<Lightning>();
         cokeShot = GetComponent<CokeShot>();
-        //build = GetComponent<Build>();
+        build = GetComponent<Build>();
         base.Awake();
         SkillInit();
     }
@@ -28,6 +26,7 @@ public class PlayerController : UnitBase
     {
         base.Update();
 
+        if(isSelected == false) return;
         if (Input.GetKey(KeyCode.Q))             //Lightning
         {
             StartCoroutine(Lightning());
@@ -44,9 +43,9 @@ public class PlayerController : UnitBase
         {
             CakeRush();
         }
-        else if(Input.GetKeyDown(KeyCode.B))
+        else if(Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
         {
-            StartCoroutine(Build());
+            StartCoroutine(BuildMode());
         }
     }
 
@@ -141,45 +140,55 @@ public class PlayerController : UnitBase
         cakeRush.UseSkill(cakeRush.level);
     }
 
-    private IEnumerator Build()
+    private IEnumerator BuildMode()
     {
+        if(build.isBuildMode == true) yield break;
         Debug.Log("BuildMode");
+        build.isBuildMode = true;
         GameObject go = null;
         RaycastHit hit;
-        BuildBase build = null;
-        string curBuildName = null;
+        BuildBase buildBase = null;
+        string curBuildName = null;   
 
         yield return null;
         
         while(true)
         {
+            
+
             if(go != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(ray, out hit, 5000f, LayerMask.NameToLayer("selectable")))
+                if (Physics.Raycast(ray, out hit, 5000f, GameProgress.instance.groundLayer))
                 {
                     go.transform.position = hit.point;
                 }
                 if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
                 {
-                    StartCoroutine(build.Build());
+                    StartCoroutine(buildBase.Build());
                     go = null;
                     Debug.Log("Build!");
                     curBuildName = null;
-                    break;
+                    build.isBuildMode = false;
+                    yield break;
                 }
             }
             
             //Input
             if(go == null)
             {
-                if(Input.GetKeyDown(KeyCode.U) && curBuildName != cakeRush.name)
+                if(Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
                 {
-                    Debug.Log($"Select {cookieHouse.name} {cakeRush.name}");
-                    go = Instantiate(cookieHouse);
-                    name = go.name;
-                    build = go.GetComponent<BuildBase>();
+                    go = Instantiate(build.cookieHouseObj);
+                    curBuildName = build.cookieHouseName;
+                    buildBase = go.GetComponent<BuildBase>();
+                }
+                else if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.costBuildName)
+                {
+                    go = Instantiate(build.cookieHouseObj);
+                    curBuildName = build.costBuildName;
+                    buildBase = go.GetComponent<BuildBase>();
                 }
             }
             
@@ -191,7 +200,8 @@ public class PlayerController : UnitBase
                     Destroy(go);
                     Debug.Log("Build Canceled");
                 }
-                StopCoroutine("Build");
+                build.isBuildMode = false;
+                yield break;
             }
             yield return null;
         }
