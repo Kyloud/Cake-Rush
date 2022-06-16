@@ -18,13 +18,15 @@ public class MobController : CharacterBase
         distanceToHomebase = 100f;
         attackRange = 8f;
         moveSpeed = 4f;
-        second = new WaitForSeconds(1);;
+        second = new WaitForSeconds(1);
+        maxHp = 100;
+        curHp = 100;
         //target = null;
     }
 
     public enum State
     {
-        idle, attack, move, reset, retargeting
+        idle, attack, move, reset, retargeting, die
     }
 
     [SerializeField]
@@ -49,13 +51,7 @@ public class MobController : CharacterBase
     {
         switch(state)
         {
-            case State.idle:
-                Idle();
-                break;
-
             case State.attack:
-                
-        
                 break;
 
             case State.move:
@@ -72,13 +68,17 @@ public class MobController : CharacterBase
 
             default:
                 break;
-
         }
+
+        animator.SetBool("Attack", state == State.attack);
+        animator.SetBool("Move", state == State.move || state == State.reset);
     }
 
-    protected void Idle()
+    protected override void Die()
     {
-        //play IDLE animation
+        base.Die();
+        animator.SetTrigger("Die");
+        state = State.die;
     }
 
     protected IEnumerator Attack()
@@ -95,12 +95,12 @@ public class MobController : CharacterBase
           {
                target.GetComponent<UnitBase>().Hit(damage);
                yield return second;
-           }
-            else
-           {
+          }
+          else
+          {
                state = State.move;
                break;
-           }
+          }
 
         }
     }
@@ -149,10 +149,12 @@ public class MobController : CharacterBase
 
     public virtual void Hit(float hitDamage, Transform attacker)
     {
+        Debug.Log("Hit");
         base.Hit(hitDamage);
-        
-        if(state != State.attack)
+
+        if (state != State.attack)
         {
+            Debug.Log("반격");
             state = State.attack;
             target = attacker;
             StartCoroutine(Attack());

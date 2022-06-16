@@ -28,7 +28,31 @@ public class PlayerController : UnitBase
 
     protected override void Update()
     {
-        if(PV.IsMine)
+        base.Update();
+
+        if (isSelected == false) return;
+        if (Input.GetKey(KeyCode.Q))             //Lightning
+        {
+            StartCoroutine(Lightning());
+        }
+        else if (Input.GetKey(KeyCode.W))        //Coke shot
+        {
+            StartCoroutine(CokeShot());
+        }
+        else if (Input.GetKey(KeyCode.E))        //Shooting star
+        {
+            ShootingStar();
+        }
+        else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
+        {
+            CakeRush();
+        }
+        else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
+        {
+            StartCoroutine(BuildMode());
+        }
+
+        /*if (PV.IsMine)
         {
             base.Update();
 
@@ -53,7 +77,7 @@ public class PlayerController : UnitBase
             {
                 StartCoroutine(BuildMode());
             }
-        }
+        }*/
     }
 
     protected override void Attack (Transform target)
@@ -65,7 +89,14 @@ public class PlayerController : UnitBase
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
 
-        target.GetComponent<EntityBase>().Hit(damage);
+        if(target.CompareTag("Monster"))
+        {
+            target.GetComponent<MobController>().Hit(damage, transform);
+        }
+        else
+        {
+            target.GetComponent<EntityBase>().Hit(damage);
+        }
     }
 
     private void SkillInit()
