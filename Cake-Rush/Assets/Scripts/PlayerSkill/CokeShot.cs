@@ -22,14 +22,16 @@ public class CokeShot : SkillBase
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            currentHoldTime = skillHoldTime;
-            StartCoroutine(SkillActive(point));
+            Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
         {
             return;
         }
+
+        currentHoldTime = skillHoldTime;
+        StartCoroutine(SkillActive(point));
     }
 
     private IEnumerator SkillActive(Vector3 point)

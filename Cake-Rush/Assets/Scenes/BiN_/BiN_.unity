@@ -369,7 +369,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668605864
 GameObject:
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466625055773112646, guid: 4d34abc213483b84db4ff85e9a46d235, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 466625055773112646, guid: 4d34abc213483b84db4ff85e9a46d235, type: 3}
       propertyPath: m_LocalScale.x
@@ -594,7 +594,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &829794015
 MonoBehaviour:
@@ -713,22 +713,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd67485abf3df488652db296a46b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedUnitList: []
   unitList:
   - {fileID: 217145603}
   - {fileID: 59108934}
   - {fileID: 24590915}
   - {fileID: 1651520171}
-  selectedBuildList: []
   buildList: []
-  selectedEnemyEntity: {fileID: 0}
+  selectedEntity: {fileID: 0}
   layerGround:
     serializedVersion: 2
     m_Bits: 64
   layerSelectable:
     serializedVersion: 2
     m_Bits: 128
-  dragRectangle: {fileID: 881127639}
+  cost: 000000000000000000000000
 --- !u!4 &889880316
 Transform:
   m_ObjectHideFlags: 0
@@ -939,6 +937,37 @@ Transform:
   m_Father: {fileID: 1413232517}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 13.333, y: -30.085, z: -0.378}
+--- !u!1 &1385518282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1385518283}
+  m_Layer: 7
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1385518283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385518282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5833334, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2102197663}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1413232516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68751289501283796, guid: d7d03bc6c503745129fc8dc6f3f6eb28, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 68751289501283796, guid: d7d03bc6c503745129fc8dc6f3f6eb28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1315,6 +1344,11 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: -0.008, y: 0.5, z: 0}
+--- !u!4 &2102197663 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+  m_PrefabInstance: {fileID: 4857680237184361232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2135286115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1474,18 @@ PrefabInstance:
       propertyPath: m_Size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 1385518283}
+    - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillEffect
+      value: 
+      objectReference: {fileID: 1096327089596252, guid: 7babbc54056405d44a273c371d1cd741, type: 3}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillEffect
+      value: 
+      objectReference: {fileID: 1096327089596252, guid: 7babbc54056405d44a273c371d1cd741, type: 3}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: damage.Array.size
       value: 1

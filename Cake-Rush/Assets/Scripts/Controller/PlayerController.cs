@@ -10,6 +10,7 @@ public class PlayerController : UnitBase
     private Lightning lightning;
     private ShootingStar shootingStar;
     private Build build;
+    private bool isSkill;
     PhotonView PV;
     
     protected override void Awake()
@@ -28,32 +29,57 @@ public class PlayerController : UnitBase
 
     protected override void Update()
     {
-        if(PV.IsMine)
-        {
-            base.Update();
+        base.Update();
 
-            if (isSelected == false) return;
-            if (Input.GetKey(KeyCode.Q))             //Lightning
-            {
-                StartCoroutine(Lightning());
-            }
-            else if (Input.GetKey(KeyCode.W))        //Coke shot
-            {
-                StartCoroutine(CokeShot());
-            }
-            else if (Input.GetKey(KeyCode.E))        //Shooting star
-            {
-                ShootingStar();
-            }
-            else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
-            {
-                CakeRush();
-            }
-            else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
-            {
-                StartCoroutine(BuildMode());
-            }
+        //if (isSelected == false && !isSkill) return;
+
+        if (Input.GetKey(KeyCode.Q))             //Lightning
+        {
+            StartCoroutine(Lightning());
         }
+        else if (Input.GetKey(KeyCode.W))        //Coke shot
+        {
+            StartCoroutine(CokeShot());
+        }
+        else if (Input.GetKey(KeyCode.E))        //Shooting star
+        {
+            ShootingStar();
+        }
+        else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
+        {
+            CakeRush();
+        }
+        else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
+        {
+            StartCoroutine(BuildMode());
+        }
+
+        //if (PV.IsMine)
+        //{
+        //    base.Update();
+
+        //    if (isSelected == false) return;
+        //    if (Input.GetKey(KeyCode.Q))             //Lightning
+        //    {
+        //        StartCoroutine(Lightning());
+        //    }
+        //    else if (Input.GetKey(KeyCode.W))        //Coke shot
+        //    {
+        //        StartCoroutine(CokeShot());
+        //    }
+        //    else if (Input.GetKey(KeyCode.E))        //Shooting star
+        //    {
+        //        ShootingStar();
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
+        //    {
+        //        CakeRush();
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
+        //    {
+        //        StartCoroutine(BuildMode());
+        //    }
+        //}
     }
 
     protected override void Attack (Transform target)
@@ -129,14 +155,19 @@ public class PlayerController : UnitBase
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("check");
+
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
+            StopCoroutine("Move");
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
-                shootingStar.UseSkill(shootingStar.level, Vector3.zero);
+                Quaternion originRot = transform.rotation;
+                shootingStar.UseSkill(shootingStar.level, originRot.eulerAngles);
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
         }

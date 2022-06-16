@@ -10,14 +10,16 @@ public class Lightning : SkillBase
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            Debug.Log("³«·Ú");
-            Factor(unit);
+            Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
         {
             return;
         }
+
+        Debug.Log("³«·Ú");
+        Factor(unit);
     }
 
     private void Factor<T>(T unit) where T : CharacterBase

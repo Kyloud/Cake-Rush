@@ -22,9 +22,7 @@ public class SkillStat
             yield return null;
         }
 
-        Debug.Log("CoolTime");
-
-        Debug.Log(isCoolTime);
+        Debug.Log($"CoolTime : {currentCoolTime}");
 
         isCoolTime = false;
         currentCoolTime = 0;
@@ -34,6 +32,7 @@ public class SkillStat
 public class SkillBase : MonoBehaviour
 {
     [SerializeField] protected SkillStat[] skillStat;
+    [SerializeField] protected GameObject skillEffect;
 
     public float range { get; set; }
     public int level { get; set; }
@@ -42,6 +41,7 @@ public class SkillBase : MonoBehaviour
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
+            Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
