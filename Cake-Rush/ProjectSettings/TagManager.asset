@@ -9,6 +9,8 @@ TagManager:
   - Team_1
   - Team_2
   - Ground_Stone
+  - Bullet
+  - Build
   layers:
   - Default
   - TransparentFX

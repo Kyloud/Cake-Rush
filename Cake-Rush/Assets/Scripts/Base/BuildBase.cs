@@ -7,12 +7,13 @@ public class BuildBase : EntityBase
 {
     public GameObject buildEffect;
     public bool isSpawned;
-        
+    
     private int[] returnCost;
     
     [SerializeField] Material blueprintMat;
     [SerializeField] Material originMat;
     Renderer render;
+
     protected override void Awake()
     {
         render = gameObject.GetComponentInChildren<Renderer>();
@@ -41,7 +42,7 @@ public class BuildBase : EntityBase
     {   
         buildEffect.SetActive(true);
         gameObject.layer = LayerMask.NameToLayer("Selectable");
-        //gameObject.tag = "Build";
+        gameObject.tag = "Build";
         Debug.Log("Start Coroutine Build()");
         while (curHp < maxHp )
         {
