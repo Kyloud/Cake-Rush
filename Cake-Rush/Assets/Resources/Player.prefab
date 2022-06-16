@@ -5220,7 +5220,6 @@ MonoBehaviour:
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   defensive: 0
-  spawnTime: 0
   Marker: {fileID: 1760859321}
   isSelected: 0
   isActive: 0
@@ -5228,7 +5227,6 @@ MonoBehaviour:
   cakeRush: {fileID: 2102197652}
   teamCamera: {fileID: 0}
   rangeView: {fileID: 0}
-  cookieHouse: {fileID: 1321768382332557657, guid: 53c7ad6e6022e4fd3940719b6940d60e, type: 3}
 --- !u!195 &5151919943443715773
 NavMeshAgent:
   m_ObjectHideFlags: 0
