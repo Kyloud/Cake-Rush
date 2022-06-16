@@ -24,6 +24,8 @@ public class PlayerController : UnitBase
         PV = GetComponent<PhotonView>();
         base.Awake();
         SkillInit();
+
+        attackRange = 30f;
     }
 
     protected override void Update()

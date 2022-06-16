@@ -15,8 +15,8 @@ public class MobController : CharacterBase
         base.Awake();
         originPos = transform.position;
         state = State.idle;
-        distanceToHomebase = 100f;
-        attackRange = 8f;
+        distanceToHomebase = 120f;
+        attackRange = 30f;
         moveSpeed = 4f;
         second = new WaitForSeconds(1);
         maxHp = 100;
@@ -93,6 +93,7 @@ public class MobController : CharacterBase
 
           if(attackRange >= (target.position - transform.position).sqrMagnitude)
           {
+                transform.LookAt(target);
                target.GetComponent<UnitBase>().Hit(damage);
                yield return second;
           }
@@ -110,7 +111,7 @@ public class MobController : CharacterBase
     {
 
         //check, is it out homebase
-        if(distanceToHomebase < (originPos - transform.position).sqrMagnitude || distanceToHomebase < (originPos - target.position).sqrMagnitude)
+        if(distanceToHomebase < Vector3.Distance(originPos, transform.position)|| distanceToHomebase < Vector3.Distance(originPos, target.position))
         {
             state = State.reset;
         }
@@ -118,7 +119,8 @@ public class MobController : CharacterBase
         //check is target in my attack range
         if(attackRange < (target.position - transform.position).sqrMagnitude)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            navMashAgent.SetDestination(target.position);
+            //transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
             transform.LookAt(target.position);
         }
         else
@@ -126,6 +128,7 @@ public class MobController : CharacterBase
             //in range
             if(state != State.attack)
             {
+                navMashAgent.ResetPath();
                 state = State.attack;
                 StartCoroutine("Attack");
             }
@@ -137,7 +140,9 @@ public class MobController : CharacterBase
         //0.1f is move mistake proofread
         if(0.1f < (originPos - transform.position).sqrMagnitude)
         {
-            transform.position = Vector3.MoveTowards(transform.position, originPos, moveSpeed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, originPos, moveSpeed * Time.deltaTime);
+
+            navMashAgent.SetDestination(target.position);
             transform.LookAt(originPos);
         }
         else
