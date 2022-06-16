@@ -21,6 +21,7 @@ public class PlayerController : UnitBase
         lightning = GetComponent<Lightning>();
         cokeShot = GetComponent<CokeShot>();
         build = GetComponent<Build>();
+        PV = GetComponent<PhotonView>();
         base.Awake();
         SkillInit();
     }
