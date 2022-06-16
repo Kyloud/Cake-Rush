@@ -15,12 +15,8 @@ public class MobController : CharacterBase
         base.Awake();
         originPos = transform.position;
         state = State.idle;
-        distanceToHomebase = 120f;
-        attackRange = 30f;
-        moveSpeed = 4f;
+        distanceToHomebase = eyeSight;
         second = new WaitForSeconds(1);
-        maxHp = 100;
-        curHp = 100;
         //target = null;
     }
 
@@ -79,6 +75,7 @@ public class MobController : CharacterBase
         base.Die();
         animator.SetTrigger("Die");
         state = State.die;
+        Destroy(gameObject, 3f);
     }
 
     protected IEnumerator Attack()
@@ -107,7 +104,7 @@ public class MobController : CharacterBase
     }
 
     //move function for trace
-    protected void Move()
+    protected virtual void Move()
     {
 
         //check, is it out homebase
@@ -121,7 +118,7 @@ public class MobController : CharacterBase
         {
             navMashAgent.SetDestination(target.position);
             //transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-            transform.LookAt(target.position);
+            //transform.LookAt(target.position);
         }
         else
         {
@@ -142,8 +139,8 @@ public class MobController : CharacterBase
         {
             //transform.position = Vector3.MoveTowards(transform.position, originPos, moveSpeed * Time.deltaTime);
 
-            navMashAgent.SetDestination(target.position);
-            transform.LookAt(originPos);
+            navMashAgent.SetDestination(originPos);
+            //transform.LookAt(originPos);
         }
         else
         {
@@ -154,12 +151,10 @@ public class MobController : CharacterBase
 
     public virtual void Hit(float hitDamage, Transform attacker)
     {
-        Debug.Log("Hit");
         base.Hit(hitDamage);
 
         if (state != State.attack)
         {
-            Debug.Log("반격");
             state = State.attack;
             target = attacker;
             StartCoroutine(Attack());
