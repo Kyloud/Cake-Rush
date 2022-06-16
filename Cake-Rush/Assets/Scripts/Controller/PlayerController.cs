@@ -151,11 +151,8 @@ public class PlayerController : UnitBase
         string curBuildName = null;   
 
         yield return null;
-        
         while(true)
         {
-            
-
             if(go != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
