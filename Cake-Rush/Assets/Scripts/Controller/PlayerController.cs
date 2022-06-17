@@ -129,7 +129,10 @@ public class PlayerController : UnitBase
 
                 navMashAgent.Stop();
                 animator.SetBool("Move", false);
-                lightning.UseSkill(lightning.level, hit.collider.GetComponent<CharacterBase>());
+                animator.SetTrigger("Lightning");
+                lightning.UseSkill(lightning.level, hit.collider);
+
+                animator.SetBool("Idle", true);
             }
         }
     }
@@ -163,11 +166,14 @@ public class PlayerController : UnitBase
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
+            StopCoroutine("Move");
+
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
-                shootingStar.UseSkill(shootingStar.level, Vector3.zero);
+                Quaternion originRot = transform.rotation;
+                shootingStar.UseSkill(shootingStar.level, originRot.eulerAngles);
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
         }
