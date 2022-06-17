@@ -12,7 +12,7 @@ public class ShootingStar : SkillBase
         angleRange = 60f;
     }
 
-    public void UseSkill(int skillLevel, Vector3 point)
+    public override void UseSkill(int skillLevel, Vector3 point)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
