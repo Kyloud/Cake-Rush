@@ -32,12 +32,18 @@ public class EntityBase : MonoBehaviourPunCallbacks
 
     public bool isSelected;
     public bool isActive;
+
+    public Material outLine;
     #endregion
 
     protected virtual void Awake()
     {
         Marker = transform.Find("Marker").gameObject;
+        Marker.transform.localPosition = Vector3.zero;
+        Marker.SetActive(false);
         rtsController = GameObject.Find("RTSManager").GetComponent<RTSController>();
+        outLine = Resources.Load<Material>("Materials/Outline");
+        outLine.SetFloat("_OutlineWidth", 0f);
         Init();
     }
 
@@ -80,13 +86,15 @@ public class EntityBase : MonoBehaviourPunCallbacks
         stat = JsonUtility.FromJson<Data.Stat>(dataFile.text);
     }
     public void Select()
-	{
+    {
+        outLine.SetFloat("_OutlineWidth", 3f);
         isSelected = true;
 		Marker.SetActive(true);
 	}
     
 	public void Deselect()
-	{
+    {
+        outLine.SetFloat("_OutlineWidth", 0f);
         isSelected = false;
         Marker.SetActive(false);
 	}

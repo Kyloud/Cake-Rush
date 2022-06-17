@@ -5,19 +5,23 @@ using UnityEngine;
 public class Build : MonoBehaviour
 {
     [SerializeField] public GameObject cookieHouseObj;
-    [SerializeField] public GameObject costBuildObj;
-    public string cookieHouseName;
-    public string costBuildName;
+    [SerializeField] public GameObject sugarMinerObj;
+    [SerializeField] public GameObject chocolateMinerObj;
 
+    public string cookieHouseName;
+    public string sugerMinerName;
+    public string chocolateMinerName;
     [SerializeField] public bool isBuildMode;
 
     void Awake()
     {
         isBuildMode = false;
         if(cookieHouseObj == null) cookieHouseObj = Resources.Load<GameObject>("Prefabs/CookieHouse");
-        if(costBuildObj == null) costBuildObj = Resources.Load<GameObject>("Prefabs/CostBuild");
-        
+        if(sugarMinerObj == null) sugarMinerObj = Resources.Load<GameObject>("Prefabs/SugarMiner");
+        if(chocolateMinerObj == null) chocolateMinerObj = Resources.Load<GameObject>("Prefabs/ChocolateMiner");
+
         if(cookieHouseObj != null) cookieHouseName = cookieHouseObj.name;
-        if(costBuildObj != null) costBuildName = costBuildObj.name;       
+        if(sugarMinerObj != null) sugerMinerName = sugarMinerObj.name;
+        if(chocolateMinerObj != null) chocolateMinerName = chocolateMinerObj.name;
     }
 }

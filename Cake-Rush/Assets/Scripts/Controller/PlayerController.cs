@@ -24,8 +24,6 @@ public class PlayerController : UnitBase
         PV = GetComponent<PhotonView>();
         base.Awake();
         SkillInit();
-
-        attackRange = 30f;
     }
 
     protected override void Update()
@@ -211,28 +209,33 @@ public class PlayerController : UnitBase
                     yield break;
                 }
             }
-            
+
             //Input
-            if(go == null)
+            if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.sugerMinerName)
             {
-                if(Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
-                {
-                    go = Instantiate(build.cookieHouseObj);
-                    curBuildName = build.cookieHouseName;
-                    buildBase = go.GetComponent<BuildBase>();
-                }
-                else if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.costBuildName)
-                {
-                    go = Instantiate(build.cookieHouseObj);
-                    curBuildName = build.costBuildName;
-                    buildBase = go.GetComponent<BuildBase>();
-                }
+
+                go = Instantiate(build.sugarMinerObj);
+                curBuildName = build.sugerMinerName;
+                buildBase = go.GetComponent<BuildBase>();
             }
-            
-            if(Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
+            {
+                go = Instantiate(build.cookieHouseObj);
+                curBuildName = build.cookieHouseName;
+                buildBase = go.GetComponent<BuildBase>();
+            }
+
+            if (Input.GetKeyDown(KeyCode.D) && curBuildName != build.chocolateMinerName)
+            {
+                go = Instantiate(build.chocolateMinerObj);
+                curBuildName = build.chocolateMinerName;
+                buildBase = go.GetComponent<BuildBase>();
+            }
+
+            if (Input.GetKeyDown(KeyCode.B))
             {
                 Debug.Log("Stop BuildMode");
-                if(go != null)
+                if (go != null)
                 {
                     Destroy(go);
                     Debug.Log("Build Canceled");
