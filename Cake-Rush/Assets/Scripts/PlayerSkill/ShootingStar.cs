@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class ShootingStar : SkillBase
 {
     public float stunTime { get; set; }
     private float angleRange;
-
+    [SerializeField] private Transform skillPos;
     private void Awake()
     {
         angleRange = 60f;
@@ -16,22 +17,30 @@ public class ShootingStar : SkillBase
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            StopAllCoroutines();
-
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
+            Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
-
-            if (colliders.Length < 2)
-            {
-                return;
-            }
-
-            SectorColision(colliders);
         }
         else
         {
             return;
         }
+
+        //StopAllCoroutines();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
+
+        point.y -= 60;
+
+        for (int i = -30; i <= 30; i += 10)
+        {
+            Instantiate(skillEffect, skillPos.position, Quaternion.Euler(0, point.y - i, 0));
+        }
+
+        if (colliders.Length < 2)
+        {
+            return;
+        }
+
+        SectorColision(colliders);
     }
 
     public void SectorColision(Collider[] colliders)
@@ -57,5 +66,11 @@ public class ShootingStar : SkillBase
         unit = unit as T;
 
         StartCoroutine(unit.Stun(stunTime));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
     }
 }

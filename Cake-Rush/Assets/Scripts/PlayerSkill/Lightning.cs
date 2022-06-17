@@ -6,18 +6,21 @@ public class Lightning : SkillBase
 {
     public float[] damage;
 
-    public void UseSkill(int skillLevel, CharacterBase unit)
+    public void UseSkill(int skillLevel, Collider unit)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            Debug.Log("³«·Ú");
-            Factor(unit);
+            Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
         {
             return;
         }
+
+        Debug.Log("³«·Ú");
+        Instantiate(skillEffect, unit.transform.position, Quaternion.Euler(-90, 0, 0));
+        Factor(unit.GetComponent<CharacterBase>());
     }
 
     private void Factor<T>(T unit) where T : CharacterBase
