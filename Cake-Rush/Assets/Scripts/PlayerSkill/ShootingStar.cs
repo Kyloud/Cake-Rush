@@ -6,7 +6,7 @@ public class ShootingStar : SkillBase
 {
     public float stunTime { get; set; }
     private float angleRange;
-    [SerializeField] private Transform skill;
+    [SerializeField] private Transform skillPos;
     private void Awake()
     {
         angleRange = 60f;
@@ -31,7 +31,7 @@ public class ShootingStar : SkillBase
 
         for (int i = -30; i <= 30; i += 10)
         {
-            Instantiate(skillEffect, skill.position, Quaternion.Euler(0, point.y - i, 0));
+            Instantiate(skillEffect, skillPos.position, Quaternion.Euler(0, point.y - i, 0));
         }
 
         if (colliders.Length < 2)
