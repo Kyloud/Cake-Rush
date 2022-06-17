@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class ShootingStar : SkillBase
 {
@@ -65,5 +66,11 @@ public class ShootingStar : SkillBase
         unit = unit as T;
 
         StartCoroutine(unit.Stun(stunTime));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
     }
 }

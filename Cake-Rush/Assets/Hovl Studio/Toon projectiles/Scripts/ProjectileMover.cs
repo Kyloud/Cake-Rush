@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProjectileMover : MonoBehaviour
 {
-    private float speed = 15f;
+    private float speed = 5f;
     public float hitOffset = 0f;
     public bool UseFirePointRotation;
     public Vector3 rotationOffset = new Vector3(0, 0, 0);
@@ -31,7 +31,7 @@ public class ProjectileMover : MonoBehaviour
                 Destroy(flashInstance, flashPsParts.main.duration);
             }
         }
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 2f);
 	}
 
     void FixedUpdate ()

@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1637940688551827405, guid: ee3ebea9e465e48c0b9be47af9da1bf9, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1637940688551827405, guid: ee3ebea9e465e48c0b9be47af9da1bf9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -369,7 +369,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668605864
 GameObject:
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466625055773112646, guid: 4d34abc213483b84db4ff85e9a46d235, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 466625055773112646, guid: 4d34abc213483b84db4ff85e9a46d235, type: 3}
       propertyPath: m_LocalScale.x
@@ -588,13 +588,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829794011}
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 17, z: -15}
+  m_LocalRotation: {x: 0.49999973, y: -0, z: -0, w: 0.8660256}
+  m_LocalPosition: {x: 0, y: 13.24343, z: -16.00657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &829794015
 MonoBehaviour:
@@ -1003,7 +1003,7 @@ Transform:
   - {fileID: 2135286120}
   - {fileID: 1147298688}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1430166979
 PrefabInstance:
@@ -1259,7 +1259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68751289501283796, guid: d7d03bc6c503745129fc8dc6f3f6eb28, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 68751289501283796, guid: d7d03bc6c503745129fc8dc6f3f6eb28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1474,6 +1474,10 @@ PrefabInstance:
       propertyPath: m_Size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2102197652, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillEffect
+      value: 
+      objectReference: {fileID: 1425074980054608, guid: 0e2584f719d5fdb43a43959102877739, type: 3}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skill
       value: 
@@ -1489,7 +1493,7 @@ PrefabInstance:
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillEffect
       value: 
-      objectReference: {fileID: 1096327089596252, guid: 7babbc54056405d44a273c371d1cd741, type: 3}
+      objectReference: {fileID: 1126996352987422, guid: cc0cfe1ce1ac63f4e9f68b166a8d799f, type: 3}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: damage.Array.size
       value: 1
@@ -1512,6 +1516,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[2].coolTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillEffect
+      value: 
+      objectReference: {fileID: 1471765515281312, guid: 7fd2df3c67ca726469634147476bb7fd, type: 3}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.data[0]
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}

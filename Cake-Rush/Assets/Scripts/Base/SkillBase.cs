@@ -22,8 +22,6 @@ public class SkillStat
             yield return null;
         }
 
-        Debug.Log($"CoolTime : {currentCoolTime}");
-
         isCoolTime = false;
         currentCoolTime = 0;
     }

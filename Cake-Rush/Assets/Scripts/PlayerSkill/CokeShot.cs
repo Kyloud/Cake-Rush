@@ -12,7 +12,7 @@ public class CokeShot : SkillBase
     private WaitForSeconds delayTime;
 
     [SerializeField] private float[] damage;
-
+    Vector3 pos;
     private void Awake()
     {
         delayTime = new WaitForSeconds(DELAY);
@@ -23,6 +23,7 @@ public class CokeShot : SkillBase
         if (!skillStat[skillLevel].isCoolTime)
         {
             Debug.Log("Check");
+            pos = point;
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
@@ -36,7 +37,9 @@ public class CokeShot : SkillBase
 
     private IEnumerator SkillActive(Vector3 point)
     {
-        while(currentHoldTime >= 0)
+        GameObject temp = Instantiate(skillEffect, point, Quaternion.Euler(0, 1, 0));
+
+        while (currentHoldTime >= 0)
         {
             Collider[] overlapShpere = Physics.OverlapSphere(point, radius, GameProgress.instance.selectableLayer);
             
@@ -45,6 +48,8 @@ public class CokeShot : SkillBase
 
             yield return delayTime;
         }
+
+        Destroy(temp);
     }
 
     private void Factor (Collider[] colliders)
@@ -59,6 +64,12 @@ public class CokeShot : SkillBase
             Debug.Log($"{colliders[i].name} Coke Shot");
             colliders[i].GetComponent<CharacterBase>().Hit(damage[level]);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(pos, 4f);
     }
 }
 
