@@ -1,23 +1,23 @@
 {
-    "hp": 40,
-    "damage": 10,
-    "attackSpeed": 1,
-    "attackRange": 10,
-    "returnExp": 10,
-    "eyeSight": 4.5,
-    "cost":
-    [
-      0,
-      0,
-      0
-    ],
-    "dropCost": 
-    [
-      50,
-      50,
-      50
-    ],
-    "defensive": 0,
-    "spawnTime": 0,
-    "moveSpeed": 5
+  "hp": 40,
+  "damage": 5,
+  "attackSpeed": 5,
+  "attackRange": 10,
+  "returnExp": 10,
+  "eyeSight": 5.5,
+  "cost":
+  [
+    5,
+    3,
+    0
+  ],
+  "dropCost": 
+  [
+    0,
+    0,
+    0
+  ],
+  "defensive": 0,
+  "spawnTime": 5,
+  "moveSpeed": 18
 }
