@@ -5101,10 +5101,7 @@ MonoBehaviour:
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  outLine: {fileID: 0}
   state: 0
   cakeRush: {fileID: 2102197652}
   teamCamera: {fileID: 0}
@@ -5187,6 +5184,7 @@ MonoBehaviour:
     currentCoolTime: 0
     isCoolTime: 0
   skillEffect: {fileID: 0}
+  angleRange: []
   skillPos: {fileID: 0}
 --- !u!114 &2102197665
 MonoBehaviour:
