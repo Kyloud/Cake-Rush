@@ -65,8 +65,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9a0296e6a88186d46892c3515d6092d7, type: 2}
   - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
+  - {fileID: 2100000, guid: 9a0296e6a88186d46892c3515d6092d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321768382332557657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72064275e45464cb4b4292728f95a6b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 825ab9c92738e5548be66ad7d75da7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curHp: 0
@@ -123,19 +123,18 @@ MonoBehaviour:
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   defensive: 0
-  Marker: {fileID: 0}
+  Marker: {fileID: 5286306832804198091}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
+  outLine:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   buildEffect: {fileID: 3224557958020540304}
   isSpawned: 0
-  blueprintMat: {fileID: 0}
+  blueprintMat: {fileID: 2100000, guid: 628599ac8d1ed47239b295ae9b16aaf1, type: 2}
   originMat: {fileID: 0}
-  units:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  isOnBuild: 0
 --- !u!1 &3224557958020540304
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,5 +300,10 @@ PrefabInstance:
 --- !u!4 &5281475906238216439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
+  m_PrefabInstance: {fileID: 5285593661189274229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5286306832804198091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1846493769993406, guid: 47128cd26267f7646bc0794052d94624, type: 3}
   m_PrefabInstance: {fileID: 5285593661189274229}
   m_PrefabAsset: {fileID: 0}

@@ -11497,7 +11497,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076866524}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b4e78b680b3644ef8d1ac11216cde43, type: 3}
   m_Name: 
@@ -11515,11 +11515,12 @@ MonoBehaviour:
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
+  outLine: []
   buildEffect: {fileID: 0}
   isSpawned: 0
   blueprintMat: {fileID: 0}
   originMat: {fileID: 0}
+  isOnBuild: 0
 --- !u!208 &1285545073
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -12104,7 +12105,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351178913}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b4e78b680b3644ef8d1ac11216cde43, type: 3}
   m_Name: 
@@ -12122,11 +12123,12 @@ MonoBehaviour:
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
+  outLine: []
   buildEffect: {fileID: 0}
   isSpawned: 0
   blueprintMat: {fileID: 0}
   originMat: {fileID: 0}
+  isOnBuild: 0
 --- !u!208 &1351178918
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -15883,7 +15885,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5151919943443715713, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
   m_PrefabInstance: {fileID: 1529453028}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115224813}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7564c00a2efbe2446abf5b1000374faa, type: 3}
@@ -17796,30 +17798,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101783542}
   m_Mesh: {fileID: 4300000, guid: de3258c27e8be4cb19e096cb6b23f46f, type: 3}
---- !u!1 &2115224813 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5150835717301315730, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
-  m_PrefabInstance: {fileID: 1529453028}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2115224827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115224813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6121d21a26a4441d880a2f6498708e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cookieHouseObj: {fileID: 0}
-  sugarMinerObj: {fileID: 0}
-  chocolateMinerObj: {fileID: 0}
-  cookieHouseName: 
-  sugerMinerName: 
-  chocolateMinerName: 
-  isBuildMode: 0
 --- !u!1 &2120958591
 GameObject:
   m_ObjectHideFlags: 0

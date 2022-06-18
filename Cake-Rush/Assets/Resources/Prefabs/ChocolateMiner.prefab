@@ -65,9 +65,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: f37dcdb250ebb0845912a568b7185d73, type: 2}
   - {fileID: 2100000, guid: bdd7ec86eb9b03c4b9cd422d4616f9d5, type: 2}
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,11 +127,13 @@ MonoBehaviour:
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
+  outLine:
+  - {fileID: 0}
   buildEffect: {fileID: 3224557958020540304}
   isSpawned: 0
-  blueprintMat: {fileID: 0}
+  blueprintMat: {fileID: 2100000, guid: 628599ac8d1ed47239b295ae9b16aaf1, type: 2}
   originMat: {fileID: 0}
+  isOnBuild: 0
 --- !u!1 &3224557958020540304
 GameObject:
   m_ObjectHideFlags: 0
