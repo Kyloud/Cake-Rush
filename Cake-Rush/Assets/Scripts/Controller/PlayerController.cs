@@ -30,24 +30,34 @@ public class PlayerController : UnitBase
     {
         base.Update();
 
-        if (isSelected == false) return;
+        if (isSelected == false && rtsController.isSkill == false) return;
+
         if (Input.GetKey(KeyCode.Q))             //Lightning
         {
             StartCoroutine(Lightning());
+            GameManager.instance.rtsController.isSkill = true;
         }
         else if (Input.GetKey(KeyCode.W))        //Coke shot
         {
             StartCoroutine(CokeShot());
+            GameManager.instance.rtsController.isSkill = true;
         }
         else if (Input.GetKey(KeyCode.E))        //Shooting star
         {
             ShootingStar();
+            GameManager.instance.rtsController.isSkill = true;
         }
         else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
         {
             CakeRush();
+            GameManager.instance.rtsController.isSkill = true;
         }
-        else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
+        else
+        {
+            rtsController.isSkill = false;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
         {
             StartCoroutine(BuildMode());
         }
@@ -128,8 +138,11 @@ public class PlayerController : UnitBase
                 }
 
                 navMashAgent.Stop();
-                animator.SetBool("Move", false);
                 animator.SetTrigger("Lightning");
+                yield return new WaitForSeconds(0.2f);
+                
+                animator.SetBool("Move", false);
+                state = CharacterState.Idle;
                 lightning.UseSkill(lightning.level, hit.collider);
 
                 animator.SetBool("Idle", true);
@@ -152,9 +165,8 @@ public class PlayerController : UnitBase
                     yield return null;
                 }
 
-                navMashAgent.Stop();
-                animator.SetBool("Move", false);
                 cokeShot.UseSkill(cokeShot.level, hit.point);
+                StopMove();
             }
         }
     }
@@ -173,7 +185,9 @@ public class PlayerController : UnitBase
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
                 Quaternion originRot = transform.rotation;
+                
                 shootingStar.UseSkill(shootingStar.level, originRot.eulerAngles);
+                StopMove();
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
         }
@@ -182,6 +196,13 @@ public class PlayerController : UnitBase
     private void CakeRush()
     {
         cakeRush.UseSkill(cakeRush.level);
+    }
+
+    private void StopMove()
+    {
+        navMashAgent.Stop();
+        animator.SetBool("Move", false);
+        state = CharacterState.Idle;
     }
 
     private IEnumerator BuildMode()

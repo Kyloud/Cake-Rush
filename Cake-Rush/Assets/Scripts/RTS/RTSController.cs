@@ -22,7 +22,7 @@ public class RTSController : MonoBehaviour
 
 	//sugar chocolate, wheat
 	public int[] cost = new int[3];
-    
+	public bool isSkill;
 	void Awake()
 	{
 		GameObject clickEffectObject = Instantiate(clickEffectPrefab);
@@ -39,7 +39,7 @@ public class RTSController : MonoBehaviour
 	void Click()
 	{
 		// When there is an object hitting the ray (= clicking on the unit)
-		if ( Input.GetMouseButtonDown(0) )
+		if ( Input.GetMouseButtonDown(0))
 		{
 			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -62,14 +62,12 @@ public class RTSController : MonoBehaviour
 					selectedEntity.Deselect();	
 					selectedEntity = null;
 				}
-				
-			
 			}
 				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 				return;
 		}
 		// move units by right-clicking
-		else if (Input.GetMouseButtonDown(1) && selectedEntity != null)
+		else if (Input.GetMouseButtonDown(1) && selectedEntity != null && isSkill == false)
 		{
 			RaycastHit	hit;
 			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);

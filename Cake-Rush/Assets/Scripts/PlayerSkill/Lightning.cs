@@ -5,6 +5,10 @@ using UnityEngine;
 public class Lightning : SkillBase
 {
     public float[] damage;
+    protected override void Awake()
+    {
+        skillEffect = Resources.Load<GameObject>("Effect/Skill/Lightning");
+    }
 
     public void UseSkill(int skillLevel, Collider unit)
     {

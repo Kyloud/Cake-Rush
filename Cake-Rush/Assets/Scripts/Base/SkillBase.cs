@@ -32,6 +32,11 @@ public class SkillBase : MonoBehaviour
     [SerializeField] protected SkillStat[] skillStat;
     [SerializeField] protected GameObject skillEffect;
 
+    protected virtual void Awake()
+    {
+
+    }
+
     public float range { get; set; }
     public int level { get; set; }
 

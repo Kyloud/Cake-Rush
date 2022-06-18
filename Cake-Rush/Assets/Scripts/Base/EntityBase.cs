@@ -41,7 +41,7 @@ public class EntityBase : MonoBehaviourPunCallbacks
         Marker = transform.Find("Marker").gameObject;
         Marker.transform.localPosition = Vector3.zero;
         Marker.SetActive(false);
-        rtsController = GameObject.Find("RTSManager").GetComponent<RTSController>();
+        rtsController = GameManager.instance.rtsController;
         outLine = Resources.Load<Material>("Materials/Outline");
         outLine.SetFloat("_OutlineWidth", 0f);
         Init();

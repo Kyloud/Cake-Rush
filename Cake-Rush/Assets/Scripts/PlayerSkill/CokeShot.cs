@@ -13,9 +13,10 @@ public class CokeShot : SkillBase
 
     [SerializeField] private float[] damage;
     Vector3 pos;
-    private void Awake()
+    protected override void Awake()
     {
         delayTime = new WaitForSeconds(DELAY);
+        skillEffect = Resources.Load<GameObject>("Effect/Skill/CokeShot");
     }
 
     public override void UseSkill(int skillLevel, Vector3 point)

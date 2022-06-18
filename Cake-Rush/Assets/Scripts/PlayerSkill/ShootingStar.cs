@@ -6,18 +6,18 @@ using UnityEditor;
 public class ShootingStar : SkillBase
 {
     public float stunTime { get; set; }
-    private float angleRange;
+    [SerializeField] private float []angleRange;
     [SerializeField] private Transform skillPos;
-    private void Awake()
+
+    protected override void Awake()
     {
-        angleRange = 60f;
+        skillEffect = Resources.Load<GameObject>("Effect/Skill/ShootingStar");
     }
 
     public override void UseSkill(int skillLevel, Vector3 point)
     {
         if (!skillStat[skillLevel].isCoolTime)
         {
-            Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
@@ -25,12 +25,11 @@ public class ShootingStar : SkillBase
             return;
         }
 
-        //StopAllCoroutines();
         Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
 
-        point.y -= 60;
+        point.y -= 90;
 
-        for (int i = -30; i <= 30; i += 10)
+        for (int i = (int) -angleRange[skillLevel] / 2; i <= (int)angleRange[skillLevel] / 2; i += 10)
         {
             Instantiate(skillEffect, skillPos.position, Quaternion.Euler(0, point.y - i, 0));
         }
@@ -48,7 +47,7 @@ public class ShootingStar : SkillBase
         Vector3 dirction;
         float dotValue;
 
-        dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
+        dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange[level] / 2));
 
         for(int i = 0; i < colliders.Length; i++)
         {
@@ -70,7 +69,7 @@ public class ShootingStar : SkillBase
 
     private void OnDrawGizmos()
     {
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, range);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange[level] / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange[level] / 2, range);
     }
 }
