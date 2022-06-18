@@ -15,16 +15,14 @@ public class MobController : CharacterBase
         base.Awake();
         originPos = transform.position;
         state = State.idle;
-        distanceToHomebase = 100f;
-        attackRange = 8f;
-        moveSpeed = 4f;
-        second = new WaitForSeconds(1);;
+        distanceToHomebase = eyeSight;
+        second = new WaitForSeconds(1);
         //target = null;
     }
 
     public enum State
     {
-        idle, attack, move, reset, retargeting
+        idle, attack, move, reset, retargeting, die
     }
 
     [SerializeField]
@@ -49,13 +47,7 @@ public class MobController : CharacterBase
     {
         switch(state)
         {
-            case State.idle:
-                Idle();
-                break;
-
             case State.attack:
-                
-        
                 break;
 
             case State.move:
@@ -72,13 +64,18 @@ public class MobController : CharacterBase
 
             default:
                 break;
-
         }
+
+        animator.SetBool("Attack", state == State.attack);
+        animator.SetBool("Move", state == State.move || state == State.reset);
     }
 
-    protected void Idle()
+    protected override void Die()
     {
-        //play IDLE animation
+        base.Die();
+        animator.SetTrigger("Die");
+        state = State.die;
+        Destroy(gameObject, 3f);
     }
 
     protected IEnumerator Attack()
@@ -93,24 +90,25 @@ public class MobController : CharacterBase
 
           if(attackRange >= (target.position - transform.position).sqrMagnitude)
           {
+                transform.LookAt(target);
                target.GetComponent<UnitBase>().Hit(damage);
                yield return second;
-           }
-            else
-           {
+          }
+          else
+          {
                state = State.move;
                break;
-           }
+          }
 
         }
     }
 
     //move function for trace
-    protected void Move()
+    protected virtual void Move()
     {
 
         //check, is it out homebase
-        if(distanceToHomebase < (originPos - transform.position).sqrMagnitude || distanceToHomebase < (originPos - target.position).sqrMagnitude)
+        if(distanceToHomebase < Vector3.Distance(originPos, transform.position)|| distanceToHomebase < Vector3.Distance(originPos, target.position))
         {
             state = State.reset;
         }
@@ -118,14 +116,16 @@ public class MobController : CharacterBase
         //check is target in my attack range
         if(attackRange < (target.position - transform.position).sqrMagnitude)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-            transform.LookAt(target.position);
+            navMashAgent.SetDestination(target.position);
+            //transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            //transform.LookAt(target.position);
         }
         else
         {
             //in range
             if(state != State.attack)
             {
+                navMashAgent.ResetPath();
                 state = State.attack;
                 StartCoroutine("Attack");
             }
@@ -137,8 +137,10 @@ public class MobController : CharacterBase
         //0.1f is move mistake proofread
         if(0.1f < (originPos - transform.position).sqrMagnitude)
         {
-            transform.position = Vector3.MoveTowards(transform.position, originPos, moveSpeed * Time.deltaTime);
-            transform.LookAt(originPos);
+            //transform.position = Vector3.MoveTowards(transform.position, originPos, moveSpeed * Time.deltaTime);
+
+            navMashAgent.SetDestination(originPos);
+            //transform.LookAt(originPos);
         }
         else
         {
@@ -150,8 +152,8 @@ public class MobController : CharacterBase
     public virtual void Hit(float hitDamage, Transform attacker)
     {
         base.Hit(hitDamage);
-        
-        if(state != State.attack)
+
+        if (state != State.attack)
         {
             state = State.attack;
             target = attacker;

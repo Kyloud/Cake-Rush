@@ -5,7 +5,10 @@ using UnityEngine;
 // 게임 내 Entity를 관리하는 시스템 클래스
 public class RTSController : MonoBehaviour
 {
-    public List<UnitBase> unitList = new List<UnitBase>();
+	[SerializeField] private GameObject clickEffectPrefab;
+	ParticleSystem clickParticle;
+
+	public List<UnitBase> unitList = new List<UnitBase>();
     public List<BuildBase> buildList = new List<BuildBase>();
 	public EntityBase selectedEntity = null;
 	private Camera teamCamera;
@@ -21,7 +24,9 @@ public class RTSController : MonoBehaviour
 	public int[] cost = new int[3];
     
 	void Awake()
-    {
+	{
+		GameObject clickEffectObject = Instantiate(clickEffectPrefab);
+		clickParticle = clickEffectObject.GetComponent<ParticleSystem>();
 		//Find Team Camera
 		teamCamera = Camera.main;
     }
@@ -69,13 +74,12 @@ public class RTSController : MonoBehaviour
 			RaycastHit	hit;
 			Ray	ray = teamCamera.ScreenPointToRay(Input.mousePosition);
 			// When the unit object (layerUnit) is clicked
-			if ( Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity))
 			{
-				if(selectedEntity.GetType() == typeof(UnitBase))
-					selectedEntity.gameObject.GetComponent<UnitBase>().Move(hit.point);
-				
+				clickParticle.gameObject.transform.position = hit.point;
+				clickParticle.Play();
 			}
-				Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
+			Debug.DrawLine(teamCamera.transform.position, hit.point, Color.red, 1f);
 		}
     }
 

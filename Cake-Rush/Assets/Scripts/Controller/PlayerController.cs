@@ -10,7 +10,6 @@ public class PlayerController : UnitBase
     private Lightning lightning;
     private ShootingStar shootingStar;
     private Build build;
-    private bool isSkill;
     PhotonView PV;
     
     protected override void Awake()
@@ -31,8 +30,7 @@ public class PlayerController : UnitBase
     {
         base.Update();
 
-        //if (isSelected == false && !isSkill) return;
-
+        if (isSelected == false) return;
         if (Input.GetKey(KeyCode.Q))             //Lightning
         {
             StartCoroutine(Lightning());
@@ -54,32 +52,32 @@ public class PlayerController : UnitBase
             StartCoroutine(BuildMode());
         }
 
-        //if (PV.IsMine)
-        //{
-        //    base.Update();
+        /*if (PV.IsMine)
+        {
+            base.Update();
 
-        //    if (isSelected == false) return;
-        //    if (Input.GetKey(KeyCode.Q))             //Lightning
-        //    {
-        //        StartCoroutine(Lightning());
-        //    }
-        //    else if (Input.GetKey(KeyCode.W))        //Coke shot
-        //    {
-        //        StartCoroutine(CokeShot());
-        //    }
-        //    else if (Input.GetKey(KeyCode.E))        //Shooting star
-        //    {
-        //        ShootingStar();
-        //    }
-        //    else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
-        //    {
-        //        CakeRush();
-        //    }
-        //    else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
-        //    {
-        //        StartCoroutine(BuildMode());
-        //    }
-        //}
+            if (isSelected == false) return;
+            if (Input.GetKey(KeyCode.Q))             //Lightning
+            {
+                StartCoroutine(Lightning());
+            }
+            else if (Input.GetKey(KeyCode.W))        //Coke shot
+            {
+                StartCoroutine(CokeShot());
+            }
+            else if (Input.GetKey(KeyCode.E))        //Shooting star
+            {
+                ShootingStar();
+            }
+            else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
+            {
+                CakeRush();
+            }
+            else if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
+            {
+                StartCoroutine(BuildMode());
+            }
+        }*/
     }
 
     protected override void Attack (Transform target)
@@ -91,7 +89,14 @@ public class PlayerController : UnitBase
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
 
-        target.GetComponent<EntityBase>().Hit(damage);
+        if(target.CompareTag("Monster"))
+        {
+            target.GetComponent<MobController>().Hit(damage, transform);
+        }
+        else
+        {
+            target.GetComponent<EntityBase>().Hit(damage);
+        }
     }
 
     private void SkillInit()
@@ -128,7 +133,6 @@ public class PlayerController : UnitBase
                 lightning.UseSkill(lightning.level, hit.collider);
 
                 animator.SetBool("Idle", true);
-
             }
         }
     }
@@ -159,8 +163,6 @@ public class PlayerController : UnitBase
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("check");
-
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -213,28 +215,33 @@ public class PlayerController : UnitBase
                     yield break;
                 }
             }
-            
+
             //Input
-            if(go == null)
+            if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.sugerMinerName)
             {
-                if(Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
-                {
-                    go = Instantiate(build.cookieHouseObj);
-                    curBuildName = build.cookieHouseName;
-                    buildBase = go.GetComponent<BuildBase>();
-                }
-                else if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.costBuildName)
-                {
-                    go = Instantiate(build.cookieHouseObj);
-                    curBuildName = build.costBuildName;
-                    buildBase = go.GetComponent<BuildBase>();
-                }
+
+                go = Instantiate(build.sugarMinerObj);
+                curBuildName = build.sugerMinerName;
+                buildBase = go.GetComponent<BuildBase>();
             }
-            
-            if(Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
+            {
+                go = Instantiate(build.cookieHouseObj);
+                curBuildName = build.cookieHouseName;
+                buildBase = go.GetComponent<BuildBase>();
+            }
+
+            if (Input.GetKeyDown(KeyCode.D) && curBuildName != build.chocolateMinerName)
+            {
+                go = Instantiate(build.chocolateMinerObj);
+                curBuildName = build.chocolateMinerName;
+                buildBase = go.GetComponent<BuildBase>();
+            }
+
+            if (Input.GetKeyDown(KeyCode.B))
             {
                 Debug.Log("Stop BuildMode");
-                if(go != null)
+                if (go != null)
                 {
                     Destroy(go);
                     Debug.Log("Build Canceled");

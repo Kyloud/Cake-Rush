@@ -16,12 +16,11 @@ public class BuildBase : EntityBase
 
     protected override void Awake()
     {
-        render = gameObject.GetComponentInChildren<Renderer>();
-        originMat = render.material;
-
         base.Awake();
         if(isSpawned)
         {
+            render = gameObject.GetComponentInChildren<Renderer>();
+            originMat = render.material;
             render.material = blueprintMat;
             curHp = 0f;
             buildEffect = transform.Find("BuildAnim").gameObject;
@@ -58,7 +57,7 @@ public class BuildBase : EntityBase
 
     protected void BuildCancel()
     {
-        // summon effect 
+        // summon effect
         // give player: returnCost / 2
         for(int i = 0; i < 2; i++)
         {
