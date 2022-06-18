@@ -35,22 +35,22 @@ public class PlayerController : UnitBase
         if (Input.GetKey(KeyCode.Q))             //Lightning
         {
             StartCoroutine(Lightning());
-            GameManager.instance.rtsController.isSkill = true;
+            rtsController.isSkill = true;
         }
         else if (Input.GetKey(KeyCode.W))        //Coke shot
         {
             StartCoroutine(CokeShot());
-            GameManager.instance.rtsController.isSkill = true;
+            rtsController.isSkill = true;
         }
         else if (Input.GetKey(KeyCode.E))        //Shooting star
         {
             ShootingStar();
-            GameManager.instance.rtsController.isSkill = true;
+            rtsController.isSkill = true;
         }
         else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
         {
             CakeRush();
-            GameManager.instance.rtsController.isSkill = true;
+            rtsController.isSkill = true;
         }
         else
         {
@@ -207,18 +207,18 @@ public class PlayerController : UnitBase
 
     private IEnumerator BuildMode()
     {
-        if(build.isBuildMode == true) yield break;
+        if (build.isBuildMode == true) yield break;
         Debug.Log("BuildMode");
         build.isBuildMode = true;
         GameObject go = null;
         RaycastHit hit;
         BuildBase buildBase = null;
-        string curBuildName = null;   
+        string curBuildName = null;
 
         yield return null;
-        while(true)
+        while (true)
         {
-            if(go != null)
+            if (go != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -226,7 +226,7 @@ public class PlayerController : UnitBase
                 {
                     go.transform.position = hit.point;
                 }
-                if(Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
+                if (Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
                 {
                     StartCoroutine(buildBase.Build());
                     go = null;
@@ -237,29 +237,29 @@ public class PlayerController : UnitBase
                 }
             }
 
-            //Input
-            if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.sugerMinerName)
-            {
-
-                go = Instantiate(build.sugarMinerObj);
-                curBuildName = build.sugerMinerName;
-                buildBase = go.GetComponent<BuildBase>();
-            }
             if (Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
             {
+                Debug.Log("A");
                 go = Instantiate(build.cookieHouseObj);
                 curBuildName = build.cookieHouseName;
                 buildBase = go.GetComponent<BuildBase>();
             }
-
+            if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.sugerMinerName)
+            {
+                Debug.Log("S");
+                go = Instantiate(build.sugarMinerObj);
+                curBuildName = build.sugerMinerName;
+                buildBase = go.GetComponent<BuildBase>();
+            }
             if (Input.GetKeyDown(KeyCode.D) && curBuildName != build.chocolateMinerName)
             {
+                Debug.Log("D");
                 go = Instantiate(build.chocolateMinerObj);
                 curBuildName = build.chocolateMinerName;
                 buildBase = go.GetComponent<BuildBase>();
             }
 
-            if (Input.GetKeyDown(KeyCode.B))
+            else if (Input.GetKeyDown(KeyCode.B))
             {
                 Debug.Log("Stop BuildMode");
                 if (go != null)

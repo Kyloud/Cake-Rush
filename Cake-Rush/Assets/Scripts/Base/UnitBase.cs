@@ -36,7 +36,7 @@ public class UnitBase : CharacterBase
     protected override void Update()
     {
         Idle();
-        Stop();
+        //Stop();
     }
     
     public void SelectUnit()
@@ -72,7 +72,7 @@ public class UnitBase : CharacterBase
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                Stop();
+                //Stop();
                 // attack cancel
                 if(state == CharacterState.Attack)
                 {

@@ -78,7 +78,7 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineBasedVertexColorR: 1
     - _OutlineFactor: 0
-    - _OutlineWidth: 3
+    - _OutlineWidth: 0
     - _OutlineWriteZ: 1
     - _Overlay: 0
     - _Parallax: 0.02
