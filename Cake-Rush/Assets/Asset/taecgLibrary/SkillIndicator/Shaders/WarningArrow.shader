@@ -32,7 +32,7 @@
 			#pragma exclude_renderers d3d11_9x
 			#pragma vertex vert
 			#pragma fragment frag
-			#pragma multi_compile_fog
+			#pragma multi_compile_fog-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
