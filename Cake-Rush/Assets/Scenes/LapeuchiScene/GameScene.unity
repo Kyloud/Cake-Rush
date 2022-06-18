@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 88c467166db994146961f1ecc5fc214e, type: 3}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43718457, g: 0.75444883, b: 1.0290297, a: 1}
+  m_IndirectSpecularColor: {r: 0.43718317, g: 0.75444984, b: 1.0290304, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9127,41 +9127,9 @@ PrefabInstance:
       value: RTSManager
       objectReference: {fileID: 0}
     - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: dragRectangle
-      value: 
-      objectReference: {fileID: 2007903338}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
       propertyPath: unitList.Array.data[5]
       value: 
       objectReference: {fileID: 874594218}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[6]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
       propertyPath: unitList.Array.data[7]
       value: 
@@ -9172,22 +9140,6 @@ PrefabInstance:
       objectReference: {fileID: 1672352623}
     - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
       propertyPath: unitList.Array.data[9]
-      value: 
-      objectReference: {fileID: 416216792}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[10]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[11]
-      value: 
-      objectReference: {fileID: 1763491708}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[12]
-      value: 
-      objectReference: {fileID: 1672352623}
-    - target: {fileID: 23007425752339819, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
-      propertyPath: unitList.Array.data[13]
       value: 
       objectReference: {fileID: 416216792}
     - target: {fileID: 23007425752339820, guid: 9ecfcf430e6d64182a7804d809e2616a, type: 3}
@@ -11560,10 +11512,10 @@ MonoBehaviour:
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   defensive: 0
-  spawnTime: 0
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
+  outLine: {fileID: 0}
   buildEffect: {fileID: 0}
   isSpawned: 0
   blueprintMat: {fileID: 0}
@@ -12167,10 +12119,10 @@ MonoBehaviour:
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   defensive: 0
-  spawnTime: 0
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
+  outLine: {fileID: 0}
   buildEffect: {fileID: 0}
   isSpawned: 0
   blueprintMat: {fileID: 0}
@@ -17094,11 +17046,6 @@ Transform:
   m_Father: {fileID: 894046399}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &2007903338 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1196701711175977167, guid: 05129b1e42c8d4889bad3e2bf3d9d9fa, type: 3}
-  m_PrefabInstance: {fileID: 763293384}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2007961862
 GameObject:
   m_ObjectHideFlags: 0
@@ -17867,9 +17814,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cookieHouseObj: {fileID: 0}
-  costBuildObj: {fileID: 0}
+  sugarMinerObj: {fileID: 0}
+  chocolateMinerObj: {fileID: 0}
   cookieHouseName: 
-  costBuildName: 
+  sugerMinerName: 
+  chocolateMinerName: 
   isBuildMode: 0
 --- !u!1 &2120958591
 GameObject:
