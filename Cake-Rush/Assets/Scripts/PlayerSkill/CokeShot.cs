@@ -6,25 +6,26 @@ public class CokeShot : SkillBase
 {
     public float radius { get; set; }
 
-    private const float skillHoldTime = 10f;
-    private const float DELAY = 4f;
+    private const float skillHoldTime = 4f;
+    [SerializeField] private float[] delay;
     private float currentHoldTime;
     private WaitForSeconds delayTime;
+    private PlayerController playerController;
 
     [SerializeField] private float[] damage;
-    Vector3 pos;
+
     protected override void Awake()
     {
-        delayTime = new WaitForSeconds(DELAY);
+        delayTime = new WaitForSeconds(delay[level]);
         skillEffect = Resources.Load<GameObject>("Effect/Skill/CokeShot");
+        playerController = GetComponent<PlayerController>();
+        maxSkillLevel = 3;
     }
 
     public override void UseSkill(int skillLevel, Vector3 point)
     {
-        if (!skillStat[skillLevel].isCoolTime)
+        if (!skillStat[skillLevel].isCoolTime && isSkillable == true)
         {
-            Debug.Log("Check");
-            pos = point;
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
         else
@@ -32,12 +33,12 @@ public class CokeShot : SkillBase
             return;
         }
 
-        currentHoldTime = skillHoldTime;
         StartCoroutine(SkillActive(point));
     }
 
     private IEnumerator SkillActive(Vector3 point)
     {
+        currentHoldTime = skillHoldTime;
         GameObject temp = Instantiate(skillEffect, point, Quaternion.Euler(0, 1, 0));
 
         while (currentHoldTime >= 0)
@@ -45,7 +46,7 @@ public class CokeShot : SkillBase
             Collider[] overlapShpere = Physics.OverlapSphere(point, radius, GameProgress.instance.selectableLayer);
             
             Factor(overlapShpere);
-            currentHoldTime -= DELAY;
+            currentHoldTime -= delay[level];
 
             yield return delayTime;
         }
@@ -64,13 +65,12 @@ public class CokeShot : SkillBase
         {
             Debug.Log($"{colliders[i].name} Coke Shot");
             colliders[i].GetComponent<CharacterBase>().Hit(damage[level]);
+            
+            if(colliders[i].GetComponent<CharacterBase>().curHp <= 0)
+            {
+                playerController.levelSystem.GetExp(colliders[i].GetComponent<CharacterBase>().returnExp);
+            }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(pos, 4f);
     }
 }
 

@@ -6,16 +6,18 @@ using Photon.Realtime;
 
 public class PlayerController : UnitBase
 {
+    public LevelSystem levelSystem;
     private CokeShot cokeShot;
     private Lightning lightning;
     private ShootingStar shootingStar;
     private Build build;
     PhotonView PV;
-    
+
     protected override void Awake()
     {
         DataLoad("Player");
 
+        levelSystem = GetComponent<LevelSystem>();
         cakeRush = GetComponent<CakeRush>();
         shootingStar = GetComponent<ShootingStar>();
         lightning = GetComponent<Lightning>();
@@ -32,6 +34,7 @@ public class PlayerController : UnitBase
 
         if (isSelected == false && rtsController.isSkill == false) return;
 
+        #region //Use Skill
         if (Input.GetKey(KeyCode.Q))             //Lightning
         {
             StartCoroutine(Lightning());
@@ -56,8 +59,29 @@ public class PlayerController : UnitBase
         {
             rtsController.isSkill = false;
         }
-        
-        if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)
+        #endregion
+
+        if(Input.GetKey(KeyCode.LeftControl) && levelSystem.skillPoint > 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                levelSystem.SkillLevelUp(lightning);
+            }
+            else if (Input.GetKeyDown(KeyCode.W))
+            {
+                levelSystem.SkillLevelUp(cokeShot);
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                levelSystem.SkillLevelUp(shootingStar);
+            }
+            else if (Input.GetKeyDown(KeyCode.R))
+            {
+                levelSystem.SkillLevelUp(cakeRush);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.B) && build.isBuildMode == false)      //Build
         {
             StartCoroutine(BuildMode());
         }
@@ -99,13 +123,38 @@ public class PlayerController : UnitBase
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
 
-        if(target.CompareTag("Monster"))
+        if (target.CompareTag("Monster"))
+        {
+            SearchTarget(target.GetComponent<MobController>());
+        }
+        else if (target.CompareTag("Build"))
+        {
+            SearchTarget(target.GetComponent<BuildBase>());
+        }
+        else if (target.CompareTag("Unit"))
+        {
+            SearchTarget(target.GetComponent<UnitBase>());
+        }
+    }
+
+    private void SearchTarget <T> (T target) where T : EntityBase
+    {
+        if(target is MobController)
         {
             target.GetComponent<MobController>().Hit(damage, transform);
         }
-        else
+        else if(target is UnitBase)
         {
-            target.GetComponent<EntityBase>().Hit(damage);
+            target.GetComponent<UnitBase>().Hit(damage);
+        }
+        else if (target is BuildBase)
+        {
+            target.GetComponent<BuildBase>().Hit(damage);
+        }
+
+        if (target.curHp <= 0)
+        {
+            levelSystem.GetExp(target.returnExp);
         }
     }
 
@@ -115,6 +164,11 @@ public class PlayerController : UnitBase
         cokeShot.level = 0;
         lightning.level = 0;
         shootingStar.level = 0;
+
+        cakeRush.isSkillable = true;
+        cokeShot.isSkillable = true;
+        lightning.isSkillable = true;
+        shootingStar.isSkillable = true;
 
         shootingStar.range = 6f;
         lightning.range = 10f;

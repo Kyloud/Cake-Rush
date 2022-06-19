@@ -1362,7 +1362,7 @@ GameObject:
   - component: {fileID: 2101740590}
   - component: {fileID: 2101740589}
   m_Layer: 7
-  m_Name: AudioSource
+  m_Name: SfxSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1381,7 +1381,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2102197663}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2101740589
 AudioSource:
@@ -1797,6 +1797,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
   m_PrefabInstance: {fileID: 4857680237184361232}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2102197675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538108312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5677a9a3ad5864aaf68f7d6952ce01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxExp:
+  - 2
+  - 2
 --- !u!1 &2135286115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +1941,14 @@ PrefabInstance:
       propertyPath: skillEffect
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2102197652, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197652, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[0].coolTime
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skill
       value: 
@@ -1939,6 +1962,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: angleRange.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1948,43 +1975,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: angleRange.Array.data[1]
-      value: 70
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: angleRange.Array.data[2]
-      value: 80
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[0].coolTime
-      value: 2
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[1].coolTime
+      value: 13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[2].coolTime
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillEffect
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: delay.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: damage.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: delay.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: delay.Array.data[1]
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: delay.Array.data[2]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: damage.Array.data[0]
-      value: 2
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.data[1]
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.data[2]
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[0].coolTime
-      value: 5
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[1].coolTime
-      value: 5
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2102197665, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[2].coolTime
-      value: 5
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillEffect
@@ -1992,15 +2051,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: damage.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: damage.Array.data[0]
-      value: 5
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.data[1]
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: damage.Array.data[2]
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.size
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[0].coolTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[1].coolTime
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102197666, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: skillStat.Array.data[2].coolTime
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1402989456788103868, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: sceneViewId
@@ -2009,6 +2088,18 @@ PrefabInstance:
     - target: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5148126917430023516, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_LocalPosition.x

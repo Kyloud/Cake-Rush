@@ -29,9 +29,11 @@ public class SkillStat
 
 public class SkillBase : MonoBehaviour
 {
-    [SerializeField] protected SkillStat[] skillStat;
+    
     [SerializeField] protected GameObject skillEffect;
-
+    [SerializeField] protected GameObject skillRangeObj;
+    public SkillStat[] skillStat;
+    public bool isSkillable { get; set; } = false;
     protected virtual void Awake()
     {
 
@@ -39,10 +41,11 @@ public class SkillBase : MonoBehaviour
 
     public float range { get; set; }
     public int level { get; set; }
+    public int maxSkillLevel { get; protected set; } = 2;
 
     public virtual void UseSkill(int skillLevel, Vector3 point)
     {
-        if (!skillStat[skillLevel].isCoolTime)
+        if (!skillStat[skillLevel].isCoolTime && isSkillable == true)
         {
             Debug.Log("Check");
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());

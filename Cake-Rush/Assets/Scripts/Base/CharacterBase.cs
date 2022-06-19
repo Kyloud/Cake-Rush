@@ -6,10 +6,11 @@ using UnityEngine.AI;
 //모든 캐릭터의 최상위 부모 클래스
 public class CharacterBase : EntityBase
 {
-    protected NavMeshAgent navMashAgent;
+    public NavMeshAgent navMashAgent;
     protected Animator animator;
     float curStunTime;
     protected bool isStun;
+
     protected override void Awake()
     {
         isStun = false;

@@ -12,11 +12,12 @@ public class ShootingStar : SkillBase
     protected override void Awake()
     {
         skillEffect = Resources.Load<GameObject>("Effect/Skill/ShootingStar");
+        maxSkillLevel = 3;
     }
 
     public override void UseSkill(int skillLevel, Vector3 point)
     {
-        if (!skillStat[skillLevel].isCoolTime)
+        if (!skillStat[skillLevel].isCoolTime && isSkillable == true)
         {
             StartCoroutine(skillStat[skillLevel].CurrentCoolTime());
         }
@@ -69,7 +70,7 @@ public class ShootingStar : SkillBase
 
     private void OnDrawGizmos()
     {
-        //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange[level] / 2, range);
-        //Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange[level] / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange[level] / 2, range);
+        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange[level] / 2, range);
     }
 }

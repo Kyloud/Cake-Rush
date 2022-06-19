@@ -10,21 +10,20 @@ public class EntityBase : MonoBehaviourPunCallbacks
     #region  element
     public float damage { get; set; }
     public float maxHp { get; set; }
-    [SerializeField] public float curHp;
-    [SerializeField] protected float attackSpeed;
-    [SerializeField] protected float attackRange;
-    [SerializeField] protected float criticalChance;
-    [SerializeField] protected float criticalDamage;
-    [SerializeField] protected float returnExp;
-    [SerializeField] protected float eyeSight;
-    [SerializeField] public int[] cost = new int[3];
+    public float curHp { get; set; }
+    public float attackSpeed { get; set; }
+    public float moveSpeed { get; set; }
+    public float spawnTime { get; set; }
+    public float returnExp { get; set; }
+    protected float attackRange;
+    protected float eyeSight;
+    public int[] cost = new int[3];
     [SerializeField] protected int[] dropCost = new int[3];
-    [SerializeField] protected float defensive;
-    [SerializeField] public float spawnTime { get; set; }
-    [SerializeField] public float moveSpeed { get; set; }
-    [SerializeField] protected Data.Stat stat;
+    protected float defensive;
+
+    protected Data.Stat stat;
     protected RTSController rtsController;
-    [SerializeField] public GameObject Marker;
+    public GameObject Marker;
 
     public int Sugar {get {return cost[1];} protected set{cost[1] = value;} }
     public int Chocolate {get {return cost[1];} protected set{cost[1] = value;} }
