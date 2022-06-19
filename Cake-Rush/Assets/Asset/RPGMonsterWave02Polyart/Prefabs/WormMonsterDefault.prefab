@@ -676,6 +676,7 @@ MonoBehaviour:
   Marker: {fileID: 64313269}
   isSelected: 0
   isActive: 0
+  outLine: {fileID: 0}
   state: 0
   target: {fileID: 0}
 --- !u!195 &2135787818
@@ -685,7 +686,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6614396397510725947}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5

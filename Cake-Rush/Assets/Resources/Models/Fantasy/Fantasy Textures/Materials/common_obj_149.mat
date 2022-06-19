@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Outline
-  m_Shader: {fileID: 4800000, guid: ecaa87dd3acaafc4fa05f757304e9b6a, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _OUTLINEBASEDVERTEXCOLORR_ON
-  - _OUTLINEWRITEZ_ON
+  m_Name: common_obj_149
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _NORMALMAP
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a82e9dc9c55cfea4f95d99fde7f080fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -42,12 +41,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _GlowObjectTex:
-        m_Texture: {fileID: 2800000, guid: 1d1950703bc368647b57b212de238cf9, type: 3}
-        m_Scale: {x: 7.66, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: de45d4392c72c8848a08f45811596861, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -66,34 +61,21 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DepthOffset: 3.7
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GlowIntensity: 3
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineBasedVertexColorR: 1
-    - _OutlineFactor: 0
-    - _OutlineWidth: 3
-    - _OutlineWriteZ: 1
-    - _Overlay: 0
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Transparent: 0
     - _UVSec: 0
-    - _ZTest2ndPass: 0
-    - _ZTest3rdPass: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlowColor: {r: 0, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 1, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
