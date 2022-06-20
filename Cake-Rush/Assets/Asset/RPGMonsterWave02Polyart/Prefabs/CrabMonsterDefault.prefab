@@ -1633,7 +1633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3443190119473844988}
   - component: {fileID: 3443190119480786188}
-  - component: {fileID: 689816300}
+  - component: {fileID: -5740698989540501084}
   - component: {fileID: 689816299}
   - component: {fileID: 689816298}
   m_Layer: 7
@@ -1681,7 +1681,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &689816300
+--- !u!114 &-5740698989540501084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1690,24 +1690,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3443190119473352412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac7ea06fdef7414fbee35183fb105b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ded1926cad14cae99e228d29ca9fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHp: 0
-  attackSpeed: 0
   attackRange: 0
-  criticalChance: 0
-  criticalDamage: 0
-  returnExp: 0
-  eyeSight: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
-  defensive: 0
   Marker: {fileID: 1527585969}
   isSelected: 0
   isActive: 0
-  state: 0
+  navMashAgent: {fileID: 0}
   target: {fileID: 0}
+  state: 0
 --- !u!195 &689816299
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &64313271
 Transform:
   m_ObjectHideFlags: 0
@@ -603,7 +603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6614396397511216411}
   - component: {fileID: 6614396397520249529}
-  - component: {fileID: 2135787819}
+  - component: {fileID: 5200991128855087422}
   - component: {fileID: 2135787818}
   - component: {fileID: 2135787817}
   m_Layer: 7
@@ -651,7 +651,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2135787819
+--- !u!114 &5200991128855087422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -660,15 +660,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6614396397510725947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac7ea06fdef7414fbee35183fb105b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 16e48e2f2be9deb4f8ec3c71f3f932dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   Marker: {fileID: 64313269}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
   navMashAgent: {fileID: 0}
   target: {fileID: 0}
   state: 0
