@@ -59,13 +59,13 @@ public class UnitBase : CharacterBase
         if(target.CompareTag("Monster"))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.position - transform.position), 90);
-            target.GetComponent<MobController>().Hit(damage, transform);
+            target.GetComponent<MobBase>().Hit(damage, transform);
         }
     }
 
     void Idle()
     {
-        if(Input.GetMouseButtonDown(1) && Marker.active)
+        if(Input.GetMouseButtonDown(1) && Marker.active && isStun == false)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 public class PlayerController : UnitBase
-{
+{ 
     public LevelSystem levelSystem;
     private CokeShot cokeShot;
     private Lightning lightning;
@@ -125,7 +125,7 @@ public class PlayerController : UnitBase
 
         if (target.CompareTag("Monster"))
         {
-            SearchTarget(target.GetComponent<MobController>());
+            SearchTarget(target.GetComponent<MobBase>());
         }
         else if (target.CompareTag("Build"))
         {
@@ -139,9 +139,9 @@ public class PlayerController : UnitBase
 
     private void SearchTarget <T> (T target) where T : EntityBase
     {
-        if(target is MobController)
+        if(target is MobBase)
         {
-            target.GetComponent<MobController>().Hit(damage, transform);
+            target.GetComponent<MobBase>().Hit(damage, transform);
         }
         else if(target is UnitBase)
         {
@@ -178,7 +178,7 @@ public class PlayerController : UnitBase
 
     private IEnumerator Lightning()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !lightning.skillStat[lightning.level].isCoolTime)
         {
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

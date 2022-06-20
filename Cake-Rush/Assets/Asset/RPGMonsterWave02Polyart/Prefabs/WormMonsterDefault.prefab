@@ -663,22 +663,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac7ea06fdef7414fbee35183fb105b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHp: 0
-  attackSpeed: 0
-  attackRange: 0
-  criticalChance: 0
-  criticalDamage: 0
-  returnExp: 0
-  eyeSight: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
-  defensive: 0
   Marker: {fileID: 64313269}
   isSelected: 0
   isActive: 0
   outLine: {fileID: 0}
-  state: 0
+  navMashAgent: {fileID: 0}
   target: {fileID: 0}
+  state: 0
 --- !u!195 &2135787818
 NavMeshAgent:
   m_ObjectHideFlags: 0

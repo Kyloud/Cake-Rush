@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HalfCrabController : MobController
+public class HalfCrabController : MobBase
 {
     protected override void Awake()
     {

@@ -29,16 +29,15 @@ public class SkillStat
 
 public class SkillBase : MonoBehaviour
 {
-    
     [SerializeField] protected GameObject skillEffect;
-    [SerializeField] protected GameObject skillRangeObj;
+    [SerializeField] protected GameObject rangeView;
     public SkillStat[] skillStat;
     public bool isSkillable { get; set; } = false;
+
     protected virtual void Awake()
     {
 
     }
-
     public float range { get; set; }
     public int level { get; set; }
     public int maxSkillLevel { get; protected set; } = 2;

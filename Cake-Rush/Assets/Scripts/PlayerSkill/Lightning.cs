@@ -26,13 +26,14 @@ public class Lightning : SkillBase
         }
 
         Debug.Log("³«·Ú");
-        Instantiate(skillEffect, unit.transform.position, Quaternion.Euler(-90, 0, 0));
+        
         Factor(unit.GetComponent<CharacterBase>());
     }
 
     private void Factor<T>(T unit) where T : CharacterBase
     {
         unit = unit as T;
+        Instantiate(skillEffect, unit.transform.position, Quaternion.Euler(-90, 0, 0));
         unit.Hit(unit.curHp / 100 * damage[level]);
     }
 }

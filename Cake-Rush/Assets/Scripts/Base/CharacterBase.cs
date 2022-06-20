@@ -8,8 +8,9 @@ public class CharacterBase : EntityBase
 {
     public NavMeshAgent navMashAgent;
     protected Animator animator;
-    float curStunTime;
+    protected Data.StatureAbillty statureAbillty;
     protected bool isStun;
+    float curStunTime;
 
     protected override void Awake()
     {
@@ -39,5 +40,19 @@ public class CharacterBase : EntityBase
 
         curStunTime = 0;
         isStun = false;
+    }
+
+    protected void AbilltyUp()
+    {
+        maxHp += statureAbillty.s_hp;
+        damage += statureAbillty.s_damage;
+        defensive += statureAbillty.s_defensive;
+    }
+
+    protected void AbilltyLoad(string data)
+    {
+        statureAbillty = new Data.StatureAbillty();
+        TextAsset dataFile = Resources.Load<TextAsset>($"Data/{data}");
+        statureAbillty = JsonUtility.FromJson<Data.StatureAbillty>(dataFile.text);
     }
 }
