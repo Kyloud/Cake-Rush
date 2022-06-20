@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8869144090878121656}
   - component: {fileID: 6424830567606060228}
   - component: {fileID: -468916176182490046}
+  - component: {fileID: -5882891756881190329}
   m_Layer: 0
   m_Name: SugarMiner
   m_TagString: Untagged
@@ -44,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321768382332557657}
-  m_Mesh: {fileID: 4300002, guid: 3d6390705bad91d41af21b1f5b2ac728, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 97e0fd5ed8c969f46a9282c03bc6f3b2, type: 3}
 --- !u!23 &8869144090878121656
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,8 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
-  - {fileID: 2100000, guid: 9a0296e6a88186d46892c3515d6092d7, type: 2}
+  - {fileID: 2100000, guid: 23d662ccc438d7b4982180d466297797, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,11 +96,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321768382332557657}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4, y: 3, z: 4}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &-468916176182490046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,31 +110,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321768382332557657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825ab9c92738e5548be66ad7d75da7cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 72064275e45464cb4b4292728f95a6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHp: 0
-  attackSpeed: 0
   attackRange: 0
-  criticalChance: 0
-  criticalDamage: 0
-  returnExp: 0
-  eyeSight: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
-  defensive: 0
   Marker: {fileID: 5286306832804198091}
   isSelected: 0
   isActive: 0
-  outLine:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   buildEffect: {fileID: 3224557958020540304}
   isSpawned: 0
-  blueprintMat: {fileID: 2100000, guid: 628599ac8d1ed47239b295ae9b16aaf1, type: 2}
+  isOnSelectable: 0
   originMat: {fileID: 0}
-  isOnBuild: 0
+--- !u!54 &-5882891756881190329
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321768382332557657}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3224557958020540304
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +231,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3224557958020540304}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -242,6 +246,10 @@ PrefabInstance:
     - target: {fileID: 1846493769993406, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_Name
       value: Marker
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846493769993406, guid: 47128cd26267f7646bc0794052d94624, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_RootOrder

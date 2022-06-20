@@ -6,25 +6,25 @@ using UnityEngine;
 public class BuildBase : EntityBase
 {
     public GameObject buildEffect;
-    public bool isSpawned;
+    public bool isSpawnable;
     
     private int[] returnCost;
+
+    public bool isOnSelectable;
     
-    [SerializeField] Material blueprintMat;
-    [SerializeField] Material originMat;
     Renderer render;
+    [SerializeField] Material originMat;
 
     protected override void Awake()
     {
         base.Awake();
-        if(isSpawned)
+        if(isSpawnable)
         {
             render = gameObject.GetComponentInChildren<Renderer>();
             originMat = render.material;
-            render.material = blueprintMat;
+            render.material = Resources.Load<Material>("Materials/Blueprint");
             curHp = 0f;
             buildEffect = transform.Find("BuildAnim").gameObject;
-           //StartCoroutine(Build());
         }
     }
     
@@ -46,6 +46,7 @@ public class BuildBase : EntityBase
         while (curHp < maxHp )
         {
             curHp += Time.deltaTime * spawnTime;
+            Debug.Log(curHp);
             yield return null;
         }
         curHp = maxHp;
@@ -53,6 +54,7 @@ public class BuildBase : EntityBase
         isActive = true;
         buildEffect.SetActive(false);
         render.material = originMat;
+        gameObject.isStatic = true;
     }
 
     protected void BuildCancel()
@@ -77,4 +79,28 @@ public class BuildBase : EntityBase
 	{
         
 	}
+
+    private void OnTriggerStay(Collider other) 
+    {
+        if(isSpawnable == true)
+        {
+            if(isActive == false && other.gameObject.layer == LayerMask.NameToLayer("Selectable")
+                || other.gameObject.CompareTag("Ground_Stone"))
+            {
+                isOnSelectable = true;
+                render.material.SetColor("_OutlineColor", Color.red);
+            }
+            
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(isSpawnable == true)
+        {
+            isOnSelectable = false;
+            render.material.SetColor("_OutlineColor", Color.green);
+        }
+    }
 }

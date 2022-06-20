@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321768382332557657}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 3269197350307402576}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &7083506981843742096
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321768382332557657}
-  m_Mesh: {fileID: 4300002, guid: 5cbd0d66b911d544fa9b05d9a5859cc7, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 5da1895cd07d94817a87a62f20ca5cd0, type: 3}
 --- !u!23 &8869144090878121656
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,9 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
-  - {fileID: 2100000, guid: f37dcdb250ebb0845912a568b7185d73, type: 2}
-  - {fileID: 2100000, guid: bdd7ec86eb9b03c4b9cd422d4616f9d5, type: 2}
+  - {fileID: 2100000, guid: 1ddfdd73011b571438c1fac335158559, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +95,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321768382332557657}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -114,26 +112,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba96473fdbe342f086aba1b3549b60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHp: 0
-  attackSpeed: 0
   attackRange: 0
-  criticalChance: 0
-  criticalDamage: 0
-  returnExp: 0
-  eyeSight: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
-  defensive: 0
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine:
-  - {fileID: 0}
   buildEffect: {fileID: 0}
   isSpawned: 0
-  blueprintMat: {fileID: 0}
+  isOnSelectable: 0
   originMat: {fileID: 0}
-  isOnBuild: 0
   enemies: []
 --- !u!1 &3224557958020540304
 GameObject:
@@ -269,15 +257,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalRotation.z
@@ -285,11 +273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4962321648763522, guid: 47128cd26267f7646bc0794052d94624, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

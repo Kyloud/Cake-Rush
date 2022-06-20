@@ -15,7 +15,7 @@ public class EntityBase : MonoBehaviourPunCallbacks
     public float moveSpeed { get; set; }
     public float spawnTime { get; set; }
     public float returnExp { get; set; }
-    protected float attackRange;
+    [SerializeField]protected float attackRange;
     protected float eyeSight;
     public int[] cost = new int[3];
     [SerializeField] protected int[] dropCost = new int[3];
@@ -32,7 +32,6 @@ public class EntityBase : MonoBehaviourPunCallbacks
     public bool isSelected;
     public bool isActive;
 
-    public Material outLine;
     #endregion
 
     protected virtual void Awake()
@@ -41,8 +40,6 @@ public class EntityBase : MonoBehaviourPunCallbacks
         Marker.transform.localPosition = Vector3.zero;
         Marker.SetActive(false);
         rtsController = GameManager.instance.rtsController;
-        outLine = Resources.Load<Material>("Materials/Outline");
-        outLine.SetFloat("_OutlineWidth", 0f);
         Init();
     }
 
@@ -86,14 +83,12 @@ public class EntityBase : MonoBehaviourPunCallbacks
     }
     public void Select()
     {
-        outLine.SetFloat("_OutlineWidth", 3f);
         isSelected = true;
 		Marker.SetActive(true);
 	}
     
 	public void Deselect()
     {
-        outLine.SetFloat("_OutlineWidth", 0f);
         isSelected = false;
         Marker.SetActive(false);
 	}
