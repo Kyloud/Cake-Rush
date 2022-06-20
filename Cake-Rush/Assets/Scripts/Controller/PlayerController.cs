@@ -280,7 +280,8 @@ public class PlayerController : UnitBase
                 {
                     go.transform.position = hit.point;
                 }
-                if (Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 5f)
+                if (Input.GetMouseButtonDown(0) && ((hit.point) - transform.position).magnitude < 30f
+                    && buildBase.isOnSelectable == false)
                 {
                     StartCoroutine(buildBase.Build());
                     go = null;
@@ -289,10 +290,21 @@ public class PlayerController : UnitBase
                     build.isBuildMode = false;
                     yield break;
                 }
+
+                if (Input.GetKey(KeyCode.Alpha1))
+                {
+                    go.transform.Rotate(Vector3.down * Time.deltaTime * 90f);
+                }
+                else if (Input.GetKey(KeyCode.Alpha2))
+                {
+                    go.transform.Rotate(Vector3.up * Time.deltaTime * 90f);
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.A) && curBuildName != build.cookieHouseName)
             {
+                if (go != null) Destroy(go);
+
                 Debug.Log("A");
                 go = Instantiate(build.cookieHouseObj);
                 curBuildName = build.cookieHouseName;
@@ -300,6 +312,7 @@ public class PlayerController : UnitBase
             }
             if (Input.GetKeyDown(KeyCode.S) && curBuildName != build.sugerMinerName)
             {
+                if (go != null) Destroy(go);
                 Debug.Log("S");
                 go = Instantiate(build.sugarMinerObj);
                 curBuildName = build.sugerMinerName;
@@ -307,6 +320,7 @@ public class PlayerController : UnitBase
             }
             if (Input.GetKeyDown(KeyCode.D) && curBuildName != build.chocolateMinerName)
             {
+                if (go != null) Destroy(go);
                 Debug.Log("D");
                 go = Instantiate(build.chocolateMinerObj);
                 curBuildName = build.chocolateMinerName;
