@@ -8,6 +8,10 @@ public class Build : MonoBehaviour
     [SerializeField] public GameObject sugarMinerObj;
     [SerializeField] public GameObject chocolateMinerObj;
 
+    [SerializeField] public CookieHouseController cookieHosueController;
+    [SerializeField] public SugarMinerController sugarMinerController;
+    [SerializeField] public ChocolateMinerController chocolateMinerController;
+
     public string cookieHouseName;
     public string sugerMinerName;
     public string chocolateMinerName;
@@ -20,8 +24,20 @@ public class Build : MonoBehaviour
         if(sugarMinerObj == null) sugarMinerObj = Resources.Load<GameObject>("Prefabs/SugarMiner");
         if(chocolateMinerObj == null) chocolateMinerObj = Resources.Load<GameObject>("Prefabs/ChocolateMiner");
 
-        if(cookieHouseObj != null) cookieHouseName = cookieHouseObj.name;
-        if(sugarMinerObj != null) sugerMinerName = sugarMinerObj.name;
-        if(chocolateMinerObj != null) chocolateMinerName = chocolateMinerObj.name;
+        if(cookieHouseObj != null) 
+        {
+            cookieHouseName = cookieHouseObj.name;
+            cookieHosueController = cookieHouseObj.GetComponent<CookieHouseController>();
+        }
+        if(sugarMinerObj != null)
+        {
+            sugerMinerName = sugarMinerObj.name;
+            sugarMinerController = sugarMinerObj.GetComponent<SugarMinerController>();
+        } 
+        if(chocolateMinerObj != null)
+        {
+            chocolateMinerName = chocolateMinerObj.name;    
+            chocolateMinerController = chocolateMinerObj.GetComponent<ChocolateMinerController>();
+        } 
     }
 }

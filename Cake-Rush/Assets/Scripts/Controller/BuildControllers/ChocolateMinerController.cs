@@ -16,22 +16,24 @@ public class ChocolateMinerController : BuildBase
 
     void Start()
     {
-
+        StartCoroutine(MineChocolate());
     }
 
     protected override void Update()
     {
         base.Update();
 
-        if(isSelected && isActive)
-        {
-            StartCoroutine(MineChocolate());
-        }
     }
 
     IEnumerator MineChocolate()
     {
-        cost[2] += ChocolatePerSec;   
-        yield return new WaitForSeconds(1f);
+        yield return new WaitUntil(()=> isActive == true);
+        while(true)
+        {
+            rtsController.cost[2] += ChocolatePerSec;   
+            yield return new WaitForSeconds(1f);    
+            Debug.Log(rtsController.cost[2]);
+            yield return null;
+        }
     }
 }

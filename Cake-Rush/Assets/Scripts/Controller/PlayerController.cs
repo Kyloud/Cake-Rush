@@ -16,7 +16,7 @@ public class PlayerController : UnitBase
     protected override void Awake()
     {
         DataLoad("Player");
-
+        
         levelSystem = GetComponent<LevelSystem>();
         cakeRush = GetComponent<CakeRush>();
         shootingStar = GetComponent<ShootingStar>();

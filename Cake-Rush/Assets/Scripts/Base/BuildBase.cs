@@ -42,6 +42,8 @@ public class BuildBase : EntityBase
         buildEffect.SetActive(true);
         gameObject.layer = LayerMask.NameToLayer("Selectable");
         gameObject.tag = "Build";
+        render.material = originMat;
+        gameObject.isStatic = true;
         Debug.Log("Start Coroutine Build()");
         while (curHp < maxHp )
         {
@@ -53,8 +55,6 @@ public class BuildBase : EntityBase
         Debug.Log("Build() Completed");
         isActive = true;
         buildEffect.SetActive(false);
-        render.material = originMat;
-        gameObject.isStatic = true;
     }
 
     protected void BuildCancel()

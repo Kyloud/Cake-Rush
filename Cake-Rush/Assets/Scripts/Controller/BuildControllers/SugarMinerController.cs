@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SugarMinerController : BuildBase
 {
-
     private int sugarPerSec = 3;
 
     protected override void Awake()
@@ -16,22 +15,24 @@ public class SugarMinerController : BuildBase
 
     void Start()
     {
-        
+        StartCoroutine(MineSugar());
     }
 
     protected override void Update()
     {
         base.Update();
 
-        if(isSelected && isActive)
-        {
-            StartCoroutine(MineSugar());
-        }
     }
 
     IEnumerator MineSugar()
     {
-        cost[0] += sugarPerSec;   
-        yield return new WaitForSeconds(1f);
+        yield return new WaitUntil(()=> isActive == true);
+        while(true)
+        {
+            rtsController.cost[0] += sugarPerSec;   
+            yield return new WaitForSeconds(1f);
+            Debug.Log(rtsController.cost[0]);
+            yield return null;
+        }
     }
 }
