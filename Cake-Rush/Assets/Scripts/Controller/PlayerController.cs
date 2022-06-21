@@ -24,6 +24,7 @@ public class PlayerController : UnitBase
         cokeShot = GetComponent<CokeShot>();
         build = GetComponent<Build>();
         PV = GetComponent<PhotonView>();
+
         base.Awake();
         SkillInit();
     }
@@ -33,31 +34,43 @@ public class PlayerController : UnitBase
         base.Update();
 
         if (isSelected == false && rtsController.isSkill == false) return;
-
+        
+        rtsController.isSkill = true;
+        
         #region //Use Skill
-        if (Input.GetKey(KeyCode.Q))             //Lightning
+        if (Input.GetKey(KeyCode.Q) && lightning.isSkillUsed == true)             //Lightning
         {
             StartCoroutine(Lightning());
-            rtsController.isSkill = true;
+            cokeShot.isSkillUsed = false;
+            shootingStar.isSkillUsed = false;
         }
-        else if (Input.GetKey(KeyCode.W))        //Coke shot
+        else if (Input.GetKey(KeyCode.W) && cokeShot.isSkillUsed == true)        //Coke shot
         {
             StartCoroutine(CokeShot());
-            rtsController.isSkill = true;
+            lightning.isSkillUsed = false;
+            shootingStar.isSkillUsed = false;
         }
-        else if (Input.GetKey(KeyCode.E))        //Shooting star
+        else if (Input.GetKey(KeyCode.E) && shootingStar.isSkillUsed == true)        //Shooting star
         {
             ShootingStar();
-            rtsController.isSkill = true;
+            lightning.isSkillUsed = false;
+            cokeShot.isSkillUsed = false;
         }
         else if (Input.GetKeyDown(KeyCode.R))        //Cake rush
         {
             CakeRush();
-            rtsController.isSkill = true;
         }
         else
         {
             rtsController.isSkill = false;
+
+            lightning.rangeView.SetActive(false);
+            cokeShot.rangeView.SetActive(false);
+            shootingStar.rangeView.SetActive(false);
+
+            lightning.isSkillUsed = true;
+            cokeShot.isSkillUsed = true;
+            shootingStar.isSkillUsed = true;
         }
         #endregion
 
@@ -75,7 +88,7 @@ public class PlayerController : UnitBase
             {
                 levelSystem.SkillLevelUp(shootingStar);
             }
-            else if (Input.GetKeyDown(KeyCode.R))
+            else if (Input.GetKeyDown(KeyCode.R) && levelSystem.curLevel > 6)
             {
                 levelSystem.SkillLevelUp(cakeRush);
             }
@@ -171,42 +184,51 @@ public class PlayerController : UnitBase
         shootingStar.isSkillable = true;
 
         shootingStar.range = 6f;
-        lightning.range = 10f;
-        cokeShot.range = 30f;
+        lightning.range = 30f;
+        cokeShot.range = 80f;
         cokeShot.radius = 5f;
     }
 
     private IEnumerator Lightning()
     {
-        if (Input.GetMouseButtonDown(0) && !lightning.skillStat[lightning.level].isCoolTime)
+        lightning.rangeView.SetActive(true);
+        
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, GameProgress.instance.selectableLayer))
+            if(!lightning.skillStat[lightning.level].isCoolTime)
             {
-                while (lightning.range < (hit.transform.position - transform.position).sqrMagnitude)
+                lightning.rangeView.SetActive(false);
+
+                Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, GameProgress.instance.selectableLayer))
                 {
-                    base.Move(hit.transform.position);
-                    yield return null;
-                }
+                    while (lightning.range < (hit.transform.position - transform.position).sqrMagnitude)
+                    {
+                        base.Move(hit.transform.position);
+                        yield return null;
+                    }
 
-                navMashAgent.Stop();
-                animator.SetTrigger("Lightning");
-                yield return new WaitForSeconds(0.2f);
+                    navMashAgent.Stop();
+                    animator.SetTrigger("Lightning");
+                    yield return new WaitForSeconds(0.2f);
                 
-                animator.SetBool("Move", false);
-                state = CharacterState.Idle;
-                lightning.UseSkill(lightning.level, hit.collider);
+                    animator.SetBool("Move", false);
+                    state = CharacterState.Idle;
+                    lightning.UseSkill(lightning.level, hit.collider);
 
-                animator.SetBool("Idle", true);
+                    animator.SetBool("Idle", true);
+                }
             }
         }
     }
 
     private IEnumerator CokeShot()
     {
-        if (Input.GetMouseButtonDown(0))
+        cokeShot.rangeView.SetActive(true);
+
+        if (Input.GetMouseButtonDown(0) && !cokeShot.skillStat[lightning.level].isCoolTime)
         {
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -227,7 +249,9 @@ public class PlayerController : UnitBase
 
     private void ShootingStar()
     {
-        if (Input.GetMouseButtonDown(0))
+        shootingStar.rangeView.SetActive(true);
+
+        if (Input.GetMouseButtonDown(0) && !shootingStar.skillStat[lightning.level].isCoolTime)
         {
             Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

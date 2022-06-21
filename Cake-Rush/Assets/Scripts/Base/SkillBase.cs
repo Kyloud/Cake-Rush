@@ -30,17 +30,24 @@ public class SkillStat
 public class SkillBase : MonoBehaviour
 {
     [SerializeField] protected GameObject skillEffect;
-    [SerializeField] protected GameObject rangeView;
+    public GameObject rangeView;
     public SkillStat[] skillStat;
-    public bool isSkillable { get; set; } = false;
+    public Material rangeMat { protected get; set; }
+    public bool isSkillable { get; set; } = false; 
+    public bool isSkillUsed { get; set; }
+    public int maxSkillLevel { get; protected set; } = 2;
+    public float range { get; set; }
+    public int level { get; set; }
 
     protected virtual void Awake()
     {
-
+        GameObject temp = Instantiate(rangeView);
+        temp.transform.position = transform.position;
+        temp.SetActive(false);
+        temp.transform.parent = transform;
+        temp.transform.localScale = rangeView.transform.localScale;
+        rangeView = temp;
     }
-    public float range { get; set; }
-    public int level { get; set; }
-    public int maxSkillLevel { get; protected set; } = 2;
 
     public virtual void UseSkill(int skillLevel, Vector3 point)
     {

@@ -18,8 +18,11 @@ public class CokeShot : SkillBase
     {
         delayTime = new WaitForSeconds(delay[level]);
         skillEffect = Resources.Load<GameObject>("Effect/Skill/CokeShot");
+        rangeView = Resources.Load<GameObject>("Prefabs/RangeView/CokeShot");
         playerController = GetComponent<PlayerController>();
-        maxSkillLevel = 3;
+        maxSkillLevel = 2;
+
+        base.Awake();
     }
 
     public override void UseSkill(int skillLevel, Vector3 point)

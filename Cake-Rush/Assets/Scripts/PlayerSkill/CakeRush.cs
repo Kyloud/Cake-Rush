@@ -10,7 +10,7 @@ public class CakeRush : SkillBase
     protected override void Awake()
     {
         skillEffect = Resources.Load<GameObject>("Effect/Skill/CakeRush");
-        maxSkillLevel = 1;
+        maxSkillLevel = 0;
     }
 
     public IEnumerator UnitCakeRush(Transform unit)
@@ -29,7 +29,7 @@ public class CakeRush : SkillBase
         GameObject go = Instantiate(skillEffect, unit.transform.position, Quaternion.Euler(-90, 0, 0));
         go.transform.parent = unit;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(15f);
 
         unitBase.moveSpeed = t_moveSpeed;
         unitBase.damage = t_damage;

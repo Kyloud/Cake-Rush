@@ -9,8 +9,11 @@ public class Lightning : SkillBase
     protected override void Awake()
     {
         skillEffect = Resources.Load<GameObject>("Effect/Skill/Lightning");
-        maxSkillLevel = 3;
-        //skillRangeObj = Resources.Load<GameObject>("Rangeview/LightningView");
+        rangeView = Resources.Load<GameObject>("Prefabs/RangeView/Lightning");
+        maxSkillLevel = 2;
+        base.Awake();
+
+        
     }
 
     public void UseSkill(int skillLevel, Collider unit)

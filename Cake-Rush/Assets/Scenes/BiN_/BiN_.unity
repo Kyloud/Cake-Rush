@@ -428,12 +428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1ce90dc318a4776a56ebc3b169080b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
   navMashAgent: {fileID: 0}
   target: {fileID: 0}
   state: 0
@@ -1084,12 +1084,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e48e2f2be9deb4f8ec3c71f3f932dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
   navMashAgent: {fileID: 0}
   target: {fileID: 0}
   state: 0
