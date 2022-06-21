@@ -884,7 +884,6 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 759d477d80623a74fb90027ee36eb008, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1035,7 +1034,6 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 8ae3ad5563aace8428cb247adb3da626, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1122,7 +1120,6 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 0957fffbd8f7ab84a9075733b67fed01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -3567,7 +3564,6 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 54e809e248f25bc47ba8bc38cc93abb8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4150,7 +4146,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 44e499ac765c77e419bb600ecfbc81df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -5563,12 +5558,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7564c00a2efbe2446abf5b1000374faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
-  outLine: {fileID: 0}
   navMashAgent: {fileID: 0}
   state: 0
   cakeRush: {fileID: 2102197652}
@@ -5731,6 +5726,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Attack
+  - Type: 9
+    SynchronizeType: 0
+    Name: Lightning
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -6917,7 +6915,6 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 0957fffbd8f7ab84a9075733b67fed01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -7953,7 +7950,6 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a3eec864e4f64821b2f7233738bd488, type: 2}
   - {fileID: 2100000, guid: 0957fffbd8f7ab84a9075733b67fed01, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
