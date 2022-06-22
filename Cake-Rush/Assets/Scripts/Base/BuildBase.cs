@@ -7,8 +7,6 @@ public class BuildBase : EntityBase
 {
     public GameObject buildEffect;
     public bool isSpawnable;
-    
-    private int[] returnCost;
 
     public bool isOnSelectable;
     
@@ -48,7 +46,15 @@ public class BuildBase : EntityBase
         while (curHp < maxHp )
         {
             curHp += Time.deltaTime * spawnTime;
-            Debug.Log(curHp);
+            //Debug.Log(curHp);
+            if(Input.GetKeyDown(KeyCode.N) && isSelected)
+            {
+                for(int i = 0; i < 3; i++)
+                    rtsController.cost[i] += cost[i]/2;
+                Debug.Log("Cenceled Build");
+                Destroy(gameObject);
+                yield break;
+            }
             yield return null;
         }
         curHp = maxHp;
@@ -63,8 +69,8 @@ public class BuildBase : EntityBase
         // give player: returnCost / 2
         for(int i = 0; i < 2; i++)
         {
-            Debug.Log($"{GameManager.instance.cost[i]} -> {GameManager.instance.cost[i] + returnCost[i]}");
-            GameManager.instance.cost[i] += returnCost[i];
+            Debug.Log($"{GameManager.instance.cost[i]} -> {GameManager.instance.cost[i] + cost[i]/2}");
+            GameManager.instance.cost[i] += cost[i]/2;
         }
         Debug.Log("Build Cancel()");
         Destroy(gameObject);

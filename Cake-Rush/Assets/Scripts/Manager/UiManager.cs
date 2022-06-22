@@ -33,21 +33,43 @@ public class UiManager : MonoBehaviourPunCallbacks
 
     private Canvas sceneUICanvas;
     private GameObject canvasOBJ;
-    private GameObject titlePanelResource;
-    private GameObject lobbyPanelResource;
     private GameObject titlePanel;
     private GameObject lobbyPanel;
     private GameObject lobbyMenuPanel;
+    private GameObject commandPanel;
 
-    private Button startButtonInTitle;
-    private Button optionButtonInTitle;
-    private Button exitButtonInTitle;
+    private Button startInTitle;
+    private Button optionInTitle;
+    private Button exitInTitle;
 
-    private Button startButtonInLobby;
-    private Button optionButtonInLobby;
-    private Button exitButtonInLobby;
-    private Button infoButtonInLobby;
+    private Button startInLobby;
+    private Button optionInLobby;
+    private Button exitInLobby;
+    private Button infoInLobby;
 
+    private Button skillCokeShot;
+    private Button skillCakeRush;
+    private Button skillShotingStar;
+    private Button skillLightning;
+
+    #endregion
+
+    #region find Function
+    GameObject FindElement(string path)
+
+    {
+        return Instantiate(Resources.Load<GameObject>($"Prefabs/{path}"), canvasOBJ.transform);
+    }
+
+    GameObject FindElement(GameObject parent, string name)
+    {
+        return parent.transform.Find(name).gameObject;
+    }
+
+    Button SetButton(GameObject parent, string name)
+    {
+        return parent.transform.Find(name).GetComponent<Button>();
+    }
     #endregion
 
     private void Awake()
@@ -56,57 +78,51 @@ public class UiManager : MonoBehaviourPunCallbacks
 
         /// Load패널먼저 로드해서 가시화(Setactive(true)를 해주고 아래 코드 실행
 
-        titlePanelResource = Resources.Load<GameObject>("Prefabs/TitlePanel");
-        lobbyPanelResource = Resources.Load<GameObject>("Prefabs/LobbyPanel2"); //Resources.Load<GameObject>("Prefabs/LobyPanel");
+        sceneUICanvas  = GetComponentInChildren<Canvas>();
+        canvasOBJ      = sceneUICanvas.gameObject;
+        titlePanel     = FindElement("TitlePanel");
+        lobbyPanel     = FindElement("LobbyPanel2");//Resources.Load<GameObject>("Prefabs/LobyPanel");
+        lobbyMenuPanel = FindElement(lobbyPanel, "OptionMenus");
+        commandPanel   = FindElement("CommandPanel");
 
-        sceneUICanvas = GetComponentInChildren<Canvas>();
-        canvasOBJ = sceneUICanvas.gameObject;
-        titlePanel = Instantiate(titlePanelResource, canvasOBJ.transform);
-        lobbyPanel = Instantiate(lobbyPanelResource, canvasOBJ.transform);
+        startInTitle  = SetButton(titlePanel, "StartButton");
+        optionInTitle = SetButton(titlePanel, "OptionButton");
+        exitInTitle   = SetButton(titlePanel, "ExitButton");
 
-        startButtonInTitle = titlePanel.transform.Find("StartButton").GetComponent<Button>();
-        optionButtonInTitle = titlePanel.transform.Find("OptionButton").GetComponent<Button>();
-        exitButtonInTitle = titlePanel.transform.Find("ExitButton").GetComponent<Button>();
+        startInLobby  = SetButton(lobbyPanel, "StartButton");
+        optionInLobby = SetButton(lobbyMenuPanel, "OptionButton");
+        exitInLobby   = SetButton(lobbyMenuPanel, "ExitButton");
+        infoInLobby   = SetButton(lobbyMenuPanel, "InfoButton");
 
-        startButtonInLobby = lobbyPanel.transform.Find("StartButton").GetComponent<Button>();
-        lobbyMenuPanel = lobbyPanel.transform.Find("OptionMenus").gameObject;
-        optionButtonInLobby = lobbyMenuPanel.transform.Find("OptionButton").GetComponent<Button>();
-        exitButtonInLobby = lobbyMenuPanel.transform.Find("ExitButton").GetComponent<Button>();
-        infoButtonInLobby = lobbyMenuPanel.transform.Find("InfoButton").GetComponent<Button>();
+        skillCokeShot    = SetButton(commandPanel, "CokeShot");
+        skillCakeRush    = SetButton(commandPanel, "CakeRush");
+        skillShotingStar = SetButton(commandPanel, "ShotingStar");
+        skillLightning   = SetButton(commandPanel, "Lightning");
     }
 
     private void Start()
     {
-        startButtonInTitle.onClick.AddListener(OnClickStartInTitle);
-        exitButtonInTitle.onClick.AddListener(OnClickExit);
-        optionButtonInTitle.onClick.AddListener(OnClickOption);
+        startInTitle.onClick.AddListener(OnClickStartInTitle);
+        exitInTitle.onClick.AddListener(OnClickExit);
+        optionInTitle.onClick.AddListener(OnClickOption);
 
-        startButtonInLobby.onClick.AddListener(OnClickStartInLobby);
-        exitButtonInLobby.onClick.AddListener(OnClickExit);
-        optionButtonInLobby.onClick.AddListener(OnClickOption);
-        infoButtonInLobby.onClick.AddListener(OnClickInfo);
+        startInLobby.onClick.AddListener(OnClickStartInLobby);
+        exitInLobby.onClick.AddListener(OnClickExit);
+        optionInLobby.onClick.AddListener(OnClickOption);
+        infoInLobby.onClick.AddListener(OnClickInfo);
 
-        SetScene("title");
+        skillCakeRush.onClick.AddListener(OnClickCakeRush);
+        skillShotingStar.onClick.AddListener(OnClickShotingStar);
+        skillCokeShot.onClick.AddListener(OnClickCokeShot);
+        skillLightning.onClick.AddListener(OnClickLightning);
+
+        SetScene("inGame");
 
         ///여기서 로딩 패널 비가시화
     }
 
-    public void OnClickStartInTitle()
-    {
-        Debug.Log("ClickStart");
-        if(PN.IsConnected)
-        {
-            PN.JoinLobby();
-        }
-    }
 
-    public void OnClickStartInLobby()
-    {
-        Debug.Log("Click Create Room or Join Room");
-        PN.JoinRandomOrCreateRoom(
-            null, 2, Photon.Realtime.MatchmakingMode.FillRoom,
-            null, null, $"{Random.Range(0, 100)}", new Photon.Realtime.RoomOptions{ MaxPlayers = 2 });
-    }
+    #region Scene or Server
 
     public override void OnCreatedRoom()
     {
@@ -142,58 +158,6 @@ public class UiManager : MonoBehaviourPunCallbacks
                 Debug.Log("DisconnectByDisconnectMessage");
                 break;
 
-            case DisconnectCause.ExceptionOnConnect:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.DnsExceptionOnConnect:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.ServerAddressInvalid:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.Exception:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.ServerTimeout:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.ClientTimeout:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.DisconnectByServerLogic:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.DisconnectByServerReasonUnknown:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.InvalidAuthentication:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.CustomAuthenticationFailed:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.AuthenticationTicketExpired:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.MaxCcuReached:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
-            case DisconnectCause.InvalidRegion:
-                Debug.Log("ExceptionOnConnect");
-                break;
-
             case DisconnectCause.OperationNotAllowedInCurrentState:
                 Debug.Log("ExceptionOnConnect");
                 break;
@@ -217,6 +181,45 @@ public class UiManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("is Loby");
+        SetScene("loby");
+    }
+
+    public override void OnJoinedRoom()
+    {
+        if (PN.CurrentRoom.MaxPlayers == PN.CurrentRoom.PlayerCount)
+        {
+            Debug.Log("Game Start");
+            SetScene("inGame");
+        }
+    }
+    #endregion
+
+    #region button
+    public void OnClickStartInTitle()
+    {
+        Debug.Log("ClickStart");
+        if (PN.IsConnected)
+        {
+            PN.JoinLobby();
+        }
+    }
+
+    public void OnClickStartInLobby()
+    {
+        Debug.Log("Click Create Room or Join Room");
+        PN.JoinRandomOrCreateRoom(
+            null, 2, Photon.Realtime.MatchmakingMode.FillRoom,
+            null, null, $"{Random.Range(0, 100)}", new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
+    }
+
+    public void OnClickExit()
+    {
+        if (PN.IsConnected)
+            PN.Disconnect();
+    }
     public void OnClickOption()
     {
         Debug.Log("Option");
@@ -227,16 +230,36 @@ public class UiManager : MonoBehaviourPunCallbacks
         Debug.Log("Infomation of it");
     }
 
-    public void OnClickExit()
-    {
-        if(PN.IsConnected)
-            PN.Disconnect();
-    }
-
     public void OnClickMaker()
     {
         Debug.Log("Maker");
     }
+    #endregion
+
+    #region skill
+
+
+
+    public void OnClickShotingStar()
+    {
+
+    }
+
+    public void OnClickLightning()
+    {
+
+    }
+
+    public void OnClickCokeShot()
+    {
+
+    }
+
+    public void OnClickCakeRush()
+    {
+
+    }
+    #endregion
 
     public void SetScene(string targetScene)
     {
@@ -268,23 +291,8 @@ public class UiManager : MonoBehaviourPunCallbacks
 
         titlePanel.SetActive(nowScene == Scene.title);
         lobbyPanel.SetActive(nowScene == Scene.lobby);
-        
-    }
+        commandPanel.SetActive(nowScene == Scene.inGame);
 
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("is Loby");
-        SetScene("loby");
-    }
-
-    public override void OnJoinedRoom()
-    {
-        if (PN.CurrentRoom.MaxPlayers == PN.CurrentRoom.PlayerCount)
-        {
-            Debug.Log("Game Start");
-            //PN.Disconnect();
-            SetScene("inGame");
-        }
     }
 
 

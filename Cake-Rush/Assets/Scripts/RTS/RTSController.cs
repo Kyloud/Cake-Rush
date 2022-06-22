@@ -19,6 +19,7 @@ public class RTSController : MonoBehaviour
     public List<BuildBase> buildList = new List<BuildBase>();
 	public EntityBase selectedEntity = null;
 	private Camera teamCamera;
+	public int maxUnit = 10;
     
 	public LayerMask layerGround = 1 << 6;
     public LayerMask layerSelectable = 1 << 7;
@@ -43,7 +44,10 @@ public class RTSController : MonoBehaviour
 		clickParticle = clickEffectObject.GetComponent<ParticleSystem>();
 		//Find Team Camera
 		teamCamera = Camera.main;
-    }
+		cost[0] += 100;
+		cost[1] += 100;
+		cost[2] += 100;
+	}
 
     void Update() 
 	{
