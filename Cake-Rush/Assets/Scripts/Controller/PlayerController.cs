@@ -64,9 +64,9 @@ public class PlayerController : UnitBase
         {
             rtsController.isSkill = false;
 
-            lightning.rangeView.SetActive(false);
-            cokeShot.rangeView.SetActive(false);
-            shootingStar.rangeView.SetActive(false);
+            lightning.rangeViewObj.SetActive(false);
+            cokeShot.rangeViewObj.SetActive(false);
+            shootingStar.rangeViewObj.SetActive(false);
 
             lightning.isSkillUsed = true;
             cokeShot.isSkillUsed = true;
@@ -191,13 +191,13 @@ public class PlayerController : UnitBase
 
     private IEnumerator Lightning()
     {
-        lightning.rangeView.SetActive(true);
+        lightning.rangeViewObj.SetActive(true);
         
         if (Input.GetMouseButtonDown(0))
         {
             if(!lightning.skillStat[lightning.level].isCoolTime)
             {
-                lightning.rangeView.SetActive(false);
+                lightning.rangeViewObj.SetActive(false);
 
                 Ray ray = teamCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -226,7 +226,7 @@ public class PlayerController : UnitBase
 
     private IEnumerator CokeShot()
     {
-        cokeShot.rangeView.SetActive(true);
+        cokeShot.rangeViewObj.SetActive(true);
 
         if (Input.GetMouseButtonDown(0) && !cokeShot.skillStat[lightning.level].isCoolTime)
         {
@@ -249,7 +249,7 @@ public class PlayerController : UnitBase
 
     private void ShootingStar()
     {
-        shootingStar.rangeView.SetActive(true);
+        shootingStar.rangeViewObj.SetActive(true);
 
         if (Input.GetMouseButtonDown(0) && !shootingStar.skillStat[lightning.level].isCoolTime)
         {

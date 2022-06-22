@@ -23,7 +23,7 @@ public class UnitBase : CharacterBase
     protected Transform targetTransform = null;
     public CakeRush cakeRush;
     public Camera teamCamera;
-    public GameObject rangeView;
+    public GameObject rangeViewObj;
 
     protected override void Awake()
     {

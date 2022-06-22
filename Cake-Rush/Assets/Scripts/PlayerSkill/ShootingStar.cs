@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootingStar : SkillBase
@@ -7,11 +5,14 @@ public class ShootingStar : SkillBase
     public float stunTime { get; set; }
     [SerializeField] private float[] angleRange;
     [SerializeField] private Transform skillPos;
-
+    [SerializeField]
+    Renderer renderer;
     protected override void Awake()
     {
+        rangeViewMat = Resources.Load<Material>("Materials/RangeView/ShootingStar");
         skillEffect = Resources.Load<GameObject>("Effect/Skill/ShootingStar");
-        rangeView = Resources.Load<GameObject>("Prefabs/RangeView/ShootingStar");
+        rangeViewObj = Resources.Load<GameObject>("Prefabs/RangeView/ShootingStar");
+        rangeViewMat.SetFloat("Angle", angleRange[level]);
         maxSkillLevel = 2;
 
         base.Awake();
