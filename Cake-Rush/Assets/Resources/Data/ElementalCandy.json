@@ -1,10 +1,11 @@
 {
-  "hp": 60,
-  "damage": 8,
-  "attackSpeed": 1.5,
+  "hp": 50,
+  "damage": 12,
+  "attackSpeed": 1.8,
   "attackRange": 55,
-  "returnExp": 10,
-  "eyeSight": 10,
+  "defensive": 0,
+  "moveSpeed": 12.5,
+  "eyeSight": 5,  
   "cost":
   [
     8,
@@ -17,7 +18,6 @@
     0,
     0
   ],
-  "defensive": 0,
   "spawnTime": 5,
-  "moveSpeed": 12.5
+  "returnExp": 18
 }
