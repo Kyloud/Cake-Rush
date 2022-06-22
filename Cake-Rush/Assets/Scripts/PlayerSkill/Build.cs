@@ -20,9 +20,9 @@ public class Build : MonoBehaviour
     void Awake()
     {
         isBuildMode = false;
-        if(cookieHouseObj == null) cookieHouseObj = Resources.Load<GameObject>("Prefabs/CookieHouse");
-        if(sugarMinerObj == null) sugarMinerObj = Resources.Load<GameObject>("Prefabs/SugarMiner");
-        if(chocolateMinerObj == null) chocolateMinerObj = Resources.Load<GameObject>("Prefabs/ChocolateMiner");
+        if(cookieHouseObj == null) cookieHouseObj = Resources.Load<GameObject>("Prefabs/Houses/CookieHouse");
+        if(sugarMinerObj == null) sugarMinerObj = Resources.Load<GameObject>("Prefabs/Houses/SugarMiner");
+        if(chocolateMinerObj == null) chocolateMinerObj = Resources.Load<GameObject>("Prefabs/Houses/ChocolateMiner");
 
         if(cookieHouseObj != null) 
         {
