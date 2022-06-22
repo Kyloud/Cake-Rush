@@ -15,7 +15,7 @@ public class EntityBase : MonoBehaviourPunCallbacks
     public float moveSpeed { get; set; }
     public float spawnTime { get; set; }
     public float returnExp { get; set; }
-    [SerializeField]protected float attackRange;
+    [SerializeField] protected float attackRange;
     protected float eyeSight;
     public int[] cost = new int[3];
     [SerializeField] protected int[] dropCost = new int[3];
@@ -64,6 +64,7 @@ public class EntityBase : MonoBehaviourPunCallbacks
     {
         curHp -= hitDamage;
 
+        Debug.Log($"Current {gameObject.name} HP : {curHp}");
         if(curHp <= 0)
         {
             Die();
@@ -94,6 +95,11 @@ public class EntityBase : MonoBehaviourPunCallbacks
 	}
     
     protected virtual void Update()
+    {
+
+    }
+
+    protected virtual void Respawn()
     {
 
     }

@@ -51,7 +51,7 @@ public class LevelSystem : MonoBehaviour
         {
             if (skill.maxSkillLevel > skill.level)
             {
-                skill.level++;
+                skill.LevelUp();
             }
         }
 

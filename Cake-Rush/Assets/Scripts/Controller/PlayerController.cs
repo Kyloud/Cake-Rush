@@ -173,11 +173,6 @@ public class PlayerController : UnitBase
 
     private void SkillInit()
     {
-        cakeRush.level = 0;
-        cokeShot.level = 0;
-        lightning.level = 0;
-        shootingStar.level = 0;
-
         cakeRush.isSkillable = true;
         cokeShot.isSkillable = true;
         lightning.isSkillable = true;
@@ -364,5 +359,11 @@ public class PlayerController : UnitBase
             }
             yield return null;
         }
+    }
+
+    protected override void Die()
+    {
+        animator.SetTrigger("Die");
+        base.Die();
     }
 }

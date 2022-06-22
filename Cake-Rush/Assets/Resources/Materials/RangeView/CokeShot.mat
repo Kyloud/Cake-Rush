@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootingStar
+  m_Name: CokeShot
   m_Shader: {fileID: 4800000, guid: 72beee40b6b178d44b2e3f86888273ac, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -71,7 +71,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Angle: 121
+    - _Angle: 360
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
