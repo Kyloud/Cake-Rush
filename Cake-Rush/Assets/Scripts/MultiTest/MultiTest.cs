@@ -43,7 +43,7 @@ public class MultiTest : MonoBehaviourPunCallbacks
         Debug.Log("Start");
         Debug.Log(PhotonNetwork.CurrentRoom.Name);
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
-        PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(41, -9.536743e-06f, 40.4f), Quaternion.identity);
+        PhotonNetwork.Instantiate("Prefabs/Units/Player", new Vector3(41, -9.536743e-06f, 40.4f), Quaternion.identity);
     }
 
     public override void OnCreatedRoom()

@@ -37,6 +37,7 @@ public class UiManager : MonoBehaviourPunCallbacks
     private GameObject lobbyPanel;
     private GameObject lobbyMenuPanel;
     private GameObject commandPanel;
+    private GameObject loaddingPanel;
 
     private Button startInTitle;
     private Button optionInTitle;
@@ -58,7 +59,7 @@ public class UiManager : MonoBehaviourPunCallbacks
     GameObject FindElement(string path)
 
     {
-        return Instantiate(Resources.Load<GameObject>($"Prefabs/{path}"), canvasOBJ.transform);
+        return Instantiate(Resources.Load<GameObject>($"Prefabs/UI/{path}"), canvasOBJ.transform);
     }
 
     GameObject FindElement(GameObject parent, string name)
@@ -76,14 +77,15 @@ public class UiManager : MonoBehaviourPunCallbacks
     {
         DontDestroyOnLoad(this);
 
-        /// Load패널먼저 로드해서 가시화(Setactive(true)를 해주고 아래 코드 실행
-
         sceneUICanvas  = GetComponentInChildren<Canvas>();
         canvasOBJ      = sceneUICanvas.gameObject;
+
+        loaddingPanel  = FindElement("LoadingPanel");
+
         titlePanel     = FindElement("TitlePanel");
         lobbyPanel     = FindElement("LobbyPanel2");//Resources.Load<GameObject>("Prefabs/LobyPanel");
         lobbyMenuPanel = FindElement(lobbyPanel, "OptionMenus");
-        commandPanel   = FindElement("CommandPanel");
+        //commandPanel   = FindElement("CommandPanel");
 
         startInTitle  = SetButton(titlePanel, "StartButton");
         optionInTitle = SetButton(titlePanel, "OptionButton");
@@ -94,10 +96,14 @@ public class UiManager : MonoBehaviourPunCallbacks
         exitInLobby   = SetButton(lobbyMenuPanel, "ExitButton");
         infoInLobby   = SetButton(lobbyMenuPanel, "InfoButton");
 
-        skillCokeShot    = SetButton(commandPanel, "CokeShot");
-        skillCakeRush    = SetButton(commandPanel, "CakeRush");
-        skillShotingStar = SetButton(commandPanel, "ShotingStar");
-        skillLightning   = SetButton(commandPanel, "Lightning");
+        //skillCokeShot    = SetButton(commandPanel, "CokeShot");
+        //skillCakeRush    = SetButton(commandPanel, "CakeRush");
+        //skillShotingStar = SetButton(commandPanel, "ShotingStar");
+        //skillLightning   = SetButton(commandPanel, "Lightning");
+
+
+
+        loaddingPanel.transform.SetAsLastSibling();
     }
 
     private void Start()
@@ -111,14 +117,12 @@ public class UiManager : MonoBehaviourPunCallbacks
         optionInLobby.onClick.AddListener(OnClickOption);
         infoInLobby.onClick.AddListener(OnClickInfo);
 
-        skillCakeRush.onClick.AddListener(OnClickCakeRush);
-        skillShotingStar.onClick.AddListener(OnClickShotingStar);
-        skillCokeShot.onClick.AddListener(OnClickCokeShot);
-        skillLightning.onClick.AddListener(OnClickLightning);
+        //skillCakeRush.onClick.AddListener(OnClickCakeRush);
+        //skillShotingStar.onClick.AddListener(OnClickShotingStar);
+        //skillCokeShot.onClick.AddListener(OnClickCokeShot);
+        //skillLightning.onClick.AddListener(OnClickLightning);
 
-        SetScene("inGame");
-
-        ///여기서 로딩 패널 비가시화
+        SetScene("title");//inGame");
     }
 
 
@@ -143,6 +147,8 @@ public class UiManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected server");
+
+        loaddingPanel.SetActive(false);
     }
 
     /// discard될 경우 이유
@@ -291,7 +297,7 @@ public class UiManager : MonoBehaviourPunCallbacks
 
         titlePanel.SetActive(nowScene == Scene.title);
         lobbyPanel.SetActive(nowScene == Scene.lobby);
-        commandPanel.SetActive(nowScene == Scene.inGame);
+        //commandPanel.SetActive(nowScene == Scene.inGame);
 
     }
 
