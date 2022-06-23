@@ -143,7 +143,6 @@ public class UnitBase : CharacterBase
         navMashAgent.isStopped = false; 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(destination - transform.position), 90);
         navMashAgent.SetDestination(destination);
-        
         StartCoroutine(Arrive());
     }
 

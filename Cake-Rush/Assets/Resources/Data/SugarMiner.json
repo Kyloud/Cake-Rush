@@ -4,7 +4,7 @@
   "attackSpeed": 0,
   "attackRange": 0,
   "returnExp": 30,
-  "eyeSight": 2,
+  "eyeSight": 8,
   "cost":
   [
     10,

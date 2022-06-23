@@ -1,8 +1,8 @@
 {
-  "hp": 1500,
-  "damage": 90,
+  "hp": 1000,
+  "damage": 70,
   "attackSpeed": 1,
-  "attackRange": 4,
+  "attackRange": 45,
   "returnExp": 150,
   "eyeSight": 5,
   "cost":

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 // this is a Build Component class that is spwanable. 
 public class BuildBase : EntityBase
 {
@@ -9,7 +9,8 @@ public class BuildBase : EntityBase
     public bool isSpawnable;
 
     public bool isOnSelectable;
-    
+
+    NavMeshObstacle obstacle;
     Renderer render;
     [SerializeField] Material originMat;
 
@@ -18,11 +19,14 @@ public class BuildBase : EntityBase
         base.Awake();
         if(isSpawnable)
         {
+            obstacle = gameObject.GetComponent<NavMeshObstacle>();
+            obstacle.carving = true;
+            obstacle.enabled = false;
             render = gameObject.GetComponentInChildren<Renderer>();
             originMat = render.material;
             render.material = Resources.Load<Material>("Materials/Blueprint");
             curHp = 0f;
-            buildEffect = transform.Find("BuildAnim").gameObject;
+            buildEffect = transform.Find("BuildEffect").gameObject;
         }
     }
     
@@ -38,6 +42,7 @@ public class BuildBase : EntityBase
     public IEnumerator Build()
     {   
         buildEffect.SetActive(true);
+        obstacle.enabled = true;
         gameObject.layer = LayerMask.NameToLayer("Selectable");
         gameObject.tag = "Build";
         render.material = originMat;
