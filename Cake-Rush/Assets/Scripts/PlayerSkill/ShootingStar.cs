@@ -39,7 +39,8 @@ public class ShootingStar : SkillBase
         Destroy(temp, 1f);
         for (int i = (int)-angleRange[skillLevel] / 2; i <= (int)angleRange[skillLevel] / 2; i += 10)
         {
-            Instantiate(skillEffect, skillPos.position, Quaternion.Euler(0, point.y - i, 0));
+            GameObject go = Instantiate(skillEffect, skillPos.position, Quaternion.Euler(0, point.y - i, 0));
+            Destroy(go, 2);
         }
 
         if (colliders.Length < 2)

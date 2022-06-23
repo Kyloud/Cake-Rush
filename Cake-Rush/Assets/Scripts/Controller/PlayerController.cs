@@ -179,7 +179,7 @@ public class PlayerController : UnitBase
         lightning.isSkillable = true;
         shootingStar.isSkillable = true;
 
-        shootingStar.range = 6f;
+        shootingStar.range = 10f;
         lightning.range = 30f;
         cokeShot.range = 80f;
         cokeShot.radius = 5f;

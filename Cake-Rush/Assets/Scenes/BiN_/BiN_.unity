@@ -1647,7 +1647,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1385518283, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1760859322, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_Size
@@ -1655,7 +1655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2101740588, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2102197652, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillEffect
@@ -1703,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[0].coolTime
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2102197658, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: skillStat.Array.data[1].coolTime
@@ -1875,7 +1875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6612299180523645839, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1651520174, guid: f6079c212e0aab146ba7541181fe87a6, type: 3}
