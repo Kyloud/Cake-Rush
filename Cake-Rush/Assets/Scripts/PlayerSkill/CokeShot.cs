@@ -40,7 +40,9 @@ public class CokeShot : SkillBase
 
     private IEnumerator SkillActive(Vector3 point)
     {
+        yield return new WaitForSeconds(0.5f);
         currentHoldTime = skillHoldTime;
+        point.y = 1f;
         GameObject temp = Instantiate(skillEffect, point, Quaternion.Euler(0, 1, 0));
 
         while (currentHoldTime >= 0)

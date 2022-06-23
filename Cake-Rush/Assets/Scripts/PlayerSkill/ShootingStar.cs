@@ -5,13 +5,15 @@ public class ShootingStar : SkillBase
     public float stunTime { get; set; }
     [SerializeField] private float[] angleRange;
     [SerializeField] private Transform skillPos;
+    [SerializeField] private GameObject slashEffect;
     private Renderer renderer;
-    public Material rangeViewMat;
+    private Material rangeViewMat;
 
     protected override void Awake()
     {
         skillEffect = Resources.Load<GameObject>("Effect/Skill/ShootingStar");
         rangeViewObj = Resources.Load<GameObject>("Prefabs/RangeView/ShootingStar");
+        slashEffect = Resources.Load<GameObject>("Effect/Skill/ShootingStar_Slash");
         renderer = rangeViewObj.GetComponent<Renderer>();
         rangeViewMat = renderer.sharedMaterial;
         base.Awake();
@@ -30,11 +32,11 @@ public class ShootingStar : SkillBase
         {
             return;
         }
-
+        
         Collider[] colliders = Physics.OverlapSphere(transform.position, 5.0f, GameProgress.instance.selectableLayer);
-
         point.y -= 90;
-
+        GameObject temp = Instantiate(slashEffect, skillPos.position, Quaternion.Euler(-105, 270, 0));
+        Destroy(temp, 1f);
         for (int i = (int)-angleRange[skillLevel] / 2; i <= (int)angleRange[skillLevel] / 2; i += 10)
         {
             Instantiate(skillEffect, skillPos.position, Quaternion.Euler(0, point.y - i, 0));

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CokeTowerController : BuildBase
 {
-
     protected override void Awake()
     {
         isSpawnable = false;

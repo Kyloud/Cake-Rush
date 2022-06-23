@@ -52,7 +52,7 @@ public class PlayerController : UnitBase
         }
         else if (Input.GetKey(KeyCode.E) && shootingStar.isSkillUsed == true)        //Shooting star
         {
-            ShootingStar();
+            StartCoroutine(ShootingStar());
             lightning.isSkillUsed = false;
             cokeShot.isSkillUsed = false;
         }
@@ -171,6 +171,7 @@ public class PlayerController : UnitBase
         }
     }
 
+    #region //Skill method
     private void SkillInit()
     {
         cakeRush.isSkillable = true;
@@ -183,7 +184,6 @@ public class PlayerController : UnitBase
         cokeShot.range = 80f;
         cokeShot.radius = 5f;
     }
-
     private IEnumerator Lightning()
     {
         lightning.rangeViewObj.SetActive(true);
@@ -218,7 +218,6 @@ public class PlayerController : UnitBase
             }
         }
     }
-
     private IEnumerator CokeShot()
     {
         cokeShot.rangeViewObj.SetActive(true);
@@ -237,12 +236,13 @@ public class PlayerController : UnitBase
                 }
 
                 cokeShot.UseSkill(cokeShot.level, hit.point);
-                StopMove();
+                navMashAgent.Stop();
+                animator.SetBool("Move", false);
+                state = CharacterState.Idle;
             }
         }
     }
-
-    private void ShootingStar()
+    private IEnumerator ShootingStar()
     {
         shootingStar.rangeViewObj.SetActive(true);
 
@@ -258,25 +258,24 @@ public class PlayerController : UnitBase
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.point - transform.position), 90);
 
                 Quaternion originRot = transform.rotation;
-                
+
+                navMashAgent.Stop();
+                animator.SetTrigger("ShootingStar");
+                animator.SetBool("Move", false);
+                yield return new WaitForSeconds(0.2f);
+
                 shootingStar.UseSkill(shootingStar.level, originRot.eulerAngles);
-                StopMove();
+                animator.SetBool("Idle", true);
+                state = CharacterState.Idle;
                 Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 1f);
             }
         }
     }
-
     private void CakeRush()
     {
         cakeRush.UseSkill(cakeRush.level);
     }
-
-    private void StopMove()
-    {
-        navMashAgent.Stop();
-        animator.SetBool("Move", false);
-        state = CharacterState.Idle;
-    }
+    #endregion
 
     private IEnumerator BuildMode()
     {
@@ -360,7 +359,6 @@ public class PlayerController : UnitBase
             yield return null;
         }
     }
-
     protected override void Die()
     {
         animator.SetTrigger("Die");
