@@ -5,7 +5,7 @@
   "attackRange": 55,
   "defensive": 0,
   "moveSpeed": 12.5,
-  "eyeSight": 5,  
+  "eyeSight": 12,  
   "cost":
   [
     8,
