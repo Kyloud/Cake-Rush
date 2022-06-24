@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CokeTowerController : BuildBase
 {
+<<<<<<< HEAD
     [SerializeField] private GameObject bullet;
     Collider target;
     Vector3 firePos;
     
+=======
+>>>>>>> BiN_
     protected override void Awake()
     {
         bullet = Resources.Load<GameObject>("Effect/TowerBullet");

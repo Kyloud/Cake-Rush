@@ -9,7 +9,7 @@ public class Lightning : SkillBase
     protected override void Awake()
     {
         skillEffect = Resources.Load<GameObject>("Effect/Skill/Lightning");
-        rangeViewObj = Resources.Load<GameObject>("Prefabs/rangeView/Lightning");
+        rangeViewObj = Resources.Load<GameObject>("Prefabs/rangeView/Lightning"); 
         //rangeViewMat = Resources.Load<Material>("Materials/RangeView/Lightning");
         maxSkillLevel = 2;
         base.Awake();
@@ -35,7 +35,7 @@ public class Lightning : SkillBase
     private void Factor<T>(T unit) where T : CharacterBase
     {
         unit = unit as T;
-        Instantiate(skillEffect, unit.transform.position, Quaternion.Euler(-90, 0, 0));
+        Instantiate(skillEffect, unit.transform.position, Quaternion.identity);
         unit.Hit(unit.curHp / 100 * damage[level]);
     }
 }
