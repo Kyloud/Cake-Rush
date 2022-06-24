@@ -22,6 +22,7 @@ public class EntityBase : MonoBehaviourPunCallbacks
     protected float defensive;
 
     protected Data.Stat stat;
+    [SerializeField]
     protected RTSController rtsController;
     public GameObject Marker;
 
@@ -39,8 +40,13 @@ public class EntityBase : MonoBehaviourPunCallbacks
         Marker = transform.Find("Marker").gameObject;
         Marker.transform.localPosition = Vector3.zero;
         Marker.SetActive(false);
-        rtsController = GameManager.instance.rtsController;
+
         Init();
+    }
+
+    protected void Start()
+    {
+        rtsController = GameManager.instance.rtsController;
     }
 
     protected virtual void Init()

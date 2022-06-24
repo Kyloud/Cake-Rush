@@ -14,11 +14,6 @@ public class UnitBase : CharacterBase
         Die,    
     }
     public CharacterState state;
-    
-    private void Start() 
-    {
-        state = CharacterState.Idle;
-    }   
 
     protected Transform targetTransform = null;
     public CakeRush cakeRush;
