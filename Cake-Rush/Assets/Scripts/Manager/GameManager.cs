@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public RTSController rtsController;
     public int[] cost;
     public bool isSpawnable;
+    private bool nowInGame;
 
     private UiManager UIManager;
 
@@ -58,11 +59,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        //if(instance == null)
-        //{
-        //    instance = this;
-        //    DontDestroyOnLoad(instance);
-        //}
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+
+        nowInGame = false;
 
         UIManagerOBJ = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIManager"), transform);
         UIManager = UIManagerOBJ.GetComponent<UiManager>();
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         PN.LocalPlayer.NickName = "1";
 
-        //SetScene("title");
+        SetScene("title");
     }
 
 
@@ -80,14 +83,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         Debug.Log("In Room");
-    }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        if (PN.CurrentRoom.MaxPlayers == PN.CurrentRoom.PlayerCount)
-        {
-            SetScene("inGame");
-        }
     }
 
     public override void OnConnectedToMaster()
@@ -142,37 +137,45 @@ public class GameManager : MonoBehaviourPunCallbacks
             SetScene("inGame");
         }
     }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if (PN.CurrentRoom.MaxPlayers == PN.CurrentRoom.PlayerCount)
+        {
+            SetScene("inGame");
+        }
+    }
     #endregion
 
 
     #region button
-    public virtual void OnClickStartInTitle()
+    public  void OnClickStartInTitle()
     {
         if (PN.IsConnected)
         {
             PN.JoinLobby();
         }
     }
-    public virtual void OnClickStartInLobby()
+    public void OnClickStartInLobby()
     {
         PN.JoinRandomOrCreateRoom(
             null, 2, Photon.Realtime.MatchmakingMode.FillRoom,
             null, null, $"{Random.Range(0, 100)}", new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
     }
-    public virtual void OnClickExit()
+    public void OnClickExit()
     {
         if (PN.IsConnected)
             PN.Disconnect();
     }
-    public virtual void OnClickOption()
+    public void OnClickOption()
     {
         Debug.Log("Option");
     }
-    public virtual void OnClickInfo()
+    public void OnClickInfo()
     {
         Debug.Log("Infomation of it");
     }
-    public virtual void OnClickMaker()
+    public void OnClickMaker()
     {
         Debug.Log("Maker");
     }
@@ -197,6 +200,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             nowScene = Scene.inGame;
             SceneManager.LoadScene("InGame");
+            nowInGame = true;
+            StartCoroutine(InGameProcess());
         }
         if (targetScene.Equals("victory"))
         {
@@ -208,5 +213,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         UIManager.ShowUI(nowScene);
+    }
+
+    private IEnumerator InGameProcess()
+    {
+        while(true)
+        {
+            if(SceneManager.GetActiveScene().name == "InGame")
+            {
+                rtsController = GameObject.Find("RTSManager").GetComponent<RTSController>();
+                PN.Instantiate("Prefabs/Units/Player", Vector3.zero, Quaternion.identity);
+
+                yield return null;
+                break;
+            }
+            yield return null;
+        }
     }
 }
