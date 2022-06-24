@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 using PN = Photon.Pun.PhotonNetwork;
 public enum Scene
 {
-    title, lobby, inGame, victory, defeat
+    noting, title, lobby, inGame, victory, defeat
 };
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -59,22 +59,30 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(instance);
         }
 
-        nowInGame = false;
 
-        UIManagerOBJ = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIManager"), transform);
-        UIManager = UIManagerOBJ.GetComponent<UiManager>();
+        if (SceneManager.GetActiveScene().name.Contains("Title"))
+        {
+            nowInGame = false;
 
-        UIManager.Init();
+            UIManagerOBJ = Instantiate(Resources.Load<GameObject>("Prefabs/UI/UIManager"), transform);
+            UIManager = UIManagerOBJ.GetComponent<UiManager>();
 
-        PN.LocalPlayer.NickName = "1";
+            UIManager.Init();
 
-        SetScene("title");
+            PN.LocalPlayer.NickName = "1";
+
+            SetScene("title");
+        }
+        else
+        {
+            rtsController = GameObject.Find("RTSManager").GetComponent<RTSController>();
+        }
     }
 
 
