@@ -6,10 +6,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
-public class ChatTest : MonoBehaviourPunCallbacks
+public class Chating : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private GameObject inputBox;
     [SerializeField]
     private GameObject[] textBoxs;
     [SerializeField]
@@ -22,38 +20,60 @@ public class ChatTest : MonoBehaviourPunCallbacks
     private bool isChat;
     PhotonView PV;
 
+    [SerializeField]
+    private GameObject inputField;
+    [SerializeField]
+    private GameObject ChatingPanel;
+    [SerializeField]
+    private GameObject viewport;
+    [SerializeField]
+    private GameObject content;
+
+
+    GameObject FindElement(GameObject parent, string name)
+    {
+        return parent.transform.Find(name).gameObject;
+    }
+
+
     private void Start()
     {
+        ChatingPanel = FindElement(gameObject, "ChatingPanel");
+        inputField = FindElement(ChatingPanel, "InputField");
+        input = inputField.GetComponent<TMP_InputField>();
+        scrollView = FindElement(ChatingPanel, "ScrollView");
+        viewport = FindElement(scrollView, "Viewport");
+        content = FindElement(viewport, "Content");
+
         isChat = false;
-        for(int i = 0; i < maxLenght; i++)
+        for (int i = 0; i < maxLenght; i++)
         {
+            textBoxs[i] = FindElement(content.gameObject, $"t{5 - i}");
             texts[i] = textBoxs[i].GetComponent<TMP_Text>();
         }
-        input = inputBox.GetComponent<TMP_InputField>();
-        inputBox.SetActive(false);
+        ChatingPanel.SetActive(false);
         scrollView.SetActive(false);
         PV = GetComponent<PhotonView>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            if(!isChat)
+            if (!isChat)
             {
                 isChat = true;
-                inputBox.SetActive(true);
+                ChatingPanel.SetActive(true);
                 scrollView.SetActive(true);
-                //input.Select();
                 input.ActivateInputField();
             }
             else
             {
-                if(input.text == "")
+                if (input.text == "")
                 {
                     input.Select();
                     isChat = false;
-                    inputBox.SetActive(false);
+                    ChatingPanel.SetActive(false);
                     scrollView.SetActive(false);
                     return;
                 }

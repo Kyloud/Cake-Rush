@@ -5568,7 +5568,7 @@ MonoBehaviour:
   state: 0
   cakeRush: {fileID: 2102197652}
   teamCamera: {fileID: 0}
-  rangeView: {fileID: 0}
+  rangeViewObj: {fileID: 0}
   levelSystem: {fileID: 0}
 --- !u!114 &2102197652
 MonoBehaviour:
@@ -5583,7 +5583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillEffect: {fileID: 0}
-  rangeView: {fileID: 0}
+  rangeViewObj: {fileID: 0}
   skillStat:
   - coolTime: 60
     currentCoolTime: 0
@@ -5601,7 +5601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillEffect: {fileID: 0}
-  rangeView: {fileID: 0}
+  rangeViewObj: {fileID: 0}
   skillStat:
   - coolTime: 15
     currentCoolTime: 0
@@ -5617,6 +5617,7 @@ MonoBehaviour:
   - 65
   - 70
   skillPos: {fileID: 1385518283}
+  rangeViewMat: {fileID: 0}
 --- !u!114 &2102197665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5630,7 +5631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillEffect: {fileID: 0}
-  rangeView: {fileID: 0}
+  rangeViewObj: {fileID: 0}
   skillStat:
   - coolTime: 18
     currentCoolTime: 0
@@ -5662,7 +5663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillEffect: {fileID: 0}
-  rangeView: {fileID: 0}
+  rangeViewObj: {fileID: 0}
   skillStat:
   - coolTime: 15
     currentCoolTime: 0
@@ -5779,6 +5780,9 @@ MonoBehaviour:
   cookieHouseObj: {fileID: 0}
   sugarMinerObj: {fileID: 0}
   chocolateMinerObj: {fileID: 0}
+  cookieHosueController: {fileID: 0}
+  sugarMinerController: {fileID: 0}
+  chocolateMinerController: {fileID: 0}
   cookieHouseName: 
   sugerMinerName: 
   chocolateMinerName: 
