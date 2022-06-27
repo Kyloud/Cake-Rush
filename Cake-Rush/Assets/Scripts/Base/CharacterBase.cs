@@ -22,7 +22,8 @@ public class CharacterBase : EntityBase
     
     protected override void Update()
     {
-        if(isStun) return;
+        if (isStun) return;
+        if (team != rtsController.team) return;
         base.Update();
     }
 

@@ -33,6 +33,8 @@ public class EntityBase : MonoBehaviourPunCallbacks
     public bool isSelected;
     public bool isActive;
 
+    public int team;
+
     #endregion
 
     protected virtual void Awake()

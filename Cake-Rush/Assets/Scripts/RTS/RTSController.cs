@@ -31,6 +31,9 @@ public class RTSController : MonoBehaviour
 	//sugar chocolate, wheat
 	public int[] cost = new int[3];
 	public bool isSkill;
+
+	public int team;
+
 	void Awake()
 	{
 		defaultCursor = Resources.Load<Texture2D>("Textures/MouseCursor/DefaultCursor");
@@ -74,6 +77,7 @@ public class RTSController : MonoBehaviour
 					return;
 				if(selectedEntity != null)
 					selectedEntity.Deselect();
+
 				selectedEntity = hit.transform.gameObject.GetComponent<EntityBase>();
 				selectedEntity.Select();
 			}

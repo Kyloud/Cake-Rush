@@ -5561,6 +5561,7 @@ MonoBehaviour:
   attackRange: 0
   cost: 000000000000000000000000
   dropCost: 000000000000000000000000
+  rtsController: {fileID: 0}
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
