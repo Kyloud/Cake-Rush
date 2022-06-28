@@ -5565,6 +5565,7 @@ MonoBehaviour:
   Marker: {fileID: 0}
   isSelected: 0
   isActive: 0
+  team: 0
   navMashAgent: {fileID: 0}
   state: 0
   cakeRush: {fileID: 2102197652}
